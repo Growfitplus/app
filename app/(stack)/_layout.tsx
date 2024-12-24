@@ -1,8 +1,10 @@
-import { Redirect, Stack } from "expo-router";
-import { Text, useColorScheme } from "react-native";
-import React from 'react'
-import { useSession } from "@/contexts/session";
-import { StatusBar } from "expo-status-bar";
+import React from 'react';
+import { Redirect, router, Stack } from 'expo-router';
+import { Text, useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
+import { useSession } from '@/contexts/session';
+import { ArrowBackIcon } from '@/components/Icons';
 
 const StackLayout = () => {
   const colorScheme = useColorScheme();
@@ -12,27 +14,41 @@ const StackLayout = () => {
     return <Text>Loading...</Text>;
   }
   if (!session) {
-    return <Redirect href="/sign-in" />;
+    return <Redirect href='/' />;
   }
 
   return (
     <>
-      <Stack screenOptions={{
-        headerShown: false,
-      }}>
+      <Stack>
         <Stack.Screen
-          name="(onboarding)" // This is the name of the page and must match the url from root
-          />
+          name='(onboarding)'
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
-          name="(tabs)"
-          />
-        <Stack.Screen
-          name="terms/index"
-          />
+          name='(tabs)'
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name='terms/terms' options={{
+          headerLeft: () => (
+            <ArrowBackIcon
+              size={24}
+              color='black'
+              onPress={() => router.back()}
+            />
+          ),
+          headerTintColor: 'transparent',
+          headerStyle: {
+            backgroundColor: 'rgb(248, 250, 255)',
+          },
+          headerShadowVisible: false,
+        }} />
       </Stack>
-      <StatusBar style={colorScheme || 'dark'} />
+      <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
     </>
-
   );
 };
 export default StackLayout;

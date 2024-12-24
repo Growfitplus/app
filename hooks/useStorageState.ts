@@ -1,11 +1,11 @@
-import  { useEffect, useCallback, useReducer } from 'react';
+import { useEffect, useCallback, useReducer } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
 type SessionObject = {
   username: string;
-  onboarding: boolean
-}
+  onboarding: boolean;
+};
 
 type UseStateHook = [[boolean, SessionObject], (value: SessionObject | null) => void];
 
@@ -13,10 +13,13 @@ const useAsyncState = (
   initialValue: [boolean, SessionObject | null] = [true, null],
 ): UseStateHook => {
   return useReducer(
-    (state: [boolean, SessionObject | null], action: SessionObject | null = null): [boolean, SessionObject | null] => [false, action],
-    initialValue
+    (
+      state: [boolean, SessionObject | null],
+      action: SessionObject | null = null,
+    ): [boolean, SessionObject | null] => [false, action],
+    initialValue,
   ) as UseStateHook;
-}
+};
 
 const setStorageItemAsync = async (key: string, value: string | null) => {
   if (Platform.OS === 'web') {
@@ -36,7 +39,7 @@ const setStorageItemAsync = async (key: string, value: string | null) => {
       await SecureStore.setItemAsync(key, value);
     }
   }
-}
+};
 
 const useStorageState = (key: string): UseStateHook => {
   // Public
@@ -47,7 +50,7 @@ const useStorageState = (key: string): UseStateHook => {
     if (Platform.OS === 'web') {
       try {
         if (typeof localStorage !== 'undefined') {
-          setState(JSON.parse(localStorage.getItem(key) || '') );
+          setState(JSON.parse(localStorage.getItem(key) || ''));
         }
       } catch (e) {
         console.error('Local storage is unavailable:', e);
@@ -61,18 +64,14 @@ const useStorageState = (key: string): UseStateHook => {
 
   // Set
   const setValue = useCallback(
-    (value: { username: string, onboarding: boolean } | null) => {
+    (value: { username: string; onboarding: boolean } | null) => {
       setState(value);
       setStorageItemAsync(key, JSON.stringify(value));
     },
-    [key]
+    [key],
   );
 
   return [state, setValue];
-}
+};
 
-
-export {
-  setStorageItemAsync,
-  useStorageState
-}
+export { setStorageItemAsync, useStorageState };

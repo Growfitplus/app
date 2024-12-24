@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
-import { SessionProvider } from '@/contexts/session';
 import { Slot } from 'expo-router';
+import { SessionProvider } from '@/contexts/session';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-
   useEffect(() => {
     SplashScreen.hideAsync();
   }, []);
@@ -18,6 +17,6 @@ const RootLayout = () => {
       <Slot />
     </SessionProvider>
   );
-}
+};
 
-export default RootLayout
+export default RootLayout;

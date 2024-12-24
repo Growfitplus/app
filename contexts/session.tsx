@@ -3,15 +3,12 @@ import { router } from 'expo-router';
 import { useContext, createContext, type PropsWithChildren, useEffect } from 'react';
 
 const AuthContext = createContext<{
-  signIn: (session: {
-    username: string;
-    onboarding: boolean
-  }) => void;
+  signIn: (session: { username: string; onboarding: boolean }) => void;
   finishOnboarding: (username: string) => void;
   signOut: () => void;
   session?: {
     username: string;
-    onboarding: boolean
+    onboarding: boolean;
   } | null;
   isLoading: boolean;
 }>({
@@ -33,43 +30,38 @@ const useSession = () => {
   }
 
   return value;
-}
+};
 
 const SessionProvider = ({ children }: PropsWithChildren) => {
   const [[isLoading, session], setSession] = useStorageState('session');
 
   useEffect(() => {
     // return () => setSession(null)
-  }, [])
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        signIn: (session:{
-          username: string;
-          onboarding: boolean
-        }) => {
+        signIn: (session: { username: string; onboarding: boolean }) => {
           // Perform sign-in logic here
           setSession(session);
         },
         finishOnboarding: (username: string) => {
           setSession({
             username,
-            onboarding: false
-          })
+            onboarding: false,
+          });
         },
         signOut: () => {
           setSession(null);
         },
         session,
         isLoading,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-export {
-  useSession,
-  SessionProvider
-}
+export { useSession, SessionProvider };
