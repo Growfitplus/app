@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
+
 import { Logo } from '@/components/svg/Logo';
 import ProfileHeader from '@/components/Headers/Profile.header';
 import { useSession } from '@/contexts/session';
@@ -12,42 +13,40 @@ const Home = () => {
   const { signOut } = useSession();
 
   const handleExit = () => {
-    signOut()
-  }
+    signOut();
+  };
 
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <View style={{ marginLeft: 20}}>
-          <Logo/>
+        <View style={{ marginLeft: 20 }}>
+          <Logo />
         </View>
       ),
-      headerRight: () => <ProfileHeader handleProfile={() => setShowProfile(true)} />
-    })
-  }, [navigation])
-
+      headerRight: () => <ProfileHeader handleProfile={() => setShowProfile(true)} />,
+    });
+  }, [navigation]);
 
   const handleAbout = () => {
-    router.push('/(stack)/terms')
+    router.push('/(stack)/terms/terms');
     setShowProfile(false);
-  }
-
+  };
 
   return (
     <>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>
-          Home
-        </Text>
+        <Text>Home</Text>
       </View>
       <Pressable onPress={() => signOut()}>
-        <Text>
-        Sign Out
-        </Text>
+        <Text>Sign Out</Text>
       </Pressable>
-      <Profile isVisible={showProfile} handleAbout={handleAbout} handleExit={handleExit} />
+      <Profile
+        isVisible={showProfile}
+        handleAbout={handleAbout}
+        handleExit={handleExit}
+      />
     </>
   );
-}
+};
 
-export default Home
+export default Home;

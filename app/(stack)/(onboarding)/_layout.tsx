@@ -1,44 +1,54 @@
-import React from 'react'
-import { Redirect, Stack } from 'expo-router';
-import { useSession } from '@/contexts/session';
+import React from 'react';
+import { Redirect, router, Stack } from 'expo-router';
 import { Text } from 'react-native';
+
+import { useSession } from '@/contexts/session';
+import { ArrowBackIcon } from '@/components/Icons';
 
 const AppLayout = () => {
   const { session, isLoading } = useSession();
 
-  // You can keep the splash screen open, or render a loading screen like we do here.
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
 
-  // Only require authentication within the (app) group's layout as users
-  // need to be able to access the (auth) group and sign in again.
   if (!session) {
-    // On web, static rendering will stop here as the user is not authenticated
-    // in the headless Node process that the pages are rendered in.
-    return <Redirect href="/" />;
+    return <Redirect href='/' />;
   }
 
-  const {onboarding} = session
+  const { onboarding } = session;
 
   if (!onboarding) {
-      return <Redirect href="/home" />;
+    return <Redirect href='/home' />;
   }
 
   return (
     <>
       <Stack
         screenOptions={{
-          headerLeft: () => <Text>Something</Text>
+          headerLeft: () => (
+            <ArrowBackIcon
+              size={24}
+              color='black'
+              onPress={() => router.back()}
+            />
+          ),
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+          headerTitleStyle: {
+            color: 'transparent',
+          },
         }}
       >
-        <Stack.Screen name="start" options={{ headerShown: false }} />
-        <Stack.Screen name="height" options={{ headerShown: false }} />
-        <Stack.Screen name="weight" options={{ headerShown: false }} />
-        <Stack.Screen name="age" options={{ headerShown: false }} />
+        <Stack.Screen name='start' />
+        <Stack.Screen name='height' />
+        <Stack.Screen name='weight' />
+        <Stack.Screen name='age' />
       </Stack>
     </>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

@@ -12,9 +12,9 @@ const Onboarding = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Onboarding Screen</Text>
-      <Link href="/height">Height Screen</Link>
+      <Link href='/height'>Height Screen</Link>
     </View>
   );
-}
+};
 
-export default Onboarding
+export default Onboarding;
