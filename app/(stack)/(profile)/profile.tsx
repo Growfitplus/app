@@ -2,6 +2,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import Info from '@/components/svg/Info';
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
+import Typography from '@/components/Typography';
 
 const Profile: React.FC<{
   isVisible: boolean;
@@ -21,7 +22,7 @@ const Profile: React.FC<{
         >
           <View style={styles.termsContainer}>
             <Info />
-            <Text style={styles.termsText}>Sobre Growfit+</Text>
+            <Typography styles={styles.termsText}>Sobre Growfit+</Typography>
           </View>
           <ChevronNextIcon
             size={24}
@@ -36,7 +37,7 @@ const Profile: React.FC<{
             size={24}
             color='#FF002E'
           />
-          <Text style={styles.logOutText}>Cerrar Sesión</Text>
+          <Typography styles={styles.logOutText}>Cerrar Sesión</Typography>
         </Pressable>
       </View>
     </Modal>

@@ -8,6 +8,7 @@ import { LogoLogIn } from '@/components/svg/Logo';
 import { useSession } from '@/contexts/session';
 import { ArrowNextIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';
+import Typography from '@/components/Typography';
 
 const Login = () => {
   const { signIn, session } = useSession();
@@ -28,7 +29,7 @@ const Login = () => {
         <LogoLogIn />
       </View>
       <View style={styles.buttonContainer}>
-        <Text style={styles.preButtonText}>Ingresa con</Text>
+        <Typography styles={styles.preButtonText} weight='medium'>Ingresa con</Typography>
         <Pressable
           style={styles.buttonBox}
           onPress={() =>
@@ -43,7 +44,7 @@ const Login = () => {
             size={24}
             color='black'
           />
-          <Text style={styles.buttonText}>Google</Text>
+          <Typography weight='bold' styles={styles.buttonText}>Google</Typography>
           <ArrowNextIcon
             size={24}
             color='black'
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   },
   logo: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   buttonContainer: { gap: 20 },
-  preButtonText: { textAlign: 'center' },
+  preButtonText: { textAlign: 'center', fontSize: 14 },
   buttonBox: {
     backgroundColor: 'white',
     height: 56,
@@ -74,7 +75,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 16,
   },
-  buttonText: { fontWeight: '700' },
+  buttonText: {
+    fontSize: 16,
+  }
 });
 
 export default Login;
