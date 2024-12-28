@@ -40,6 +40,21 @@
           "configureAndroidBackup": true,
           "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_100Thin.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_200ExtraLight.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_300Light.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_400Regular.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_500Medium.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_700Bold.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_800ExtraBold.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_900Black.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {
