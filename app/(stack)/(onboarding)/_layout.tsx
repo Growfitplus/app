@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 
 import { useSession } from '@/contexts/session';
 import { ArrowBackIcon } from '@/components/Icons';
+import { Colors } from '@/constants/Colors';
 
 const AppLayout = () => {
   const { session, isLoading } = useSession();
@@ -35,7 +36,7 @@ const AppLayout = () => {
           ),
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: Colors.light['screen-bg'],
           },
           headerTitleStyle: {
             color: 'transparent',

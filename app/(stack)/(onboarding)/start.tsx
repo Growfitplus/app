@@ -1,6 +1,7 @@
+import { Colors } from '@/constants/Colors';
 import { Link, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Onboarding = () => {
   const navigation = useNavigation();
@@ -10,11 +11,20 @@ const Onboarding = () => {
   }, [navigation]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.main}>
       <Text>Onboarding Screen</Text>
       <Link href='/height'>Height Screen</Link>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.light['screen-bg'],
+  },
+});
 
 export default Onboarding;

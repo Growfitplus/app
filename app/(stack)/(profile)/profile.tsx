@@ -14,25 +14,14 @@ const Profile: React.FC<{
       transparent={true}
       visible={isVisible}
     >
-      <View style={styles.modalContent}>
+      <View style={styles.main}>
         <Pressable
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            height: 30,
-          }}
+          style={styles.pressable}
           onPress={handleAbout}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 24,
-              flex: 1,
-            }}
-          >
+          <View style={styles.termsContainer}>
             <Info />
-            <Text style={{ fontSize: 16 }}>Sobre Growfit+</Text>
+            <Text style={styles.termsText}>Sobre Growfit+</Text>
           </View>
           <ChevronNextIcon
             size={24}
@@ -40,14 +29,14 @@ const Profile: React.FC<{
           />
         </Pressable>
         <Pressable
-          style={styles.row}
+          style={styles.pressable}
           onPress={handleExit}
         >
           <LogOutIcon
             size={24}
             color='#FF002E'
           />
-          <Text style={{ fontSize: 16, color: '#FF002E' }}>Cerrar Sesión</Text>
+          <Text style={styles.logOutText}>Cerrar Sesión</Text>
         </Pressable>
       </View>
     </Modal>
@@ -55,7 +44,7 @@ const Profile: React.FC<{
 };
 
 const styles = StyleSheet.create({
-  modalContent: {
+  main: {
     height: '25%',
     width: '100%',
     backgroundColor: 'white',
@@ -67,12 +56,20 @@ const styles = StyleSheet.create({
     gap: 38,
     justifyContent: 'center',
   },
-  row: {
+  pressable: {
     flexDirection: 'row',
     alignItems: 'center',
     height: 30,
     gap: 24,
   },
+  termsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 30,
+    flex: 1,
+  },
+  termsText: { fontSize: 16 },
+  logOutText: { fontSize: 16, color: '#FF002E' },
 });
 
 export default Profile;
