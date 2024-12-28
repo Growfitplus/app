@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, SafeAreaView, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,6 +7,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { LogoLogIn } from '@/components/svg/Logo';
 import { useSession } from '@/contexts/session';
 import { ArrowNextIcon } from '@/components/Icons';
+import { Colors } from '@/constants/Colors';
 
 const Login = () => {
   const { signIn, session } = useSession();
@@ -22,30 +23,14 @@ const Login = () => {
   }, [session]);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#00FFC2',
-      }}
-    >
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <SafeAreaView style={styles.main}>
+      <View style={styles.logo}>
         <LogoLogIn />
       </View>
-      <View style={{ gap: 20 }}>
-        <Text style={{ textAlign: 'center' }}>Ingresa con</Text>
+      <View style={styles.buttonContainer}>
+        <Text style={styles.preButtonText}>Ingresa con</Text>
         <Pressable
-          style={{
-            backgroundColor: 'white',
-            height: 56,
-            width: 312,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderRadius: 16,
-            flexDirection: 'row',
-            paddingHorizontal: 16,
-          }}
+          style={styles.buttonBox}
           onPress={() =>
             signIn({
               username: 'eamzea',
@@ -58,7 +43,7 @@ const Login = () => {
             size={24}
             color='black'
           />
-          <Text style={{ fontWeight: '700' }}>Google</Text>
+          <Text style={styles.buttonText}>Google</Text>
           <ArrowNextIcon
             size={24}
             color='black'
@@ -68,5 +53,28 @@ const Login = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.light['main-primary'],
+  },
+  logo: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  buttonContainer: { gap: 20 },
+  preButtonText: { textAlign: 'center' },
+  buttonBox: {
+    backgroundColor: 'white',
+    height: 56,
+    width: 312,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 16,
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+  },
+  buttonText: { fontWeight: '700' },
+});
 
 export default Login;

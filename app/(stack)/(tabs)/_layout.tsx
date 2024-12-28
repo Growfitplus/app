@@ -7,6 +7,10 @@ import { HapticTab } from '@/components/HapticTab';
 import { useSession } from '@/contexts/session';
 import Home from '@/components/svg/Home';
 import Clock from '@/components/svg/Clock';
+import { Colors } from '@/constants/Colors';
+import HomeTab from '@/components/Tabs/Home.tab';
+import ProgressTab from '@/components/Tabs/Progress.tab';
+import TrainingTab from '@/components/Tabs/Training.tab';
 
 const TabLayout = () => {
   const { session, isLoading } = useSession();
@@ -22,79 +26,42 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: 'transparent',
+          backgroundColor: Colors.light['screen-bg'],
         },
         tabBarButton: HapticTab,
         tabBarItemStyle: { marginTop: 20 },
         tabBarStyle: {
+          borderTopWidth: 0,
+          elevation: 0,
           height: 100,
         },
         headerTitleStyle: {
           color: 'transparent',
         },
+        sceneStyle: {
+          backgroundColor: Colors.light['screen-bg'],
+        },
+        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen
         name='progress'
         options={{
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                backgroundColor: focused ? '#00FFC2' : 'none',
-                width: 40,
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 14,
-              }}
-            >
-              <Feather
-                name='camera'
-                size={24}
-                color='black'
-              />
-            </View>
-          ),
+          tabBarIcon: ProgressTab,
           tabBarShowLabel: false,
         }}
       />
       <Tabs.Screen
         name='home'
         options={{
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                backgroundColor: focused ? '#00FFC2' : 'none',
-                width: 40,
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 14,
-              }}
-            >
-              <Home />
-            </View>
-          ),
+          tabBarIcon: HomeTab,
           tabBarShowLabel: false,
         }}
       />
       <Tabs.Screen
         name='training'
         options={{
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                backgroundColor: focused ? '#00FFC2' : 'none',
-                width: 40,
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 14,
-              }}
-            >
-              <Clock />
-            </View>
-          ),
+          tabBarIcon: TrainingTab,
           tabBarShowLabel: false,
         }}
       />

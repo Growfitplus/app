@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.main}>
         <Text>Home</Text>
       </View>
       <Pressable onPress={() => signOut()}>
@@ -48,5 +48,13 @@ const Home = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Home;

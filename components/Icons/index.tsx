@@ -1,7 +1,7 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
+import Feather from '@expo/vector-icons/Feather';
 
 export const ArrowBackIcon = (props: Record<string, unknown>) => (
   <Ionicons
@@ -30,6 +30,15 @@ export const LogOutIcon = (props: Record<string, unknown>) => (
     style={{
       transform: [{ rotate: '180deg' }],
     }}
+    {...props}
+  />
+);
+
+export const CameraIcon = (props: Record<string, unknown>) => (
+  <Feather
+    name='camera'
+    size={24}
+    color='black'
     {...props}
   />
 );

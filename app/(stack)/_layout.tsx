@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { useSession } from '@/contexts/session';
 import { ArrowBackIcon } from '@/components/Icons';
+import { Colors } from '@/constants/Colors';
 
 const StackLayout = () => {
   const colorScheme = useColorScheme();
@@ -19,7 +20,11 @@ const StackLayout = () => {
 
   return (
     <>
-      <Stack>
+      <Stack screenOptions={{
+        contentStyle: {
+          backgroundColor: Colors.light['screen-bg'],
+        }
+      }}>
         <Stack.Screen
           name='(onboarding)'
           options={{
@@ -42,7 +47,7 @@ const StackLayout = () => {
           ),
           headerTintColor: 'transparent',
           headerStyle: {
-            backgroundColor: 'rgb(248, 250, 255)',
+            backgroundColor: Colors.light['screen-bg'],
           },
           headerShadowVisible: false,
         }} />
