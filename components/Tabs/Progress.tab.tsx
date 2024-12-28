@@ -1,6 +1,6 @@
-import React from 'react'
-import { View } from 'react-native'
-import { CameraIcon } from '../Icons'
+import React from 'react';
+import { View } from 'react-native';
+import { CameraIcon } from '../Icons';
 
 const ProgressTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   <View
@@ -15,6 +15,6 @@ const ProgressTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   >
     <CameraIcon />
   </View>
-)
+);
 
-export default ProgressTab
+export default ProgressTab;

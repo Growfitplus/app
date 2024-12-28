@@ -1,8 +1,8 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import Info from '@/components/svg/Info';
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
+import InfoIcon from '@/components/svg/Info';
 
 const Profile: React.FC<{
   isVisible: boolean;
@@ -21,7 +21,10 @@ const Profile: React.FC<{
           onPress={handleAbout}
         >
           <View style={styles.termsContainer}>
-            <Info />
+            <InfoIcon
+              width={24}
+              height={24}
+            />
             <Typography styles={styles.termsText}>Sobre Growfit+</Typography>
           </View>
           <ChevronNextIcon
