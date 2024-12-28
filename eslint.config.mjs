@@ -22,7 +22,7 @@ export default tseslint.config(
       'android/**',
       '.prettierrc.js',
       'expo-env.d.ts',
-      'commitlint.config.js',
+      'commitlint.config.mjs',
       'eslint.config.mjs',
     ],
   },
