@@ -1,8 +1,8 @@
+import { useContext, createContext, type PropsWithChildren } from 'react';
 import { useStorageState } from '@/hooks/useStorageState';
-import { router } from 'expo-router';
-import { useContext, createContext, type PropsWithChildren, useEffect } from 'react';
 
 const AuthContext = createContext<{
+  // eslint-disable-next-line func-call-spacing
   signIn: (session: { username: string; onboarding: boolean }) => void;
   finishOnboarding: (username: string) => void;
   signOut: () => void;
@@ -12,11 +12,11 @@ const AuthContext = createContext<{
   } | null;
   isLoading: boolean;
 }>({
+  finishOnboarding: () => null,
+  isLoading: false,
+  session: null,
   signIn: () => null,
   signOut: () => null,
-  finishOnboarding: () => null,
-  session: null,
-  isLoading: false,
 });
 
 // This hook can be used to access the user info.
@@ -35,28 +35,23 @@ const useSession = () => {
 const SessionProvider = ({ children }: PropsWithChildren) => {
   const [[isLoading, session], setSession] = useStorageState('session');
 
-  useEffect(() => {
-    // return () => setSession(null)
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
-        signIn: (session: { username: string; onboarding: boolean }) => {
-          // Perform sign-in logic here
-          setSession(session);
-        },
         finishOnboarding: (username: string) => {
           setSession({
-            username,
             onboarding: false,
+            username,
           });
+        },
+        isLoading,
+        session,
+        signIn: (session: { username: string; onboarding: boolean }) => {
+          setSession(session);
         },
         signOut: () => {
           setSession(null);
         },
-        session,
-        isLoading,
       }}
     >
       {children}

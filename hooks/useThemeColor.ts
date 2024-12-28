@@ -8,6 +8,7 @@ import { useColorScheme } from 'react-native';
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark,
 ) {
   const theme = useColorScheme() ?? 'light';

@@ -1,4 +1,5 @@
 export const Colors = {
+  dark: {},
   light: {
     'main-primary': '#00FFC2',
     'screen-bg': '#f8faff',
@@ -11,5 +12,4 @@ export const Colors = {
       input: '#080110'
     }
   },
-  dark: {},
 };

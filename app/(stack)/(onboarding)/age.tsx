@@ -1,5 +1,14 @@
 import { router } from 'expo-router';
-import { Button, Keyboard, Platform, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Keyboard,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import { useSession } from '@/contexts/session';
 import { Colors } from '@/constants/Colors';
@@ -17,7 +26,6 @@ const Age = () => {
       router.replace('/(stack)/(tabs)/home');
     }
   };
-
 
   return (
     <SafeAreaView style={styles.main}>
@@ -69,32 +77,10 @@ const Age = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 22,
     paddingVertical: 32,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-  value: {
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-    color: Colors.light.text.emphasis
-  },
-  years: {
-    fontSize: 16,
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   continueButton: {
     alignItems: 'center',
@@ -102,6 +88,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     width: '100%',
+  },
+  continueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+  },
+  value: {
+    color: Colors.light.text.emphasis,
+    fontFamily: Fonts.RobotoRegular,
+    fontSize: 72,
+  },
+  valueContainer: {
+    alignItems: 'center',
+    flex: 1,
+    gap: 12,
+    justifyContent: 'center',
+  },
+  years: {
+    fontSize: 16,
   },
 });
 
