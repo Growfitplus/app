@@ -27,10 +27,10 @@ const Age = () => {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 

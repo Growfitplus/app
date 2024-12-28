@@ -1,0 +1,9 @@
+node_modules/
+.husky
+**/node_modules
+**/.prettierignore
+scripts/**
+.expo/**
+dist/**
+ios/**
+android/**
