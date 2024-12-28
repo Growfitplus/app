@@ -20,11 +20,13 @@ const StackLayout = () => {
 
   return (
     <>
-      <Stack screenOptions={{
-        contentStyle: {
-          backgroundColor: Colors.light['screen-bg'],
-        }
-      }}>
+      <Stack
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: Colors.light['screen-bg'],
+          },
+        }}
+      >
         <Stack.Screen
           name='(onboarding)'
           options={{
@@ -37,20 +39,23 @@ const StackLayout = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name='terms/terms' options={{
-          headerLeft: () => (
-            <ArrowBackIcon
-              size={24}
-              color='black'
-              onPress={() => router.back()}
-            />
-          ),
-          headerTintColor: 'transparent',
-          headerStyle: {
-            backgroundColor: Colors.light['screen-bg'],
-          },
-          headerShadowVisible: false,
-        }} />
+        <Stack.Screen
+          name='terms/terms'
+          options={{
+            headerLeft: () => (
+              <ArrowBackIcon
+                size={24}
+                color='black'
+                onPress={() => router.back()}
+              />
+            ),
+            headerTintColor: 'transparent',
+            headerStyle: {
+              backgroundColor: Colors.light['screen-bg'],
+            },
+            headerShadowVisible: false,
+          }}
+        />
       </Stack>
       <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
     </>

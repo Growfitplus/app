@@ -29,7 +29,12 @@ const Login = () => {
         <LogoLogIn />
       </View>
       <View style={styles.buttonContainer}>
-        <Typography styles={styles.preButtonText} weight='medium'>Ingresa con</Typography>
+        <Typography
+          styles={styles.preButtonText}
+          weight='medium'
+        >
+          Ingresa con
+        </Typography>
         <Pressable
           style={styles.buttonBox}
           onPress={() =>
@@ -44,7 +49,12 @@ const Login = () => {
             size={24}
             color='black'
           />
-          <Typography weight='bold' styles={styles.buttonText}>Google</Typography>
+          <Typography
+            weight='bold'
+            styles={styles.buttonText}
+          >
+            Google
+          </Typography>
           <ArrowNextIcon
             size={24}
             color='black'
@@ -77,7 +87,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-  }
+  },
 });
 
 export default Login;

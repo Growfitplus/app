@@ -1,6 +1,6 @@
-import React from 'react'
-import { View } from 'react-native'
-import Clock from '../svg/Clock'
+import React from 'react';
+import { View } from 'react-native';
+import Clock from '../svg/Clock';
 
 const TrainingTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   <View
@@ -15,6 +15,6 @@ const TrainingTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   >
     <Clock />
   </View>
-)
+);
 
-export default TrainingTab
+export default TrainingTab;
