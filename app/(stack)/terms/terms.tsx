@@ -1,13 +1,13 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import InfoIcon from '@/components/SVG/Info';
+import { InfoSVG } from '@/components/SVG';
 import Typography from '@/components/Typography';
 
 const Terms = () => {
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
-        <InfoIcon
+        <InfoSVG
           width={24}
           height={24}
         />
@@ -216,27 +216,28 @@ const Terms = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
   container: {
     paddingHorizontal: 22,
     paddingVertical: 32,
+  },
+  content: {
+    fontSize: 10,
+    marginBottom: 12,
+  },
+  main: {
+    flex: 1,
+  },
+  subtitle: {
+    fontSize: 14,
   },
   title: {
     fontSize: 24,
     marginVertical: 20,
   },
-  subtitle: {
-    fontSize: 14,
-  },
+
   vignette: {
     fontSize: 12,
     marginVertical: 20,
-  },
-  content: {
-    fontSize: 10,
-    marginBottom: 12,
   },
 });
 

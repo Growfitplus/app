@@ -49,11 +49,11 @@ const StackLayout = () => {
                 onPress={() => router.back()}
               />
             ),
-            headerTintColor: 'transparent',
+            headerShadowVisible: false,
             headerStyle: {
               backgroundColor: Colors.light['screen-bg'],
             },
-            headerShadowVisible: false,
+            headerTintColor: 'transparent',
           }}
         />
       </Stack>
@@ -61,4 +61,5 @@ const StackLayout = () => {
     </>
   );
 };
+
 export default StackLayout;

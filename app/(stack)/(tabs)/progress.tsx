@@ -10,9 +10,9 @@ const Progress = () => {
 
 const styles = StyleSheet.create({
   main: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

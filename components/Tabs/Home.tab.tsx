@@ -1,20 +1,20 @@
 import React from 'react';
 import { View } from 'react-native';
-import Home from '../SVG/Home';
+import { HomeSVG } from '../SVG';
 
 const HomeTab: React.FC<{ focused: boolean }> = ({ focused }) => {
   return (
     <View
       style={{
-        backgroundColor: focused ? '#00FFC2' : 'none',
-        width: 40,
-        height: 40,
         alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: focused ? '#00FFC2' : 'none',
         borderRadius: 14,
+        height: 40,
+        justifyContent: 'center',
+        width: 40,
       }}
     >
-      <Home />
+      <HomeSVG />
     </View>
   );
 };

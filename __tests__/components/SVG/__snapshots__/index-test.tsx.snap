@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SVG should render ClockSVG component 1`] = `[Function]`;
+
+exports[`SVG should render HomeSVG component 1`] = `[Function]`;
+
+exports[`SVG should render InfoSVG component 1`] = `[Function]`;
+
+exports[`SVG should render LogoLogInSVG component 1`] = `[Function]`;
+
+exports[`SVG should render LogoSVG component 1`] = `[Function]`;
+
+exports[`SVG should render UserSVG component 1`] = `[Function]`;

@@ -3,7 +3,7 @@ import { Pressable, SafeAreaView, View } from 'react-native';
 import { router } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-import { LogoLogIn } from '@/components/SVG/Logo';
+import { LogoLogInSVG } from '@/components/SVG';
 import { useSession } from '@/contexts/session';
 import { ArrowNextIcon } from '@/components/Icons';
 
@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <SafeAreaView style={LogInStyles.main}>
       <View style={LogInStyles.logo}>
-        <LogoLogIn />
+        <LogoLogInSVG />
       </View>
       <View style={LogInStyles.buttonContainer}>
         <Typography

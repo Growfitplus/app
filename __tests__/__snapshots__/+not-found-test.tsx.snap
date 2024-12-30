@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Not Found should match the snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "padding": 20,
+    }
+  }
+>
+  <Text>
+    This screen doesn't exist.
+  </Text>
+  <Text
+    href="/"
+    onPress={[Function]}
+    role="link"
+    style={
+      {
+        "marginTop": 15,
+        "paddingVertical": 15,
+      }
+    }
+  >
+    <Text>
+      Go to home screen!
+    </Text>
+  </Text>
+</View>
+`;

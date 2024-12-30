@@ -1,9 +1,9 @@
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import { useState } from 'react';
-import { Keyboard, Platform, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, Platform, Pressable, SafeAreaView, StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 const Weight = () => {
   const [weight, setWeight] = useState(0);

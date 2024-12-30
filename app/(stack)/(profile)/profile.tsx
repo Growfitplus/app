@@ -2,7 +2,7 @@ import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
-import InfoIcon from '@/components/SVG/Info';
+import { InfoSVG } from '@/components/SVG';
 
 const Profile: React.FC<{
   isVisible: boolean;
@@ -21,7 +21,7 @@ const Profile: React.FC<{
           onPress={handleAbout}
         >
           <View style={styles.termsContainer}>
-            <InfoIcon
+            <InfoSVG
               width={24}
               height={24}
             />
@@ -48,32 +48,32 @@ const Profile: React.FC<{
 };
 
 const styles = StyleSheet.create({
+  logOutText: { color: '#FF002E', fontSize: 16 },
   main: {
-    height: '25%',
-    width: '100%',
     backgroundColor: 'white',
-    borderTopRightRadius: 34,
     borderTopLeftRadius: 34,
-    position: 'absolute',
+    borderTopRightRadius: 34,
     bottom: 0,
-    padding: 25,
     gap: 38,
+    height: '25%',
     justifyContent: 'center',
+    padding: 25,
+    position: 'absolute',
+    width: '100%',
   },
   pressable: {
-    flexDirection: 'row',
     alignItems: 'center',
-    height: 30,
+    flexDirection: 'row',
     gap: 24,
+    height: 30,
   },
   termsContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 30,
     flex: 1,
+    flexDirection: 'row',
+    gap: 30,
   },
   termsText: { fontSize: 16 },
-  logOutText: { fontSize: 16, color: '#FF002E' },
 });
 
 export default Profile;

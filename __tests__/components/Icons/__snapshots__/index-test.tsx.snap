@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icons should render ArrowBackIcon component 1`] = `[Function]`;
+
+exports[`Icons should render ArrowNextIcon component 1`] = `[Function]`;
+
+exports[`Icons should render CameraIcon component 1`] = `[Function]`;
+
+exports[`Icons should render ChevronNextIcon component 1`] = `[Function]`;
+
+exports[`Icons should render LogOutIcon component 1`] = `[Function]`;

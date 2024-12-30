@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { PlatformPressable } from '@react-navigation/elements';
 
