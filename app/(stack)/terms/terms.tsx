@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import InfoIcon from '@/components/svg/Info';
+import InfoIcon from '@/components/SVG/Info';
 import Typography from '@/components/Typography';
 
 const Terms = () => {

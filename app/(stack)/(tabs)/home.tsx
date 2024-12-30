@@ -2,10 +2,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
-import { Logo } from '@/components/svg/Logo';
+import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
 import { useSession } from '@/contexts/session';
-import Profile from '../(profile)/profile';
+import { Logo } from '@/components/SVG/Logo';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);

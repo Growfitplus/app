@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Clock from '../svg/Clock';
+import Clock from '../SVG/Clock';
 
 const TrainingTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   <View

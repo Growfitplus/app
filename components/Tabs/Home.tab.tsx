@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Home from '../svg/Home';
+import Home from '../SVG/Home';
 
 const HomeTab: React.FC<{ focused: boolean }> = ({ focused }) => {
   return (

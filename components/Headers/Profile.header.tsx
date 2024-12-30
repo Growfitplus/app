@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import UserSVG from '../svg/User';
+import UserSVG from '../SVG/User';
 
 const ProfileHeader: React.FC<{ handleProfile: () => void }> = ({ handleProfile }) => {
   return (
