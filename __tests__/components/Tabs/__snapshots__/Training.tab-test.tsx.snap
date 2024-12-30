@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Training Tab should not add bg when not focused 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "none",
+      "borderRadius": 14,
+      "height": 40,
+      "justifyContent": "center",
+      "width": 40,
+    }
+  }
+>
+  <RNSVGSvgView
+    bbHeight={24}
+    bbWidth={24}
+    fill="none"
+    focusable={false}
+    height={24}
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "flex": 0,
+          "height": 24,
+          "width": 24,
+        },
+      ]
+    }
+    width={24}
+  >
+    <RNSVGGroup
+      fill={null}
+      propList={
+        [
+          "fill",
+        ]
+      }
+    >
+      <RNSVGPath
+        clipRule={0}
+        d="M9 4.75h6A4.25 4.25 0 0 1 19.25 9v6A4.25 4.25 0 0 1 15 19.25H9A4.25 4.25 0 0 1 4.75 15V9A4.25 4.25 0 0 1 9 4.75ZM3 9a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6V9Zm9.875-1h-1.75v5.375H16v-1.75h-3.125V8Z"
+        fill={
+          {
+            "payload": 4280494648,
+            "type": 0,
+          }
+        }
+        fillRule={0}
+        propList={
+          [
+            "fill",
+            "fillRule",
+          ]
+        }
+      />
+    </RNSVGGroup>
+  </RNSVGSvgView>
+</View>
+`;
+
+exports[`Training Tab should render without crashing 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#00FFC2",
+      "borderRadius": 14,
+      "height": 40,
+      "justifyContent": "center",
+      "width": 40,
+    }
+  }
+>
+  <RNSVGSvgView
+    bbHeight={24}
+    bbWidth={24}
+    fill="none"
+    focusable={false}
+    height={24}
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "flex": 0,
+          "height": 24,
+          "width": 24,
+        },
+      ]
+    }
+    width={24}
+  >
+    <RNSVGGroup
+      fill={null}
+      propList={
+        [
+          "fill",
+        ]
+      }
+    >
+      <RNSVGPath
+        clipRule={0}
+        d="M9 4.75h6A4.25 4.25 0 0 1 19.25 9v6A4.25 4.25 0 0 1 15 19.25H9A4.25 4.25 0 0 1 4.75 15V9A4.25 4.25 0 0 1 9 4.75ZM3 9a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6V9Zm9.875-1h-1.75v5.375H16v-1.75h-3.125V8Z"
+        fill={
+          {
+            "payload": 4280494648,
+            "type": 0,
+          }
+        }
+        fillRule={0}
+        propList={
+          [
+            "fill",
+            "fillRule",
+          ]
+        }
+      />
+    </RNSVGGroup>
+  </RNSVGSvgView>
+</View>
+`;

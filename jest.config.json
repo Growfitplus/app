@@ -1,0 +1,31 @@
+{
+  "preset": "jest-expo",
+  "collectCoverage": true,
+  "collectCoverageFrom": ["**/*.{ts,tsx,js,jsx}"],
+  "coveragePathIgnorePatterns": [
+    ".expo/",
+    ".prettierrc.js",
+    "babel.config.js",
+    "coverage/",
+    "expo-env.d.ts",
+    "jest.config.{ts,tsx,js,jsx}",
+    "jest.setup.{ts,tsx,js,jsx}",
+    "node_modules/",
+    "scripts/"
+  ],
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["json", "lcov", "clover", "text", "html"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  },
+  "testPathIgnorePatterns": ["scripts/"],
+  "transformIgnorePatterns": [
+    "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg)"
+  ],
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
+}

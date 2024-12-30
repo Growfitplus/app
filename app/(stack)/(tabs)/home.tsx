@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
-import { Logo } from '@/components/svg/Logo';
+import { LogoSVG } from '@/components/SVG';
 import ProfileHeader from '@/components/Headers/Profile.header';
 import { useSession } from '@/contexts/session';
 import Profile from '../(profile)/profile';
@@ -20,7 +20,7 @@ const Home = () => {
     navigation.setOptions({
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <Logo />
+          <LogoSVG />
         </View>
       ),
       headerRight: () => <ProfileHeader handleProfile={() => setShowProfile(true)} />,
@@ -51,9 +51,9 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   main: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

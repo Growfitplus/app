@@ -13,17 +13,21 @@ export default tseslint.config(
   prettierConfig,
   {
     ignores: [
-      '**/node_modules',
-      '**/.prettierignore',
-      'scripts/**',
       '.expo/**',
-      'dist/**',
-      'ios/**',
-      'android/**',
       '.prettierrc.js',
-      'expo-env.d.ts',
+      '**/.prettierignore',
+      '**/node_modules',
+      'android/**',
+      'babel.config.js',
       'commitlint.config.mjs',
+      'dist/**',
       'eslint.config.mjs',
+      'expo-env.d.ts',
+      'ios/**',
+      'jest.setup.js',
+      'node_modules/**',
+      'scripts/**',
+      'coverage/',
     ],
   },
   {
@@ -37,7 +41,6 @@ export default tseslint.config(
 
       sourceType: 'module',
     },
-
     rules: {
       '@typescript-eslint/await-thenable': 'error',
       'array-bracket-newline': [

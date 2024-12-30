@@ -15,28 +15,22 @@ const useAsyncState = (
   return useReducer(
     (
       state: [boolean, SessionObject | null],
-      action: SessionObject | null = null,
+      action: SessionObject,
     ): [boolean, SessionObject | null] => [false, action],
     initialValue,
   ) as UseStateHook;
 };
 
 const setStorageItemAsync = async (key: string, value: string | null) => {
-  if (Platform.OS === 'web') {
+  if (Platform.OS !== 'web') {
     try {
-      if (value === null) {
-        localStorage.removeItem(key);
+      if (value == null) {
+        await SecureStore.deleteItemAsync(key);
       } else {
-        localStorage.setItem(key, value);
+        await SecureStore.setItemAsync(key, value);
       }
     } catch (e) {
-      console.error('Local storage is unavailable:', e);
-    }
-  } else {
-    if (value == null) {
-      await SecureStore.deleteItemAsync(key);
-    } else {
-      await SecureStore.setItemAsync(key, value);
+      console.error('Secure Store is unavailable:', e);
     }
   }
 };
@@ -47,19 +41,15 @@ const useStorageState = (key: string): UseStateHook => {
 
   // Get
   useEffect(() => {
-    if (Platform.OS === 'web') {
+    if (Platform.OS !== 'web') {
       try {
-        if (typeof localStorage !== 'undefined') {
-          setState(JSON.parse(localStorage.getItem(key) ?? '') as SessionObject);
-        }
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        SecureStore.getItemAsync(key).then(value => {
+          setState(value ? (JSON.parse(value) as SessionObject) : null);
+        });
       } catch (e) {
-        console.error('Local storage is unavailable:', e);
+        console.error('Session storage is unavailable:', e);
       }
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      SecureStore.getItemAsync(key).then(value => {
-        setState(JSON.parse(value ?? '') as SessionObject);
-      });
     }
   }, [key]);
 
