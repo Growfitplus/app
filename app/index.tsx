@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-import { LogoLogIn } from '@/components/svg/Logo';
+import { LogoLogIn } from '@/components/SVG/Logo';
 import { useSession } from '@/contexts/session';
 import { ArrowNextIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';

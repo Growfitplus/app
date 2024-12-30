@@ -1,8 +1,8 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
-import InfoIcon from '@/components/svg/Info';
+import InfoIcon from '@/components/SVG/Info';
 
 const Profile: React.FC<{
   isVisible: boolean;
