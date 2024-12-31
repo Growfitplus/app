@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
 import { LogoSVG } from '@/components/SVG';
+import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
 import { useSession } from '@/contexts/session';
-import Profile from '../(profile)/profile';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);

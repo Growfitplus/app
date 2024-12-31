@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Pressable } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Pressable } from 'react-native';
 import { router, useNavigation } from 'expo-router';
 
 import Typography from '@/components/Typography';
@@ -29,7 +29,12 @@ const Onboarding = () => {
             onPress={() => router.push('/(stack)/(onboarding)/height')}
           >
             <View>
-              <Typography weight='bold' styles={styles.sign}>♂</Typography>
+              <Typography
+                weight='bold'
+                styles={styles.sign}
+              >
+                ♂
+              </Typography>
             </View>
             <View style={styles.genreContainer}>
               <Typography styles={styles.genre}>Masculino</Typography>
@@ -40,7 +45,12 @@ const Onboarding = () => {
             onPress={() => router.push('/(stack)/(onboarding)/height')}
           >
             <View>
-              <Typography weight='bold' styles={styles.sign}>♀</Typography>
+              <Typography
+                weight='bold'
+                styles={styles.sign}
+              >
+                ♀
+              </Typography>
             </View>
             <View style={styles.genreContainer}>
               <Typography styles={styles.genre}>Femenino</Typography>
@@ -53,43 +63,43 @@ const Onboarding = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 22,
     paddingVertical: 32,
   },
-  optionsContainer: {
+  genre: {
+    color: Colors.light.text.input,
+    fontSize: 12,
+    textAlign: 'right',
+  },
+  genreContainer: {
+    alignItems: 'flex-end',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    gap: 12,
+    justifyContent: 'flex-end',
+  },
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
   },
   option: {
     backgroundColor: 'white',
     borderRadius: 20,
-    width: 152,
     height: 152,
     padding: 12,
+    width: 152,
+  },
+  optionsContainer: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    gap: 12,
+    justifyContent: 'center',
   },
   sign: {
     color: Colors.light.text.emphasis,
     fontSize: 16,
   },
-  genreContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-  },
-  genre: {
-    color: Colors.light.text.input,
-    fontSize: 12,
-    textAlign: 'right',
-  }
 });
 
 export default Onboarding;

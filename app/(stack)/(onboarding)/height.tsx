@@ -8,11 +8,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { router } from 'expo-router';
+import { useState } from 'react';
 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
-import { router } from 'expo-router';
-import { useState } from 'react';
 import { Fonts } from '@/constants/Fonts';
 
 const Height = () => {
@@ -68,32 +68,13 @@ const Height = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
+  cms: {
+    fontSize: 16,
   },
   container: {
     flex: 1,
     paddingHorizontal: 22,
     paddingVertical: 32,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-  value: {
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-    color: Colors.light.text.emphasis
-  },
-  cms: {
-    fontSize: 16,
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   continueButton: {
     alignItems: 'center',
@@ -101,6 +82,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     width: '100%',
+  },
+  continueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+  },
+  value: {
+    color: Colors.light.text.emphasis,
+    fontFamily: Fonts.RobotoRegular,
+    fontSize: 72,
+  },
+  valueContainer: {
+    alignItems: 'center',
+    flex: 1,
+    gap: 12,
+    justifyContent: 'center',
   },
 });
 

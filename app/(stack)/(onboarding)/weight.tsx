@@ -1,9 +1,19 @@
+import { router } from 'expo-router';
+import { useState } from 'react';
+import {
+  Keyboard,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
-import { router } from 'expo-router';
-import { useState } from 'react';
-import { Keyboard, Platform, Pressable, SafeAreaView, StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 const Weight = () => {
   const [weight, setWeight] = useState(0);
@@ -58,32 +68,10 @@ const Weight = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 22,
     paddingVertical: 32,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-  value: {
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-    color: Colors.light.text.emphasis
-  },
-  kg: {
-    fontSize: 16,
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   continueButton: {
     alignItems: 'center',
@@ -91,6 +79,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     width: '100%',
+  },
+  continueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  kg: {
+    fontSize: 16,
+  },
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+  },
+  value: {
+    color: Colors.light.text.emphasis,
+    fontFamily: Fonts.RobotoRegular,
+    fontSize: 72,
+  },
+  valueContainer: {
+    alignItems: 'center',
+    flex: 1,
+    gap: 12,
+    justifyContent: 'center',
   },
 });
 
