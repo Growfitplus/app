@@ -1,29 +1,92 @@
 import React from 'react';
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { LogoLogIn } from '@/components/SVG/Logo';
-import { useSession } from '@/contexts/session';
 import { ArrowNextIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
+import { useUserContext } from '@/contexts/user/context';
+import { loadData, logIn, setUsername } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
+import { finishStorage, gettingStorage, settingStorage } from '@/contexts/storage/actions';
+import * as SecureStore from 'expo-secure-store';
 
 const Login = () => {
-  const { signIn, session } = useSession();
+  const [user, userDispatch] = useUserContext();
+  const [{ isLoading }, storageDispatch] = useStorageContext();
 
   useEffect(() => {
-    if (session) {
-      if (session.onboarding) {
-        router.push('/(stack)/(onboarding)/start');
-      } else {
-        router.push('/(stack)/(tabs)/home');
-      }
-    }
-  }, [session]);
+    loadStorageData();
+  }, []);
 
-  return (
+  const loadStorageData = async () => {
+    storageDispatch(gettingStorage());
+
+    try {
+      const store = await SecureStore.getItemAsync('session');
+
+      if (store) {
+        const data = JSON.parse(store);
+
+        if (data.hasSession) {
+          userDispatch(logIn(data));
+
+          await SecureStore.setItemAsync('session', JSON.stringify({ ...data, hasSession: true }));
+
+          if (!data.onboardingFinished) {
+            router.push('/(stack)/(onboarding)/start');
+          } else {
+            router.push('/(stack)/(tabs)/home');
+          }
+        } else {
+          userDispatch(loadData(data));
+        }
+      }
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+  };
+
+  const signIn = async () => {
+    userDispatch(setUsername('eamzea'));
+
+    try {
+      storageDispatch(settingStorage());
+
+      await SecureStore.setItemAsync(
+        'session',
+        JSON.stringify({
+          ...user,
+          username: 'eamzea',
+          hasSession: true,
+        }),
+      );
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+
+    if (!user.onboardingFinished) {
+      router.push('/(stack)/(onboarding)/start');
+    } else {
+      router.push('/(stack)/(tabs)/home');
+    }
+  };
+
+  return isLoading ? (
+    <View style={styles.main}>
+      <ActivityIndicator
+        size='large'
+        color='black'
+      />
+    </View>
+  ) : (
     <SafeAreaView style={styles.main}>
       <View style={styles.logo}>
         <LogoLogIn />
@@ -37,12 +100,7 @@ const Login = () => {
         </Typography>
         <Pressable
           style={styles.buttonBox}
-          onPress={() =>
-            signIn({
-              username: 'eamzea',
-              onboarding: true,
-            })
-          }
+          onPress={signIn}
         >
           <AntDesign
             name='google'

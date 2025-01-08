@@ -1,25 +1,18 @@
 import React from 'react';
 import { Redirect, router, Stack } from 'expo-router';
-import { Text } from 'react-native';
 
-import { useSession } from '@/contexts/session';
 import { ArrowBackIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';
+import { useUserContext } from '@/contexts/user/context';
 
 const AppLayout = () => {
-  const { session, isLoading } = useSession();
+  const [user] = useUserContext();
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (!session) {
+  if (!user.hasSession) {
     return <Redirect href='/' />;
   }
 
-  const { onboarding } = session;
-
-  if (!onboarding) {
+  if (user.onboardingFinished) {
     return <Redirect href='/home' />;
   }
 

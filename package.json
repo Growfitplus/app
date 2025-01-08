@@ -1,19 +1,4 @@
 {
-  "name": "growfit",
-  "main": "expo-router/entry",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll",
-    "lint": "expo lint"
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "@expo-google-fonts/roboto-mono": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
@@ -54,5 +39,20 @@
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "main": "expo-router/entry",
+  "name": "growfit",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "reset-project": "node ./scripts/reset-project.js",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "test": "jest --watchAll",
+    "lint": "expo lint"
+  },
+  "version": "1.0.0"
 }

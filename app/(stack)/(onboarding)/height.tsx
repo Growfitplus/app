@@ -1,5 +1,6 @@
 import {
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
   Pressable,
   SafeAreaView,
@@ -14,12 +15,26 @@ import Typography from '@/components/Typography';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Fonts } from '@/constants/Fonts';
+import { useUserContext } from '@/contexts/user/context';
+import { USER_ACTION_TYPES } from '@/contexts/user/types';
+import { setHeight } from '@/contexts/user/actions';
 
 const Height = () => {
-  const [height, setHeight] = useState(0);
+  const [user, dispatch] = useUserContext();
+  const [height, updateHeight] = useState(user.data.height);
+  const [keyboardActive, setKeyboardActive] = useState(false);
+
+  const handleContinue = () => {
+    dispatch(setHeight(Number(height)));
+
+    router.push('/(stack)/(onboarding)/weight');
+  };
 
   return (
-    <SafeAreaView style={styles.main}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.main}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View>
@@ -30,11 +45,13 @@ const Height = () => {
               Estatura
             </Typography>
           </View>
-          <View style={styles.valueContainer}>
+          <View style={[styles.valueContainer, { height: keyboardActive ? '75%' : '90%' }]}>
             <TextInput
               style={styles.value}
               value={height.toString()}
-              onChangeText={text => setHeight(Number(text))}
+              onChangeText={text => updateHeight(Number(text))}
+              onFocus={() => setKeyboardActive(true)}
+              onBlur={() => setKeyboardActive(false)}
               inputMode='decimal'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
             />
@@ -47,7 +64,7 @@ const Height = () => {
                 backgroundColor:
                   height === 0 ? Colors.light.button.disabled : Colors.light['main-primary'],
               }}
-              onPress={() => router.push('/(stack)/(onboarding)/weight')}
+              onPress={handleContinue}
               disabled={height === 0}
             >
               <Typography
@@ -63,7 +80,7 @@ const Height = () => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -75,18 +92,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 22,
-    paddingVertical: 32,
+    paddingTop: 32,
+    paddingBottom: 48,
   },
   valueContainer: {
     alignItems: 'center',
-    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },
   value: {
     fontFamily: Fonts.RobotoRegular,
     fontSize: 72,
-    color: Colors.light.text.emphasis
+    color: Colors.light.text.emphasis,
   },
   cms: {
     fontSize: 16,

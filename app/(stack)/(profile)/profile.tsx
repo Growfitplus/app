@@ -1,14 +1,34 @@
-import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
 import InfoIcon from '@/components/SVG/Info';
+import { useUserContext } from '@/contexts/user/context';
+import { logOut } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
+import { finishStorage, settingStorage } from '@/contexts/storage/actions';
+import * as SecureStore from 'expo-secure-store';
 
 const Profile: React.FC<{
   isVisible: boolean;
   handleAbout: () => void;
-  handleExit: () => void;
-}> = ({ isVisible, handleExit, handleAbout }) => {
+}> = ({ isVisible, handleAbout }) => {
+  const [user, userDispatch] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
+
+  const handleExit = async () => {
+    try {
+      storageDispatch(settingStorage());
+
+      await SecureStore.setItemAsync('session', JSON.stringify({ ...user, hasSession: false }));
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+    userDispatch(logOut());
+  };
+
   return (
     <Modal
       animationType='slide'

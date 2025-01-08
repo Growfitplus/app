@@ -4,17 +4,17 @@ import { router, useNavigation } from 'expo-router';
 
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
-import { useSession } from '@/contexts/session';
 import { Logo } from '@/components/SVG/Logo';
+import { useUserContext } from '@/contexts/user/context';
+import * as SecureStore from 'expo-secure-store';
+import { useStorageContext } from '@/contexts/storage/context';
+import { deletingStorage, finishStorage } from '@/contexts/storage/actions';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [user] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
   const navigation = useNavigation();
-  const { signOut } = useSession();
-
-  const handleExit = () => {
-    signOut();
-  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -32,18 +32,29 @@ const Home = () => {
     setShowProfile(false);
   };
 
+  const handleRemove = async () => {
+    try {
+      storageDispatch(deletingStorage());
+      await SecureStore.deleteItemAsync('session');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+  };
+
   return (
     <>
       <View style={styles.main}>
         <Text>Home</Text>
+        <Text>{JSON.stringify(user)}</Text>
       </View>
-      <Pressable onPress={() => signOut()}>
-        <Text>Sign Out</Text>
+      <Pressable onPress={handleRemove}>
+        <Text>Remove Storage</Text>
       </Pressable>
       <Profile
         isVisible={showProfile}
         handleAbout={handleAbout}
-        handleExit={handleExit}
       />
     </>
   );
