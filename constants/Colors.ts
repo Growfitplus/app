@@ -11,5 +11,6 @@ export const Colors = {
       emphasis: '#232A38',
       input: '#080110',
     },
+    white: '#FFF',
   },
 };

@@ -41,6 +41,10 @@ const TabLayout = () => {
     }
   }, [user.hasSession]);
 
+  if (!user.hasSession) {
+    return <Redirect href='/' />;
+  }
+
   const handleExit = () => {
     storageDispatch(settingStorage());
 

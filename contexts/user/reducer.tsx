@@ -68,6 +68,34 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         hasSession: false,
       };
 
+    case USER_ACTION_TYPES.SET_IMAGES:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          images: [
+            ...state.data.images,
+            {
+              ...action.payload,
+            },
+          ],
+        },
+      };
+
+    case USER_ACTION_TYPES.RESET_STATE:
+      return {
+        data: {
+          age: 0,
+          genre: null,
+          height: 0,
+          images: [],
+          weight: 0,
+        },
+        hasSession: false,
+        onboardingFinished: false,
+        username: '',
+      };
+
     default:
       return state;
   }

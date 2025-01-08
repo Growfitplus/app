@@ -1,20 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
-import * as SecureStore from 'expo-secure-store';
 
 import { LogoSVG } from '@/components/SVG';
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
 import { useUserContext } from '@/contexts/user/context';
-import { useStorageContext } from '@/contexts/storage/context';
-import { deletingStorage, finishStorage } from '@/contexts/storage/actions';
+import useStorage from '@/hooks/useStorage';
+import { resetState } from '@/contexts/user/actions';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
-  const [user] = useUserContext();
-  const [, storageDispatch] = useStorageContext();
+  const [user, userDispatch] = useUserContext();
   const navigation = useNavigation();
+  const { deleteStorage } = useStorage();
 
   useEffect(() => {
     navigation.setOptions({
@@ -33,14 +32,9 @@ const Home = () => {
   };
 
   const handleRemove = async () => {
-    try {
-      storageDispatch(deletingStorage());
-      await SecureStore.deleteItemAsync('session');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      storageDispatch(finishStorage());
-    }
+    await deleteStorage();
+
+    userDispatch(resetState());
   };
 
   return (

@@ -9,6 +9,7 @@ const INITIAL_USER_STATE: USER_STATE_TYPE = {
     age: 0,
     genre: null,
     height: 0,
+    images: [],
     weight: 0,
   },
   hasSession: false,

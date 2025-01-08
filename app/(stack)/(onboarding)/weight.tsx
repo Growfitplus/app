@@ -2,12 +2,12 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
   Pressable,
-  KeyboardAvoidingView,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback,
+  useWindowDimensions,
   View,
 } from 'react-native';
 
@@ -16,11 +16,14 @@ import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
 import { setWeight } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
+import Container from '@/components/Container';
+import { heightPercentage } from '@/utils/keyboardHeight';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
   const [weight, updateWeight] = useState(user.data.weight);
   const [keyboardActive, setKeyboardActive] = useState(false);
+  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setWeight(Number(weight)));
@@ -33,8 +36,11 @@ const Weight = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+      <Container>
+        <Pressable
+          onPress={Keyboard.dismiss}
+          style={styles.container}
+        >
           <View>
             <Typography
               weight='bold'
@@ -43,7 +49,12 @@ const Weight = () => {
               Peso actual
             </Typography>
           </View>
-          <View style={[styles.valueContainer, { height: keyboardActive ? '70%' : '90%' }]}>
+          <View
+            style={[
+              styles.valueContainer,
+              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+            ]}
+          >
             <TextInput
               style={styles.value}
               value={weight.toString()}
@@ -76,8 +87,8 @@ const Weight = () => {
               </Typography>
             </Pressable>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </Pressable>
+      </Container>
     </KeyboardAvoidingView>
   );
 };
@@ -85,8 +96,8 @@ const Weight = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 22,
-    paddingVertical: 32,
+    paddingBottom: 48,
+    paddingTop: 32,
   },
   continueButton: {
     alignItems: 'center',

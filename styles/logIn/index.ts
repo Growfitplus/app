@@ -4,7 +4,7 @@ import { Colors } from '@/constants/Colors';
 export const LogInStyles = StyleSheet.create({
   buttonBox: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.light.white,
     borderRadius: 16,
     flexDirection: 'row',
     height: 56,

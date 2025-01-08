@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -5,22 +6,24 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { router } from 'expo-router';
-import { useState } from 'react';
 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
 import { Fonts } from '@/constants/Fonts';
 import { useUserContext } from '@/contexts/user/context';
 import { setHeight } from '@/contexts/user/actions';
+import Container from '@/components/Container';
+import { heightPercentage } from '@/utils/keyboardHeight';
 
 const Height = () => {
   const [user, dispatch] = useUserContext();
   const [height, updateHeight] = useState(user.data.height);
   const [keyboardActive, setKeyboardActive] = useState(false);
+  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setHeight(Number(height)));
@@ -33,8 +36,11 @@ const Height = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+      <Container>
+        <Pressable
+          onPress={Keyboard.dismiss}
+          style={styles.container}
+        >
           <View>
             <Typography
               weight='bold'
@@ -43,7 +49,12 @@ const Height = () => {
               Estatura
             </Typography>
           </View>
-          <View style={[styles.valueContainer, { height: keyboardActive ? '75%' : '90%' }]}>
+          <View
+            style={[
+              styles.valueContainer,
+              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+            ]}
+          >
             <TextInput
               style={styles.value}
               value={height.toString()}
@@ -76,8 +87,8 @@ const Height = () => {
               </Typography>
             </Pressable>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </Pressable>
+      </Container>
     </KeyboardAvoidingView>
   );
 };
@@ -89,7 +100,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 48,
-    paddingHorizontal: 22,
     paddingTop: 32,
   },
   continueButton: {
