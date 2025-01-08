@@ -1,5 +1,5 @@
-import { PhotosState } from '@/types/photos';
 import { Dispatch } from 'react';
+import { PhotosState } from '@/types/photos';
 
 export enum USER_ACTION_TYPES {
   FINISH_ONBOARDING = 'FINISH_ONBOARDING',
@@ -33,7 +33,7 @@ export enum GENRE_TYPES {
   'Feminine' = 'Feminine',
 }
 
-export type USER_STATE_TYPE = {
+export interface USER_STATE_TYPE {
   username: string;
   onboardingFinished: boolean;
   hasSession: boolean;
@@ -44,7 +44,7 @@ export type USER_STATE_TYPE = {
     age: number;
     images: PhotosState[];
   };
-};
+}
 
 export type USER_CONTEXT_INTERFACE = [
   {

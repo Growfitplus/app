@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ProvidersProps {
-  providers: Array<React.JSXElementConstructor<React.PropsWithChildren<any>>>;
+  providers: React.JSXElementConstructor<React.PropsWithChildren<unknown>>[];
   children: React.ReactNode;
 }
 

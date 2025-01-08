@@ -5,12 +5,12 @@ import { CameraIcon } from '../Icons';
 const ProgressTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   <View
     style={{
-      backgroundColor: focused ? '#00FFC2' : 'none',
-      width: 40,
-      height: 40,
       alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: focused ? '#00FFC2' : 'none',
       borderRadius: 14,
+      height: 40,
+      justifyContent: 'center',
+      width: 40,
     }}
   >
     <CameraIcon />

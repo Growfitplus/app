@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, Stack } from 'expo-router';
+import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function NotFoundScreen() {
+const NotFoundScreen = () => {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
       <View style={styles.container}>
         <Text>This screen doesn't exist.</Text>
         <Link
@@ -17,12 +16,12 @@ export default function NotFoundScreen() {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
     padding: 20,
   },
@@ -31,3 +30,5 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
+
+export default NotFoundScreen;

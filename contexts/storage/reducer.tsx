@@ -9,8 +9,8 @@ const StorageReducer = (state: STORAGE_STATE_TYPE, action: STORAGE_TYPE_ACTIONS)
     case STORAGE_ACTION_TYPES.SETTING_STORAGE:
       return {
         ...state,
-        stage: STORAGE_ACTION_TYPES.SETTING_STORAGE,
         isLoading: true,
+        stage: STORAGE_ACTION_TYPES.SETTING_STORAGE,
       };
 
     case STORAGE_ACTION_TYPES.GETTING_STORAGE:
@@ -31,7 +31,7 @@ const StorageReducer = (state: STORAGE_STATE_TYPE, action: STORAGE_TYPE_ACTIONS)
       return {
         ...state,
         isLoading: false,
-        stage: null
+        stage: null,
       };
 
     default:

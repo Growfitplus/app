@@ -1,25 +1,25 @@
-import React from 'react';
-import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, Pressable, SafeAreaView, View } from 'react-native';
 import { router } from 'expo-router';
-import { useEffect } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
-
-import { LogoLogIn } from '@/components/SVG/Logo';
-import { ArrowNextIcon } from '@/components/Icons';
-import { Colors } from '@/constants/Colors';
-import Typography from '@/components/Typography';
-import { useUserContext } from '@/contexts/user/context';
-import { loadData, logIn, setUsername } from '@/contexts/user/actions';
-import { useStorageContext } from '@/contexts/storage/context';
-import { finishStorage, gettingStorage, settingStorage } from '@/contexts/storage/actions';
 import * as SecureStore from 'expo-secure-store';
+
+import { ArrowNextIcon } from '@/components/Icons';
+import { finishStorage, gettingStorage, settingStorage } from '@/contexts/storage/actions';
+import { loadData, logIn, setUsername } from '@/contexts/user/actions';
+import { LogInStyles } from '@/styles/logIn';
+import { LogoLogIn } from '@/components/SVG/Logo';
+import { useStorageContext } from '@/contexts/storage/context';
+import { useUserContext } from '@/contexts/user/context';
+import Typography from '@/components/Typography';
+import { USER_STATE_TYPE } from '@/contexts/user/types';
 
 const Login = () => {
   const [user, userDispatch] = useUserContext();
   const [{ isLoading }, storageDispatch] = useStorageContext();
 
   useEffect(() => {
-    loadStorageData();
+    void loadStorageData();
   }, []);
 
   const loadStorageData = async () => {
@@ -29,7 +29,7 @@ const Login = () => {
       const store = await SecureStore.getItemAsync('session');
 
       if (store) {
-        const data = JSON.parse(store);
+        const data = JSON.parse(store) as USER_STATE_TYPE;
 
         if (data.hasSession) {
           userDispatch(logIn(data));
@@ -62,8 +62,8 @@ const Login = () => {
         'session',
         JSON.stringify({
           ...user,
-          username: 'eamzea',
           hasSession: true,
+          username: 'eamzea',
         }),
       );
     } catch (e) {
@@ -80,26 +80,28 @@ const Login = () => {
   };
 
   return isLoading ? (
-    <View style={styles.main}>
+    <View style={LogInStyles.main}>
       <ActivityIndicator
         size='large'
         color='black'
+        data-testid='loading-indicator'
       />
     </View>
   ) : (
-    <SafeAreaView style={styles.main}>
-      <View style={styles.logo}>
+    <SafeAreaView style={LogInStyles.main}>
+      <View style={LogInStyles.logo}>
         <LogoLogIn />
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={LogInStyles.buttonContainer}>
         <Typography
-          styles={styles.preButtonText}
+          styles={LogInStyles.preButtonText}
           weight='medium'
         >
           Ingresa con
         </Typography>
         <Pressable
-          style={styles.buttonBox}
+          style={LogInStyles.buttonBox}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onPress={signIn}
         >
           <AntDesign
@@ -109,7 +111,7 @@ const Login = () => {
           />
           <Typography
             weight='bold'
-            styles={styles.buttonText}
+            styles={LogInStyles.buttonText}
           >
             Google
           </Typography>
@@ -122,30 +124,5 @@ const Login = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.light['main-primary'],
-  },
-  logo: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  buttonContainer: { gap: 20 },
-  preButtonText: { textAlign: 'center', fontSize: 14 },
-  buttonBox: {
-    backgroundColor: Colors.light.white,
-    height: 56,
-    width: 312,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: 16,
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-  },
-  buttonText: {
-    fontSize: 16,
-  },
-});
 
 export default Login;

@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { router } from 'expo-router';
+import { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -23,7 +23,7 @@ const Weight = () => {
   const [user, dispatch] = useUserContext();
   const [weight, updateWeight] = useState(user.data.weight);
   const [keyboardActive, setKeyboardActive] = useState(false);
-  const {height: heightScreen} = useWindowDimensions()
+  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setWeight(Number(weight)));
@@ -37,7 +37,10 @@ const Weight = () => {
       style={styles.main}
     >
       <Container>
-        <Pressable onPress={Keyboard.dismiss} style={styles.container}>
+        <Pressable
+          onPress={Keyboard.dismiss}
+          style={styles.container}
+        >
           <View>
             <Typography
               weight='bold'
@@ -46,7 +49,12 @@ const Weight = () => {
               Peso actual
             </Typography>
           </View>
-          <View style={[styles.valueContainer, { height: keyboardActive ? heightPercentage(heightScreen) : '90%' }]}>
+          <View
+            style={[
+              styles.valueContainer,
+              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+            ]}
+          >
             <TextInput
               style={styles.value}
               value={weight.toString()}
@@ -86,31 +94,10 @@ const Weight = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
   container: {
     flex: 1,
-    paddingTop: 32,
     paddingBottom: 48,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    gap: 12,
-    justifyContent: 'center',
-  },
-  value: {
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-    color: Colors.light.text.emphasis,
-  },
-  kg: {
-    fontSize: 16,
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 32,
   },
   continueButton: {
     alignItems: 'center',
@@ -118,6 +105,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     width: '100%',
+  },
+  continueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  kg: {
+    fontSize: 16,
+  },
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+  },
+  value: {
+    color: Colors.light.text.emphasis,
+    fontFamily: Fonts.RobotoRegular,
+    fontSize: 72,
+  },
+  valueContainer: {
+    alignItems: 'center',
+    gap: 12,
+    justifyContent: 'center',
   },
 });
 

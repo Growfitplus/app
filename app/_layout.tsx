@@ -3,9 +3,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 import { Slot } from 'expo-router';
 import {
-  RobotoMono_700Bold,
-  RobotoMono_500Medium,
-  RobotoMono_400Regular,
+  RobotoMono_700Bold as RobotoBold,
+  RobotoMono_500Medium as RobotoMedium,
+  RobotoMono_400Regular as RobotoRegular,
   useFonts,
 } from '@expo-google-fonts/roboto-mono';
 
@@ -13,23 +13,24 @@ import RootProvider from '@/contexts/root';
 import UserProvider from '@/contexts/user/provider';
 import StorageProvider from '@/contexts/storage/provider';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const [loaded, error] = useFonts({
-    RobotoMono_700Bold,
-    RobotoMono_500Medium,
-    RobotoMono_400Regular,
+    RobotoBold,
+    RobotoMedium,
+    RobotoRegular,
   });
 
   useEffect(() => {
     if (loaded || error) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
 
-  if (!loaded && !error) {
+  if (!loaded && error) {
     return null;
   }
 

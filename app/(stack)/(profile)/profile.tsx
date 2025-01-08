@@ -2,12 +2,9 @@ import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
-import InfoIcon from '@/components/SVG/Info';
+import { InfoSVG } from '@/components/SVG';
 import { useUserContext } from '@/contexts/user/context';
 import { logOut } from '@/contexts/user/actions';
-import { useStorageContext } from '@/contexts/storage/context';
-import { finishStorage, settingStorage } from '@/contexts/storage/actions';
-import * as SecureStore from 'expo-secure-store';
 import { Colors } from '@/constants/Colors';
 import useStorage from '@/hooks/useStorage';
 
@@ -16,11 +13,10 @@ const Profile: React.FC<{
   handleAbout: () => void;
 }> = ({ isVisible, handleAbout }) => {
   const [user, userDispatch] = useUserContext();
-  const [, storageDispatch] = useStorageContext();
   const { updateStorage } = useStorage();
 
   const handleExit = async () => {
-    await updateStorage({ ...user, hasSession: false })
+    await updateStorage({ ...user, hasSession: false });
 
     userDispatch(logOut());
   };
@@ -37,7 +33,7 @@ const Profile: React.FC<{
           onPress={handleAbout}
         >
           <View style={styles.termsContainer}>
-            <InfoIcon
+            <InfoSVG
               width={24}
               height={24}
             />
@@ -50,6 +46,7 @@ const Profile: React.FC<{
         </Pressable>
         <Pressable
           style={styles.pressable}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onPress={handleExit}
         >
           <LogOutIcon
@@ -64,32 +61,32 @@ const Profile: React.FC<{
 };
 
 const styles = StyleSheet.create({
+  logOutText: { color: '#FF002E', fontSize: 16 },
   main: {
-    height: '25%',
-    width: '100%',
     backgroundColor: Colors.light.white,
-    borderTopRightRadius: 34,
     borderTopLeftRadius: 34,
-    position: 'absolute',
+    borderTopRightRadius: 34,
     bottom: 0,
-    padding: 25,
     gap: 38,
+    height: '25%',
     justifyContent: 'center',
+    padding: 25,
+    position: 'absolute',
+    width: '100%',
   },
   pressable: {
-    flexDirection: 'row',
     alignItems: 'center',
-    height: 30,
+    flexDirection: 'row',
     gap: 24,
+    height: 30,
   },
   termsContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 30,
     flex: 1,
+    flexDirection: 'row',
+    gap: 30,
   },
   termsText: { fontSize: 16 },
-  logOutText: { fontSize: 16, color: '#FF002E' },
 });
 
 export default Profile;

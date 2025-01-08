@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View, SafeAreaView, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -10,24 +10,20 @@ import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { useUserContext } from '@/contexts/user/context';
 import PhotosProgress from '@/components/PhotosProgress';
-import { PhotosState } from '@/types/photos';
-import { useNavigation } from 'expo-router';
 import { addImage, setWeight } from '@/contexts/user/actions';
 import { useStorageContext } from '@/contexts/storage/context';
-import { finishStorage, settingStorage } from '@/contexts/storage/actions';
-import * as SecureStore from 'expo-secure-store';
 import useStorage from '@/hooks/useStorage';
 
 const Progress = () => {
   const [user, userDispatch] = useUserContext();
-  const [{ isLoading }, storageDispatch] = useStorageContext();
+  const [{ isLoading }] = useStorageContext();
   const { updateStorage } = useStorage();
   const {
     data: { images, weight },
   } = user;
 
   useEffect(() => {
-    updateStorage({ ...user });
+    void updateStorage({ ...user });
   }, [images, weight]);
 
   const setNewWeight = (value: number) => {
@@ -37,7 +33,7 @@ const Progress = () => {
   };
 
   const pickImageAsync = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       quality: 1,
     });
@@ -45,7 +41,7 @@ const Progress = () => {
     if (!result.canceled) {
       userDispatch(
         addImage({
-          id: result.assets[0].fileName as string,
+          id: result.assets[0].fileName!,
           uri: result.assets[0].uri,
         }),
       );
@@ -64,6 +60,7 @@ const Progress = () => {
         <View style={styles.dataContainer}>
           <PressableWithEffect
             customStyles={styles.addPhotoCard}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onPressAction={pickImageAsync}
             isEnabled={!isLoading}
           >
@@ -103,8 +100,8 @@ const Progress = () => {
             gap: 8,
           }}
           columnWrapperStyle={{
-            justifyContent: 'flex-start',
             gap: 8,
+            justifyContent: 'flex-start',
           }}
         />
       </Container>
@@ -126,8 +123,8 @@ const styles = StyleSheet.create({
     width: 104,
   },
   addPhotoText: {
-    textAlign: 'right',
     fontSize: 12,
+    textAlign: 'right',
   },
   dataContainer: {
     flexDirection: 'row',
@@ -141,11 +138,11 @@ const styles = StyleSheet.create({
     marginBottom: 52,
   },
   weightButton: {
-    borderWidth: 2,
+    alignItems: 'center',
     borderColor: Colors.light.text.input,
     borderRadius: 24,
+    borderWidth: 2,
     height: 24,
-    alignItems: 'center',
     justifyContent: 'center',
   },
   weightContainer: {

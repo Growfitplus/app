@@ -1,5 +1,6 @@
-import { Redirect, Tabs } from 'expo-router';
 import React, { useEffect } from 'react';
+import { Redirect, Tabs } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 
 import { HapticTab } from '@/components/HapticTab';
 import { Colors } from '@/constants/Colors';
@@ -9,7 +10,26 @@ import TrainingTab from '@/components/Tabs/Training.tab';
 import { useUserContext } from '@/contexts/user/context';
 import { useStorageContext } from '@/contexts/storage/context';
 import { finishStorage, settingStorage } from '@/contexts/storage/actions';
-import * as SecureStore from 'expo-secure-store';
+
+const TabOptions = {
+  headerShadowVisible: false,
+  headerStyle: {
+    backgroundColor: Colors.light['screen-bg'],
+  },
+  headerTitleStyle: {
+    color: 'transparent',
+  },
+  sceneStyle: {
+    backgroundColor: Colors.light['screen-bg'],
+  },
+  tabBarButton: HapticTab,
+  tabBarItemStyle: { marginTop: 20 },
+  tabBarStyle: {
+    borderTopWidth: 0,
+    elevation: 0,
+    height: 100,
+  },
+};
 
 const TabLayout = () => {
   const [user] = useUserContext();
@@ -41,27 +61,7 @@ const TabLayout = () => {
   };
 
   return (
-    <Tabs
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors.light['screen-bg'],
-        },
-        tabBarButton: HapticTab,
-        tabBarItemStyle: { marginTop: 20 },
-        tabBarStyle: {
-          borderTopWidth: 0,
-          elevation: 0,
-          height: 100,
-        },
-        headerTitleStyle: {
-          color: 'transparent',
-        },
-        sceneStyle: {
-          backgroundColor: Colors.light['screen-bg'],
-        },
-        headerShadowVisible: false,
-      }}
-    >
+    <Tabs screenOptions={TabOptions}>
       <Tabs.Screen
         name='progress'
         options={{

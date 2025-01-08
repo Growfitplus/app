@@ -16,8 +16,8 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_USERNAME:
       return {
         ...state,
-        username: action.payload.username,
         hasSession: true,
+        username: action.payload.username,
       };
 
     case USER_ACTION_TYPES.SET_GENRE:
@@ -84,16 +84,16 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
 
     case USER_ACTION_TYPES.RESET_STATE:
       return {
-        username: '',
-        onboardingFinished: false,
-        hasSession: false,
         data: {
+          age: 0,
           genre: null,
           height: 0,
-          weight: 0,
-          age: 0,
           images: [],
+          weight: 0,
         },
+        hasSession: false,
+        onboardingFinished: false,
+        username: '',
       };
 
     default:

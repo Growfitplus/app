@@ -2,15 +2,12 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
+import { LogoSVG } from '@/components/SVG';
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
-import { Logo } from '@/components/SVG/Logo';
 import { useUserContext } from '@/contexts/user/context';
-import * as SecureStore from 'expo-secure-store';
-import { useStorageContext } from '@/contexts/storage/context';
-import { deletingStorage, finishStorage } from '@/contexts/storage/actions';
 import useStorage from '@/hooks/useStorage';
-import { logOut, resetState } from '@/contexts/user/actions';
+import { resetState } from '@/contexts/user/actions';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -22,7 +19,7 @@ const Home = () => {
     navigation.setOptions({
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <Logo />
+          <LogoSVG />
         </View>
       ),
       headerRight: () => <ProfileHeader handleProfile={() => setShowProfile(true)} />,
@@ -46,7 +43,10 @@ const Home = () => {
         <Text>Home</Text>
         <Text>{JSON.stringify(user)}</Text>
       </View>
-      <Pressable onPress={handleRemove}>
+      <Pressable
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onPress={handleRemove}
+      >
         <Text>Remove Storage</Text>
       </Pressable>
       <Profile
@@ -59,9 +59,9 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   main: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

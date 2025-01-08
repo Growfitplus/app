@@ -6,7 +6,7 @@ import { STORAGE_STATE_TYPE } from './types';
 
 const INITIAL_STORAGE_STATE: STORAGE_STATE_TYPE = {
   isLoading: true,
-  stage: null
+  stage: null,
 };
 
 const StorageProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {

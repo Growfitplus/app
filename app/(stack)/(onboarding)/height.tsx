@@ -23,7 +23,7 @@ const Height = () => {
   const [user, dispatch] = useUserContext();
   const [height, updateHeight] = useState(user.data.height);
   const [keyboardActive, setKeyboardActive] = useState(false);
-  const {height: heightScreen} = useWindowDimensions()
+  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setHeight(Number(height)));
@@ -49,7 +49,12 @@ const Height = () => {
               Estatura
             </Typography>
           </View>
-          <View style={[styles.valueContainer, { height: keyboardActive ? heightPercentage(heightScreen) : '90%' }]}>
+          <View
+            style={[
+              styles.valueContainer,
+              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+            ]}
+          >
             <TextInput
               style={styles.value}
               value={height.toString()}
@@ -89,31 +94,13 @@ const Height = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    paddingTop: 32,
-    paddingBottom: 48,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    gap: 12,
-    justifyContent: 'center',
-  },
-  value: {
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-    color: Colors.light.text.emphasis,
-  },
   cms: {
     fontSize: 16,
   },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    flex: 1,
+    paddingBottom: 48,
+    paddingTop: 32,
   },
   continueButton: {
     alignItems: 'center',
@@ -121,6 +108,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     width: '100%',
+  },
+  continueContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  main: {
+    backgroundColor: Colors.light['screen-bg'],
+    flex: 1,
+  },
+  value: {
+    color: Colors.light.text.emphasis,
+    fontFamily: Fonts.RobotoRegular,
+    fontSize: 72,
+  },
+  valueContainer: {
+    alignItems: 'center',
+    gap: 12,
+    justifyContent: 'center',
   },
 });
 

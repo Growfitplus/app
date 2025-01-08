@@ -1,27 +1,27 @@
-import { Dispatch } from "react"
+import { Dispatch } from 'react';
 
 export enum STORAGE_ACTION_TYPES {
   SETTING_STORAGE = 'SETTING_STORAGE',
   GETTING_STORAGE = 'GETTING_STORAGE',
   DELETING_STORAGE = 'DELETING_STORAGE',
   FINISH_STORAGE = 'FINISH_STORAGE',
-};
+}
 
 export type STORAGE_TYPE_ACTIONS =
   | { type: STORAGE_ACTION_TYPES.GETTING_STORAGE }
   | { type: STORAGE_ACTION_TYPES.SETTING_STORAGE }
   | { type: STORAGE_ACTION_TYPES.DELETING_STORAGE }
-  | { type: STORAGE_ACTION_TYPES.FINISH_STORAGE }
+  | { type: STORAGE_ACTION_TYPES.FINISH_STORAGE };
 
-export type STORAGE_STATE_TYPE = {
-  isLoading: boolean,
-  stage: STORAGE_ACTION_TYPES | null
+export interface STORAGE_STATE_TYPE {
+  isLoading: boolean;
+  stage: STORAGE_ACTION_TYPES | null;
 }
 
 export type STORAGE_CONTEXT_INTERFACE = [
   {
-    isLoading: boolean,
-    stage: STORAGE_ACTION_TYPES | null
+    isLoading: boolean;
+    stage: STORAGE_ACTION_TYPES | null;
   },
-  dispatch: Dispatch<STORAGE_TYPE_ACTIONS>
-]
+  dispatch: Dispatch<STORAGE_TYPE_ACTIONS>,
+];

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress Tab should not add bg when not focused 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "none",
+      "borderRadius": 14,
+      "height": 40,
+      "justifyContent": "center",
+      "width": 40,
+    }
+  }
+>
+  <Text />
+</View>
+`;
+
+exports[`Progress Tab should render without crashing 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#00FFC2",
+      "borderRadius": 14,
+      "height": 40,
+      "justifyContent": "center",
+      "width": 40,
+    }
+  }
+>
+  <Text />
+</View>
+`;
