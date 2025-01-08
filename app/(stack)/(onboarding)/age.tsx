@@ -1,26 +1,60 @@
+import { useState } from 'react';
 import { router } from 'expo-router';
-import { Button, Keyboard, Platform, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
-import { useSession } from '@/contexts/session';
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
 import { Fonts } from '@/constants/Fonts';
-import { useState } from 'react';
+import { useUserContext } from '@/contexts/user/context';
+import { finishOnboarding, setAge } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
+import { finishStorage, settingStorage } from '@/contexts/storage/actions';
+import * as SecureStore from 'expo-secure-store';
 
 const Age = () => {
-  const { finishOnboarding, session } = useSession();
-  const [age, setAge] = useState(0);
+  const [user, userDispatch] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
+  const [age, updateAge] = useState(user.data.age);
+  const [keyboardActive, setKeyboardActive] = useState(false);
 
-  const handleOnboarding = () => {
-    if (session) {
-      finishOnboarding(session.username);
-      router.replace('/(stack)/(tabs)/home');
+  const handleOnboarding = async () => {
+    userDispatch(setAge(Number(age)));
+    userDispatch(finishOnboarding());
+
+    try {
+      storageDispatch(settingStorage());
+
+      await SecureStore.setItemAsync(
+        'session',
+        JSON.stringify({
+          ...user,
+          onboardingFinished: true,
+          data: { ...user.data, age: Number(age) },
+        }),
+      );
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
     }
+
+    router.push('/(stack)/(tabs)/home');
   };
 
-
   return (
-    <SafeAreaView style={styles.main}>
+    <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.main}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View>
@@ -31,11 +65,13 @@ const Age = () => {
               Edad
             </Typography>
           </View>
-          <View style={styles.valueContainer}>
+          <View style={[styles.valueContainer, { height: keyboardActive ? '70%' : '90%' }]}>
             <TextInput
               style={styles.value}
               value={age.toString()}
-              onChangeText={text => setAge(Number(text))}
+              onChangeText={text => updateAge(Number(text))}
+              onFocus={() => setKeyboardActive(true)}
+              onBlur={() => setKeyboardActive(false)}
               inputMode='decimal'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
             />
@@ -64,7 +100,7 @@ const Age = () => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -80,14 +116,13 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     alignItems: 'center',
-    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },
   value: {
     fontFamily: Fonts.RobotoRegular,
     fontSize: 72,
-    color: Colors.light.text.emphasis
+    color: Colors.light.text.emphasis,
   },
   years: {
     fontSize: 16,

@@ -1,20 +1,15 @@
 import React from 'react';
 import { Redirect, router, Stack } from 'expo-router';
-import { Text, useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-import { useSession } from '@/contexts/session';
 import { ArrowBackIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';
+import { useUserContext } from '@/contexts/user/context';
 
 const StackLayout = () => {
-  const colorScheme = useColorScheme();
-  const { session, isLoading } = useSession();
+  const [user] = useUserContext();
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-  if (!session) {
+  if (!user.hasSession) {
     return <Redirect href='/' />;
   }
 
@@ -57,7 +52,7 @@ const StackLayout = () => {
           }}
         />
       </Stack>
-      <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
+      <StatusBar style='dark' />
     </>
   );
 };

@@ -4,13 +4,23 @@ import { router, useNavigation } from 'expo-router';
 
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
+import { useUserContext } from '@/contexts/user/context';
+import { setGenre } from '@/contexts/user/actions';
+import { GENRE_TYPES } from '@/contexts/user/types';
 
 const Onboarding = () => {
   const navigation = useNavigation();
+  const [user, dispatch] = useUserContext();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
+
+  const handleGenre = (genre: GENRE_TYPES) => {
+    dispatch(setGenre(genre));
+
+    router.push('/(stack)/(onboarding)/height')
+  }
 
   return (
     <SafeAreaView style={styles.main}>
@@ -25,8 +35,8 @@ const Onboarding = () => {
         </View>
         <View style={styles.optionsContainer}>
           <Pressable
-            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1 })}
-            onPress={() => router.push('/(stack)/(onboarding)/height')}
+            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1, backgroundColor: user.data.genre === GENRE_TYPES.Masculine ? Colors.light['main-primary'] : 'white' })}
+            onPress={() => handleGenre(GENRE_TYPES.Masculine)}
           >
             <View>
               <Typography weight='bold' styles={styles.sign}>♂</Typography>
@@ -36,8 +46,8 @@ const Onboarding = () => {
             </View>
           </Pressable>
           <Pressable
-            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1 })}
-            onPress={() => router.push('/(stack)/(onboarding)/height')}
+            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1, backgroundColor: user.data.genre === GENRE_TYPES.Feminine ? Colors.light['main-primary'] : 'white' })}
+            onPress={() => handleGenre(GENRE_TYPES.Feminine)}
           >
             <View>
               <Typography weight='bold' styles={styles.sign}>♀</Typography>
@@ -70,7 +80,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   option: {
-    backgroundColor: 'white',
     borderRadius: 20,
     width: 152,
     height: 152,

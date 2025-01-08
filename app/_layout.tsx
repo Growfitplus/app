@@ -8,7 +8,10 @@ import {
   RobotoMono_400Regular,
   useFonts,
 } from '@expo-google-fonts/roboto-mono';
-import { SessionProvider } from '@/contexts/session';
+
+import RootProvider from '@/contexts/root';
+import UserProvider from '@/contexts/user/provider';
+import StorageProvider from '@/contexts/storage/provider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,9 +34,9 @@ const RootLayout = () => {
   }
 
   return (
-    <SessionProvider>
+    <RootProvider providers={[UserProvider, StorageProvider]}>
       <Slot />
-    </SessionProvider>
+    </RootProvider>
   );
 };
 
