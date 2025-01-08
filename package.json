@@ -63,9 +63,9 @@
     "reset-project": "node ./scripts/reset-project.js",
     "start": "expo start",
     "test:debug": "jest -o --watch --coverage=false",
+    "test:updateSnapshots": "jest -u --coverage=false",
     "test:watch": "jest --watch --changedSince=origin/main",
     "test": "jest --passWithNoTests --config jest.config.json",
-    "updateSnapshots": "jest -u --coverage=false",
     "validate": "npx prettier --check . && npx eslint .",
     "web": "expo start --web"
   },

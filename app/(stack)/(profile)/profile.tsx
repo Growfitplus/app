@@ -1,14 +1,34 @@
 import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
 import { InfoSVG } from '@/components/SVG';
+import { useUserContext } from '@/contexts/user/context';
+import { logOut } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
+import { finishStorage, settingStorage } from '@/contexts/storage/actions';
 
 const Profile: React.FC<{
   isVisible: boolean;
   handleAbout: () => void;
-  handleExit: () => void;
-}> = ({ isVisible, handleExit, handleAbout }) => {
+}> = ({ isVisible, handleAbout }) => {
+  const [user, userDispatch] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
+
+  const handleExit = async () => {
+    try {
+      storageDispatch(settingStorage());
+
+      await SecureStore.setItemAsync('session', JSON.stringify({ ...user, hasSession: false }));
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+    userDispatch(logOut());
+  };
+
   return (
     <Modal
       animationType='slide'
@@ -34,6 +54,7 @@ const Profile: React.FC<{
         </Pressable>
         <Pressable
           style={styles.pressable}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onPress={handleExit}
         >
           <LogOutIcon

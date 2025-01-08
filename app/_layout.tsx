@@ -8,7 +8,10 @@ import {
   RobotoMono_400Regular as RobotoRegular,
   useFonts,
 } from '@expo-google-fonts/roboto-mono';
-import { SessionProvider } from '@/contexts/session';
+
+import RootProvider from '@/contexts/root';
+import UserProvider from '@/contexts/user/provider';
+import StorageProvider from '@/contexts/storage/provider';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 SplashScreen.preventAutoHideAsync();
@@ -32,9 +35,9 @@ const RootLayout = () => {
   }
 
   return (
-    <SessionProvider>
+    <RootProvider providers={[UserProvider, StorageProvider]}>
       <Slot />
-    </SessionProvider>
+    </RootProvider>
   );
 };
 

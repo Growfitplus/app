@@ -33,12 +33,10 @@ export default tseslint.config(
   {
     languageOptions: {
       ecmaVersion: 'latest',
-
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
-
       sourceType: 'module',
     },
     rules: {
@@ -49,11 +47,9 @@ export default tseslint.config(
           multiline: true,
         },
       ],
-
       'array-bracket-spacing': ['error', 'never'],
       'array-callback-return': 'error',
       'arrow-parens': ['error', 'as-needed'],
-
       'arrow-spacing': [
         'error',
         {
@@ -61,9 +57,7 @@ export default tseslint.config(
           before: true,
         },
       ],
-
       'block-spacing': 'error',
-
       'brace-style': [
         'error',
         '1tbs',
@@ -71,14 +65,12 @@ export default tseslint.config(
           allowSingleLine: false,
         },
       ],
-
       camelcase: [
         'error',
         {
           properties: 'always',
         },
       ],
-
       'comma-dangle': [
         'error',
         {
@@ -89,7 +81,6 @@ export default tseslint.config(
           objects: 'only-multiline',
         },
       ],
-
       'comma-spacing': [
         'error',
         {
@@ -97,7 +88,6 @@ export default tseslint.config(
           before: false,
         },
       ],
-
       'computed-property-spacing': ['error', 'never'],
       'default-case': 'error',
       'default-case-last': 'error',
@@ -106,9 +96,7 @@ export default tseslint.config(
       'eol-last': ['error', 'always'],
       eqeqeq: ['error', 'smart'],
       'func-call-spacing': ['error', 'never'],
-      'implicit-arrow-linebreak': ['error', 'beside'],
       'jsx-quotes': ['error', 'prefer-single'],
-
       'key-spacing': [
         'error',
         {
@@ -116,7 +104,6 @@ export default tseslint.config(
           beforeColon: false,
         },
       ],
-
       'keyword-spacing': [
         'error',
         {
@@ -124,30 +111,24 @@ export default tseslint.config(
           before: true,
         },
       ],
-
-      'multiline-ternary': ['error', 'always-multiline'],
       'no-duplicate-imports': ['error'],
       'no-empty-function': 'error',
       'no-mixed-operators': 'error',
       'no-multi-spaces': 'error',
-
       'no-multiple-empty-lines': [
         'error',
         {
           max: 1,
         },
       ],
-
       'no-trailing-spaces': [
         'error',
         {
           skipBlankLines: true,
         },
       ],
-
       'no-var': 'error',
       'no-whitespace-before-property': 'error',
-
       'object-curly-spacing': [
         'error',
         'always',
@@ -156,16 +137,13 @@ export default tseslint.config(
           objectsInObjects: true,
         },
       ],
-
       'object-property-newline': [
         'error',
         {
           allowAllPropertiesOnSameLine: true,
         },
       ],
-
       'padded-blocks': ['error', 'never'],
-
       'padding-line-between-statements': [
         'error',
         {
@@ -179,10 +157,8 @@ export default tseslint.config(
           prev: ['const', 'let', 'var', 'directive'],
         },
       ],
-
       'prefer-arrow-callback': 'error',
       'prefer-const': 'error',
-
       'prefer-destructuring': [
         'error',
         {
@@ -190,7 +166,6 @@ export default tseslint.config(
           object: true,
         },
       ],
-
       'prefer-object-spread': 'error',
       'prefer-rest-params': 'error',
       'prefer-template': 'error',
@@ -198,7 +173,6 @@ export default tseslint.config(
       quotes: ['error', 'single'],
       'rest-spread-spacing': ['error', 'never'],
       semi: ['error', 'always'],
-
       'sort-keys': [
         'error',
         'asc',
@@ -208,7 +182,6 @@ export default tseslint.config(
           natural: false,
         },
       ],
-
       'sort-vars': 'error',
       'space-before-blocks': 'error',
       'spaced-comment': ['error', 'always'],

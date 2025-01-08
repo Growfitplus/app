@@ -1,20 +1,20 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 
 import { LogoSVG } from '@/components/SVG';
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
-import { useSession } from '@/contexts/session';
+import { useUserContext } from '@/contexts/user/context';
+import { useStorageContext } from '@/contexts/storage/context';
+import { deletingStorage, finishStorage } from '@/contexts/storage/actions';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [user] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
   const navigation = useNavigation();
-  const { signOut } = useSession();
-
-  const handleExit = () => {
-    signOut();
-  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -32,18 +32,32 @@ const Home = () => {
     setShowProfile(false);
   };
 
+  const handleRemove = async () => {
+    try {
+      storageDispatch(deletingStorage());
+      await SecureStore.deleteItemAsync('session');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+  };
+
   return (
     <>
       <View style={styles.main}>
         <Text>Home</Text>
+        <Text>{JSON.stringify(user)}</Text>
       </View>
-      <Pressable onPress={() => signOut()}>
-        <Text>Sign Out</Text>
+      <Pressable
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onPress={handleRemove}
+      >
+        <Text>Remove Storage</Text>
       </Pressable>
       <Profile
         isVisible={showProfile}
         handleAbout={handleAbout}
-        handleExit={handleExit}
       />
     </>
   );

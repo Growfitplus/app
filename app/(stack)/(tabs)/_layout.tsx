@@ -1,13 +1,15 @@
+import React, { useEffect } from 'react';
 import { Redirect, Tabs } from 'expo-router';
-import React from 'react';
-import { Text } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { HapticTab } from '@/components/HapticTab';
-import { useSession } from '@/contexts/session';
 import { Colors } from '@/constants/Colors';
 import HomeTab from '@/components/Tabs/Home.tab';
 import ProgressTab from '@/components/Tabs/Progress.tab';
 import TrainingTab from '@/components/Tabs/Training.tab';
+import { useUserContext } from '@/contexts/user/context';
+import { useStorageContext } from '@/contexts/storage/context';
+import { finishStorage, settingStorage } from '@/contexts/storage/actions';
 
 const TabOptions = {
   headerShadowVisible: false,
@@ -30,14 +32,29 @@ const TabOptions = {
 };
 
 const TabLayout = () => {
-  const { session, isLoading } = useSession();
+  const [user] = useUserContext();
+  const [, storageDispatch] = useStorageContext();
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-  if (!session) {
-    return <Redirect href='/' />;
-  }
+  useEffect(() => {
+    if (!user.hasSession) {
+      handleExit();
+    }
+  }, [user.hasSession]);
+
+  const handleExit = () => {
+    storageDispatch(settingStorage());
+
+    SecureStore.setItemAsync('session', JSON.stringify(user))
+      .then(() => {
+        return <Redirect href='/' />;
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(() => {
+        storageDispatch(finishStorage());
+      });
+  };
 
   return (
     <Tabs screenOptions={TabOptions}>

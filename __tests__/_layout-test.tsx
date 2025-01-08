@@ -17,10 +17,6 @@ jest.mock('expo-router', () => ({
   Slot: () => <></>,
 }));
 
-jest.mock('@/contexts/session', () => ({
-  SessionProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
 describe('RootLayout', () => {
   it('renders null when fonts are not loaded and no error', () => {
     (useFonts as jest.Mock).mockReturnValue([false, null]);
