@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   main: {
-    alignItems: 'center',
     flex: 1,
   },
   title: {

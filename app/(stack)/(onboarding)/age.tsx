@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     alignItems: 'center',
-    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },
