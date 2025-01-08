@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "growfit",
-    "slug": "growfit",
+    "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -65,8 +65,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "cb95155c-47ed-4d4f-96e7-96a9a12727d4"
+        "projectId": "f1c41dc6-6cd5-4b07-b9a8-15631a22a3b7"
       }
-    }
+    },
+    "owner": "growfitapp"
   }
 }
