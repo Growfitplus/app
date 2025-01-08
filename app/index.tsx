@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   buttonContainer: { gap: 20 },
   preButtonText: { textAlign: 'center', fontSize: 14 },
   buttonBox: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.light.white,
     height: 56,
     width: 312,
     alignItems: 'center',

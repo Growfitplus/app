@@ -9,7 +9,8 @@ export const Colors = {
       disabled: '#8A919D',
       emphasis: '#232A38',
       input: '#080110'
-    }
+    },
+    white: '#FFF'
   },
   dark: {},
 };

@@ -5,12 +5,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback,
+  useWindowDimensions,
   View,
 } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
@@ -19,44 +19,41 @@ import { useUserContext } from '@/contexts/user/context';
 import { finishOnboarding, setAge } from '@/contexts/user/actions';
 import { useStorageContext } from '@/contexts/storage/context';
 import { finishStorage, settingStorage } from '@/contexts/storage/actions';
-import * as SecureStore from 'expo-secure-store';
+import Container from '@/components/Container';
+import { heightPercentage } from '@/utils/keyboardHeight';
+import useStorage from '@/hooks/useStorage';
 
 const Age = () => {
   const [user, userDispatch] = useUserContext();
   const [, storageDispatch] = useStorageContext();
   const [age, updateAge] = useState(user.data.age);
   const [keyboardActive, setKeyboardActive] = useState(false);
+  const { height: heightScreen } = useWindowDimensions();
+  const { updateStorage } = useStorage();
 
   const handleOnboarding = async () => {
     userDispatch(setAge(Number(age)));
     userDispatch(finishOnboarding());
 
-    try {
-      storageDispatch(settingStorage());
-
-      await SecureStore.setItemAsync(
-        'session',
-        JSON.stringify({
-          ...user,
-          onboardingFinished: true,
-          data: { ...user.data, age: Number(age) },
-        }),
-      );
-    } catch (e) {
-      console.error('Secure Store is unavailable:', e);
-    } finally {
-      storageDispatch(finishStorage());
-    }
+    await updateStorage({
+      ...user,
+      onboardingFinished: true,
+      data: { ...user.data, age: Number(age) },
+    });
 
     router.push('/(stack)/(tabs)/home');
   };
 
   return (
     <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.main}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.main}
+    >
+      <Container>
+        <Pressable
+          onPress={Keyboard.dismiss}
+          style={styles.container}
+        >
           <View>
             <Typography
               weight='bold'
@@ -65,7 +62,12 @@ const Age = () => {
               Edad
             </Typography>
           </View>
-          <View style={[styles.valueContainer, { height: keyboardActive ? '70%' : '90%' }]}>
+          <View
+            style={[
+              styles.valueContainer,
+              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+            ]}
+          >
             <TextInput
               style={styles.value}
               value={age.toString()}
@@ -98,8 +100,8 @@ const Age = () => {
               </Typography>
             </Pressable>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </Pressable>
+      </Container>
     </KeyboardAvoidingView>
   );
 };
@@ -111,8 +113,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 22,
-    paddingVertical: 32,
+    paddingTop: 32,
+    paddingBottom: 48,
   },
   valueContainer: {
     alignItems: 'center',

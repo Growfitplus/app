@@ -21,18 +21,24 @@ const TabLayout = () => {
     }
   }, [user.hasSession]);
 
+  if (!user.hasSession) {
+    return <Redirect href='/' />;
+  }
+
   const handleExit = () => {
     storageDispatch(settingStorage());
 
-    SecureStore.setItemAsync('session', JSON.stringify(user)).then(() => {
-      return <Redirect href='/' />;
-    }).catch( (error) => {
-      console.error(error);
-    } ).finally(() => {
-      storageDispatch(finishStorage())
-    })
-
-  }
+    SecureStore.setItemAsync('session', JSON.stringify(user))
+      .then(() => {
+        return <Redirect href='/' />;
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(() => {
+        storageDispatch(finishStorage());
+      });
+  };
 
   return (
     <Tabs

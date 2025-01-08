@@ -2,11 +2,12 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import InfoIcon from '@/components/SVG/Info';
 import Typography from '@/components/Typography';
+import Container from '@/components/Container';
 
 const Terms = () => {
   return (
     <ScrollView style={styles.main}>
-      <View style={styles.container}>
+      <Container customStyles={styles.container}>
         <InfoIcon
           width={24}
           height={24}
@@ -210,7 +211,7 @@ const Terms = () => {
         >
           Última actualización: 26 de noviembre del 2024
         </Typography>
-      </View>
+      </Container>
     </ScrollView>
   );
 };
@@ -220,7 +221,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    paddingHorizontal: 22,
     paddingVertical: 32,
   },
   title: {
