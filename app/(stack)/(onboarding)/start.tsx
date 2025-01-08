@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { router, useNavigation } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { useUserContext } from '@/contexts/user/context';
 import { setGenre } from '@/contexts/user/actions';
 import { GENRE_TYPES } from '@/contexts/user/types';
+import PressableWithEffect from '@/components/PressableWithEffect';
 
 const Onboarding = () => {
   const navigation = useNavigation();
@@ -19,8 +21,8 @@ const Onboarding = () => {
   const handleGenre = (genre: GENRE_TYPES) => {
     dispatch(setGenre(genre));
 
-    router.push('/(stack)/(onboarding)/height')
-  }
+    router.push('/(stack)/(onboarding)/height');
+  };
 
   return (
     <SafeAreaView style={styles.main}>
@@ -34,28 +36,50 @@ const Onboarding = () => {
           </Typography>
         </View>
         <View style={styles.optionsContainer}>
-          <Pressable
-            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1, backgroundColor: user.data.genre === GENRE_TYPES.Masculine ? Colors.light['main-primary'] : 'white' })}
-            onPress={() => handleGenre(GENRE_TYPES.Masculine)}
+          <PressableWithEffect
+            customStyles={{
+              ...styles.option,
+              backgroundColor:
+                user.data.genre === GENRE_TYPES.Masculine
+                  ? Colors.light['main-primary']
+                  : Colors.light.white,
+            }}
+            onPressAction={() => handleGenre(GENRE_TYPES.Masculine)}
           >
             <View>
-              <Typography weight='bold' styles={styles.sign}>♂</Typography>
+              <Typography
+                weight='bold'
+                styles={styles.sign}
+              >
+                ♂
+              </Typography>
             </View>
             <View style={styles.genreContainer}>
               <Typography styles={styles.genre}>Masculino</Typography>
             </View>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => ({ ...styles.option, opacity: pressed ? 0.5 : 1, backgroundColor: user.data.genre === GENRE_TYPES.Feminine ? Colors.light['main-primary'] : 'white' })}
-            onPress={() => handleGenre(GENRE_TYPES.Feminine)}
+          </PressableWithEffect>
+          <PressableWithEffect
+            customStyles={{
+              ...styles.option,
+              backgroundColor:
+                user.data.genre === GENRE_TYPES.Feminine
+                  ? Colors.light['main-primary']
+                  : Colors.light.white,
+            }}
+            onPressAction={() => handleGenre(GENRE_TYPES.Feminine)}
           >
             <View>
-              <Typography weight='bold' styles={styles.sign}>♀</Typography>
+              <Typography
+                weight='bold'
+                styles={styles.sign}
+              >
+                ♀
+              </Typography>
             </View>
             <View style={styles.genreContainer}>
               <Typography styles={styles.genre}>Femenino</Typography>
             </View>
-          </Pressable>
+          </PressableWithEffect>
         </View>
       </View>
     </SafeAreaView>
@@ -98,7 +122,7 @@ const styles = StyleSheet.create({
     color: Colors.light.text.input,
     fontSize: 12,
     textAlign: 'right',
-  }
+  },
 });
 
 export default Onboarding;

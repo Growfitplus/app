@@ -1,4 +1,4 @@
-import { Modal, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import { ChevronNextIcon, LogOutIcon } from '@/components/Icons';
 import Typography from '@/components/Typography';
@@ -8,6 +8,8 @@ import { logOut } from '@/contexts/user/actions';
 import { useStorageContext } from '@/contexts/storage/context';
 import { finishStorage, settingStorage } from '@/contexts/storage/actions';
 import * as SecureStore from 'expo-secure-store';
+import { Colors } from '@/constants/Colors';
+import useStorage from '@/hooks/useStorage';
 
 const Profile: React.FC<{
   isVisible: boolean;
@@ -15,17 +17,11 @@ const Profile: React.FC<{
 }> = ({ isVisible, handleAbout }) => {
   const [user, userDispatch] = useUserContext();
   const [, storageDispatch] = useStorageContext();
+  const { updateStorage } = useStorage();
 
   const handleExit = async () => {
-    try {
-      storageDispatch(settingStorage());
+    await updateStorage({ ...user, hasSession: false })
 
-      await SecureStore.setItemAsync('session', JSON.stringify({ ...user, hasSession: false }));
-    } catch (e) {
-      console.error('Secure Store is unavailable:', e);
-    } finally {
-      storageDispatch(finishStorage());
-    }
     userDispatch(logOut());
   };
 
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
   main: {
     height: '25%',
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: Colors.light.white,
     borderTopRightRadius: 34,
     borderTopLeftRadius: 34,
     position: 'absolute',

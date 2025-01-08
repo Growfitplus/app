@@ -1,3 +1,4 @@
+import { PhotosState } from '@/types/photos';
 import { GENRE_TYPES, USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
 
 export const setUsername = (username: string): USER_TYPE_ACTIONS => ({
@@ -41,4 +42,13 @@ export const setAge = (age: number): USER_TYPE_ACTIONS => ({
 
 export const logOut = (): USER_TYPE_ACTIONS => ({
   type: USER_ACTION_TYPES.LOGOUT,
-})
+});
+
+export const addImage = (newImage: PhotosState): USER_TYPE_ACTIONS => ({
+  type: USER_ACTION_TYPES.SET_IMAGES,
+  payload: newImage,
+});
+
+export const resetState = (): USER_TYPE_ACTIONS => ({
+  type: USER_ACTION_TYPES.RESET_STATE,
+});

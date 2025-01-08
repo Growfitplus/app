@@ -13,6 +13,7 @@ const INITIAL_USER_STATE: USER_STATE_TYPE = {
     height: 0,
     weight: 0,
     age: 0,
+    images: []
   },
 };
 
