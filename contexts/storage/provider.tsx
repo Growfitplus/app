@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { JSXElementConstructor, ReactNode, useReducer } from 'react';
 
 import StorageContext from '@/contexts/storage/context';
 import StorageReducer from '@/contexts/storage/reducer';
@@ -9,7 +9,7 @@ const INITIAL_STORAGE_STATE: STORAGE_STATE_TYPE = {
   stage: null,
 };
 
-const StorageProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+const StorageProvider: JSXElementConstructor<{ children?: ReactNode }> = ({ children }) => {
   const [storage, dispatch] = useReducer(StorageReducer, INITIAL_STORAGE_STATE);
 
   return (

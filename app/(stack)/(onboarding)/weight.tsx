@@ -17,7 +17,6 @@ import { Fonts } from '@/constants/Fonts';
 import { setWeight } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
 import Container from '@/components/Container';
-import { heightPercentage } from '@/utils/keyboardHeight';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
@@ -52,7 +51,11 @@ const Weight = () => {
           <View
             style={[
               styles.valueContainer,
-              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+              {
+                height: keyboardActive
+                  ? Math.floor(heightScreen * 0.425)
+                  : Math.floor(heightScreen * 0.725),
+              },
             ]}
           >
             <TextInput

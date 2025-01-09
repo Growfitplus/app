@@ -16,7 +16,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.eamzea.growfit"
     },
     "web": {
       "bundler": "metro",
@@ -50,9 +51,8 @@
             "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_300Light.ttf",
             "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_400Regular.ttf",
             "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_500Medium.ttf",
-            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_700Bold.ttf",
-            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_800ExtraBold.ttf",
-            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_900Black.ttf"
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_600SemiBold.ttf",
+            "node_modules/@expo-google-fonts/roboto-mono/RobotoMono_700Bold.ttf"
           ]
         }
       ]

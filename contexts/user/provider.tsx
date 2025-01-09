@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { JSXElementConstructor, ReactNode, useReducer } from 'react';
 
 import UserContext from '@/contexts/user/context';
 import UserReducer from '@/contexts/user/reducer';
@@ -17,7 +17,7 @@ const INITIAL_USER_STATE: USER_STATE_TYPE = {
   username: '',
 };
 
-const UserProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+const UserProvider: JSXElementConstructor<{ children?: ReactNode }> = ({ children }) => {
   const [userData, dispatch] = useReducer(UserReducer, INITIAL_USER_STATE);
 
   return (

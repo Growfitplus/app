@@ -21,6 +21,7 @@ const Progress = () => {
   const {
     data: { images, weight },
   } = user;
+  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
 
   useEffect(() => {
     void updateStorage({ ...user });
@@ -33,18 +34,22 @@ const Progress = () => {
   };
 
   const pickImageAsync = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      quality: 1,
-    });
+    if (status?.granted) {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        quality: 1,
+      });
 
-    if (!result.canceled) {
-      userDispatch(
-        addImage({
-          id: result.assets[0].fileName!,
-          uri: result.assets[0].uri,
-        }),
-      );
+      if (!result.canceled) {
+        userDispatch(
+          addImage({
+            id: result.assets[0].fileName!,
+            uri: result.assets[0].uri,
+          }),
+        );
+      }
+    } else {
+      await requestPermission();
     }
   };
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 
 export const LogInStyles = StyleSheet.create({
@@ -22,6 +22,7 @@ export const LogInStyles = StyleSheet.create({
     backgroundColor: Colors.light['main-primary'],
     flex: 1,
     justifyContent: 'center',
+    paddingBottom: Platform.OS === 'android' ? 32 : 0,
   },
 
   preButtonText: { fontSize: 14, textAlign: 'center' },

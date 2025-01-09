@@ -12,6 +12,7 @@ import {
 import RootProvider from '@/contexts/root';
 import UserProvider from '@/contexts/user/provider';
 import StorageProvider from '@/contexts/storage/provider';
+import { StatusBar } from 'expo-status-bar';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 SplashScreen.preventAutoHideAsync();
@@ -36,6 +37,10 @@ const RootLayout = () => {
 
   return (
     <RootProvider providers={[UserProvider, StorageProvider]}>
+      <StatusBar
+        style='dark'
+        translucent={true}
+      />
       <Slot />
     </RootProvider>
   );

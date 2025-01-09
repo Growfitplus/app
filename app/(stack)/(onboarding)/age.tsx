@@ -17,7 +17,6 @@ import { Fonts } from '@/constants/Fonts';
 import { useUserContext } from '@/contexts/user/context';
 import { finishOnboarding, setAge } from '@/contexts/user/actions';
 import Container from '@/components/Container';
-import { heightPercentage } from '@/utils/keyboardHeight';
 import useStorage from '@/hooks/useStorage';
 
 const Age = () => {
@@ -61,7 +60,11 @@ const Age = () => {
           <View
             style={[
               styles.valueContainer,
-              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
+              {
+                height: keyboardActive
+                  ? Math.floor(heightScreen * 0.425)
+                  : Math.floor(heightScreen * 0.725),
+              },
             ]}
           >
             <TextInput
