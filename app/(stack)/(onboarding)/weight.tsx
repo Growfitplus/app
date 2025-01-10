@@ -1,25 +1,18 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, TextInput, View } from 'react-native';
 
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
-import { Fonts } from '@/constants/Fonts';
 import { setWeight } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
 import Container from '@/components/Container';
+import { OnboardingStyles } from '@/styles/onboarding';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
-  const [weight, updateWeight] = useState(user.data.weight);
+  const [weight, updateWeight] = useState(user.data.weight.toString());
+  const isInvalidWeight = Number(weight) < 30 || Number(weight) > 200;
 
   const handleContinue = () => {
     dispatch(setWeight(Number(weight)));
@@ -27,50 +20,64 @@ const Weight = () => {
     router.push('/(stack)/(onboarding)/age');
   };
 
+  const formatWeight = (value: string) => {
+    const valueArr = [...value];
+
+    if (valueArr[0] === '0') {
+      valueArr.shift();
+    }
+
+    if (valueArr.length < 4) {
+      updateWeight(valueArr.join(''));
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.main}
+      style={OnboardingStyles.main}
     >
       <Container>
         <Pressable
           onPress={Keyboard.dismiss}
-          style={styles.container}
+          style={OnboardingStyles.container}
         >
           <View>
             <Typography
               weight='bold'
-              styles={{ fontSize: 24 }}
+              styles={OnboardingStyles.title}
             >
               Peso actual
             </Typography>
           </View>
-          <View style={styles.valueContainer}>
+          <View style={OnboardingStyles.valueContainer}>
             <TextInput
-              style={styles.value}
-              value={weight.toString()}
-              onChangeText={text => updateWeight(Number(text))}
-              inputMode='decimal'
+              style={OnboardingStyles.value}
+              value={weight}
+              onChangeText={formatWeight}
+              inputMode='numeric'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
+              placeholder='70'
             />
-            <Typography styles={styles.kg}>Kilos</Typography>
+            <Typography styles={OnboardingStyles.unit}>Kilos</Typography>
           </View>
-          <View style={styles.continueContainer}>
+          <View style={OnboardingStyles.continueContainer}>
             <Pressable
               style={{
-                ...styles.continueButton,
-                backgroundColor:
-                  weight === 0 ? Colors.light.button.disabled : Colors.light['main-primary'],
+                ...OnboardingStyles.continueButton,
+                backgroundColor: isInvalidWeight
+                  ? Colors.light.button.disabled
+                  : Colors.light['main-primary'],
               }}
               onPress={handleContinue}
-              disabled={weight === 0}
+              disabled={isInvalidWeight}
             >
               <Typography
                 weight='bold'
                 styles={{
-                  color: weight === 0 ? Colors.light.text.disabled : Colors.light.text.emphasis,
-                  fontSize: 16,
+                  color: isInvalidWeight ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  ...OnboardingStyles.continueButtonText,
                 }}
               >
                 Continuar
@@ -82,42 +89,5 @@ const Weight = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 48,
-    paddingTop: 32,
-  },
-  continueButton: {
-    alignItems: 'center',
-    borderRadius: 16,
-    justifyContent: 'center',
-    padding: 16,
-    width: '100%',
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  kg: {
-    fontSize: 16,
-  },
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
-  value: {
-    color: Colors.light.text.emphasis,
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-});
 
 export default Weight;

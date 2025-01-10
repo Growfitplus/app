@@ -1,27 +1,20 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, TextInput, View } from 'react-native';
 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
-import { Fonts } from '@/constants/Fonts';
 import { useUserContext } from '@/contexts/user/context';
 import { finishOnboarding, setAge } from '@/contexts/user/actions';
 import Container from '@/components/Container';
 import useStorage from '@/hooks/useStorage';
+import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Age = () => {
   const [user, userDispatch] = useUserContext();
-  const [age, updateAge] = useState(user.data.age);
+  const [age, updateAge] = useState(user.data.age.toString());
   const { updateStorage } = useStorage();
+  const isInvalidAge = Number(age) < 9 || Number(age) > 99;
 
   const handleOnboarding = async () => {
     userDispatch(setAge(Number(age)));
@@ -36,51 +29,65 @@ const Age = () => {
     router.push('/(stack)/(tabs)/home');
   };
 
+  const formatAge = (value: string) => {
+    const valueArr = [...value];
+
+    if (valueArr[0] === '0') {
+      valueArr.shift();
+    }
+
+    if (valueArr.length < 3) {
+      updateAge(valueArr.join(''));
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.main}
+      style={OnboardingStyles.main}
     >
       <Container>
         <Pressable
           onPress={Keyboard.dismiss}
-          style={styles.container}
+          style={OnboardingStyles.container}
         >
           <View>
             <Typography
               weight='bold'
-              styles={{ fontSize: 24 }}
+              styles={OnboardingStyles.title}
             >
               Edad
             </Typography>
           </View>
-          <View style={styles.valueContainer}>
+          <View style={OnboardingStyles.valueContainer}>
             <TextInput
-              style={styles.value}
-              value={age.toString()}
-              onChangeText={text => updateAge(Number(text))}
-              inputMode='decimal'
+              style={OnboardingStyles.value}
+              value={age}
+              onChangeText={formatAge}
+              inputMode='numeric'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
+              placeholder='30'
             />
-            <Typography styles={styles.years}>Años</Typography>
+            <Typography styles={OnboardingStyles.unit}>Años</Typography>
           </View>
-          <View style={styles.continueContainer}>
+          <View style={OnboardingStyles.continueContainer}>
             <Pressable
               style={{
-                ...styles.continueButton,
-                backgroundColor:
-                  age === 0 ? Colors.light.button.disabled : Colors.light['main-primary'],
+                ...OnboardingStyles.continueButton,
+                backgroundColor: isInvalidAge
+                  ? Colors.light.button.disabled
+                  : Colors.light['main-primary'],
               }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onPress={handleOnboarding}
-              disabled={age === 0}
+              disabled={isInvalidAge}
             >
               <Typography
                 weight='bold'
                 styles={{
-                  color: age === 0 ? Colors.light.text.disabled : Colors.light.text.emphasis,
-                  fontSize: 16,
+                  color: isInvalidAge ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  ...OnboardingStyles.continueButtonText,
                 }}
               >
                 Continuar
@@ -92,42 +99,5 @@ const Age = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: 48,
-    paddingTop: 32,
-  },
-  continueButton: {
-    alignItems: 'center',
-    borderRadius: 16,
-    justifyContent: 'center',
-    padding: 16,
-    width: '100%',
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
-  value: {
-    color: Colors.light.text.emphasis,
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-  years: {
-    fontSize: 16,
-  },
-});
 
 export default Age;
