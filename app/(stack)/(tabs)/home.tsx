@@ -1,11 +1,11 @@
-import { View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
 import { LogoSVG } from '@/components/SVG';
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
-import { useUserContext } from '@/contexts/user/context';
+// import { useUserContext } from '@/contexts/user/context';
 // import useStorage from '@/hooks/useStorage';
 // import { resetState } from '@/contexts/user/actions';
 import Container from '@/components/Container';
@@ -15,7 +15,7 @@ import Drinking from '@/components/Drinking';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
-  const [user] = useUserContext();
+  // const [user] = useUserContext();
   const navigation = useNavigation();
   // const { deleteStorage } = useStorage();
 
@@ -30,10 +30,6 @@ const Home = () => {
     });
   }, [navigation]);
 
-  console.log({
-    user,
-  });
-
   const handleAbout = () => {
     router.push('/(stack)/terms/terms');
     setShowProfile(false);
@@ -46,13 +42,26 @@ const Home = () => {
   // };
 
   return (
-    <Container customStyles={{ gap: 12 }}>
-      <Calories />
-      <View style={{ flexDirection: 'row', gap: 12 }}>
-        <Walking />
-        <Drinking />
-      </View>
-      {/* <View style={styles.main}>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={64}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{
+        flex: 1,
+      }}
+    >
+      <Container customStyles={{ gap: 12 }}>
+        <Pressable
+          onPress={Keyboard.dismiss}
+          style={{
+            flex: 1,
+          }}
+        >
+          <Calories />
+          <View style={{ flexDirection: 'row', gap: 12 }}>
+            <Walking />
+            <Drinking />
+          </View>
+          {/* <View style={styles.main}>
         <Text>Home</Text>
         <Text>{JSON.stringify(user)}</Text>
       </View>
@@ -63,11 +72,13 @@ const Home = () => {
         <Text>Remove Storage</Text>
       </Pressable>
       */}
-      <Profile
-        isVisible={showProfile}
-        handleAbout={handleAbout}
-      />
-    </Container>
+          <Profile
+            isVisible={showProfile}
+            handleAbout={handleAbout}
+          />
+        </Pressable>
+      </Container>
+    </KeyboardAvoidingView>
   );
 };
 

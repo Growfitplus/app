@@ -1,12 +1,30 @@
 import { Colors } from '@/constants/Colors';
-import React from 'react';
-import { View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Platform, TextInput, View } from 'react-native';
 import WeekDays from './WeekDays';
 import { FireSVG } from '../SVG';
 import Typography from '../Typography';
 import CaloriesProgress from './CaloriesProgress';
+import { Fonts } from '../../constants/Fonts';
+import { useUserContext } from '@/contexts/user/context';
+import { setCalories } from '@/contexts/user/actions';
+import useStorage from '@/hooks/useStorage';
 
 const Calories = () => {
+  const [user, userDispatch] = useUserContext();
+  const { updateStorage } = useStorage();
+  const {
+    data: { calories = 0 },
+  } = user;
+
+  useEffect(() => {
+    void updateStorage({ ...user });
+  }, [calories]);
+
+  const handleCalories = (value: string) => {
+    userDispatch(setCalories(Number(value)));
+  };
+
   return (
     <View
       style={{
@@ -37,12 +55,19 @@ const Calories = () => {
           Calorías
         </Typography>
       </View>
-      <Typography
-        weight='medium'
-        styles={{ fontSize: 56, marginBottom: 24, textAlign: 'center' }}
-      >
-        0
-      </Typography>
+      <TextInput
+        value={calories.toString()}
+        onChangeText={handleCalories}
+        inputMode='numeric'
+        keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
+        placeholder='0'
+        style={{
+          fontFamily: Fonts.RobotoMedium,
+          fontSize: 56,
+          marginBottom: 24,
+          textAlign: 'center',
+        }}
+      />
       <CaloriesProgress />
       <Typography
         styles={{
