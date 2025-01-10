@@ -6,7 +6,6 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  useWindowDimensions,
   View,
 } from 'react-native';
 import { router } from 'expo-router';
@@ -17,13 +16,10 @@ import { Fonts } from '@/constants/Fonts';
 import { useUserContext } from '@/contexts/user/context';
 import { setHeight } from '@/contexts/user/actions';
 import Container from '@/components/Container';
-import { heightPercentage } from '@/utils/keyboardHeight';
 
 const Height = () => {
   const [user, dispatch] = useUserContext();
   const [height, updateHeight] = useState(user.data.height);
-  const [keyboardActive, setKeyboardActive] = useState(false);
-  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setHeight(Number(height)));
@@ -33,6 +29,7 @@ const Height = () => {
 
   return (
     <KeyboardAvoidingView
+      keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main}
     >
@@ -49,18 +46,11 @@ const Height = () => {
               Estatura
             </Typography>
           </View>
-          <View
-            style={[
-              styles.valueContainer,
-              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
-            ]}
-          >
+          <View style={styles.valueContainer}>
             <TextInput
               style={styles.value}
               value={height.toString()}
               onChangeText={text => updateHeight(Number(text))}
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
               inputMode='decimal'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
             />
@@ -125,6 +115,7 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     alignItems: 'center',
+    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { JSXElementConstructor, ReactNode } from 'react';
 
-interface ProvidersProps {
-  providers: React.JSXElementConstructor<React.PropsWithChildren<unknown>>[];
-  children: React.ReactNode;
+export interface RootProviderProps {
+  children: ReactNode;
+  providers: JSXElementConstructor<React.PropsWithChildren<unknown>>[];
 }
 
-const RootProvider: React.FC<ProvidersProps> = ({ providers, children }) =>
+const RootProvider: React.FC<RootProviderProps> = ({ providers, children }) =>
   providers.reduceRight((next, Provider) => <Provider>{next}</Provider>, children);
 
 export default RootProvider;

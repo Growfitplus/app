@@ -7,7 +7,6 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  useWindowDimensions,
   View,
 } from 'react-native';
 
@@ -17,13 +16,10 @@ import { Fonts } from '@/constants/Fonts';
 import { setWeight } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
 import Container from '@/components/Container';
-import { heightPercentage } from '@/utils/keyboardHeight';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
   const [weight, updateWeight] = useState(user.data.weight);
-  const [keyboardActive, setKeyboardActive] = useState(false);
-  const { height: heightScreen } = useWindowDimensions();
 
   const handleContinue = () => {
     dispatch(setWeight(Number(weight)));
@@ -33,6 +29,7 @@ const Weight = () => {
 
   return (
     <KeyboardAvoidingView
+      keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main}
     >
@@ -49,18 +46,11 @@ const Weight = () => {
               Peso actual
             </Typography>
           </View>
-          <View
-            style={[
-              styles.valueContainer,
-              { height: keyboardActive ? heightPercentage(heightScreen) : '90%' },
-            ]}
-          >
+          <View style={styles.valueContainer}>
             <TextInput
               style={styles.value}
               value={weight.toString()}
               onChangeText={text => updateWeight(Number(text))}
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
               inputMode='decimal'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
             />
@@ -124,6 +114,7 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     alignItems: 'center',
+    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },

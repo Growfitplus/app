@@ -84,7 +84,6 @@ const Login = () => {
       <ActivityIndicator
         size='large'
         color='black'
-        data-testid='loading-indicator'
       />
     </View>
   ) : (
@@ -92,7 +91,12 @@ const Login = () => {
       <View style={LogInStyles.logo}>
         <LogoLogIn />
       </View>
-      <View style={LogInStyles.buttonContainer}>
+      <View
+        style={{
+          ...LogInStyles.buttonContainer,
+          marginBottom: 16,
+        }}
+      >
         <Typography
           styles={LogInStyles.preButtonText}
           weight='medium'
