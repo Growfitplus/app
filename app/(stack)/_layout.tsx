@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect, router, Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 
 import { ArrowBackIcon } from '@/components/Icons';
 import { Colors } from '@/constants/Colors';
@@ -52,7 +51,6 @@ const StackLayout = () => {
           }}
         />
       </Stack>
-      <StatusBar style='dark' />
     </>
   );
 };

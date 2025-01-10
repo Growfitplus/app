@@ -1,25 +1,18 @@
 import { useState } from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
-import { Fonts } from '@/constants/Fonts';
 import { useUserContext } from '@/contexts/user/context';
 import { setHeight } from '@/contexts/user/actions';
 import Container from '@/components/Container';
+import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Height = () => {
   const [user, dispatch] = useUserContext();
-  const [height, updateHeight] = useState(user.data.height);
+  const [height, updateHeight] = useState(user.data.height.toString());
+  const isInvalidHeight = Number(height) < 1.2 || Number(height) > 2.5;
 
   const handleContinue = () => {
     dispatch(setHeight(Number(height)));
@@ -27,50 +20,69 @@ const Height = () => {
     router.push('/(stack)/(onboarding)/weight');
   };
 
+  const formatHeight = (value: string) => {
+    const valueArr = [...value];
+
+    if (valueArr[0] === '0') {
+      valueArr.shift();
+    }
+
+    if (valueArr.length > 1 && valueArr[1] !== '.') {
+      valueArr.splice(1, 0, '.');
+    }
+
+    if (valueArr.length < 5) {
+      updateHeight(valueArr.join(''));
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.main}
+      style={OnboardingStyles.main}
     >
       <Container>
         <Pressable
           onPress={Keyboard.dismiss}
-          style={styles.container}
+          style={OnboardingStyles.container}
         >
           <View>
             <Typography
               weight='bold'
-              styles={{ fontSize: 24 }}
+              styles={OnboardingStyles.title}
             >
               Estatura
             </Typography>
           </View>
-          <View style={styles.valueContainer}>
+          <View style={OnboardingStyles.valueContainer}>
             <TextInput
-              style={styles.value}
-              value={height.toString()}
-              onChangeText={text => updateHeight(Number(text))}
-              inputMode='decimal'
+              style={OnboardingStyles.value}
+              value={height}
+              onChangeText={formatHeight}
+              inputMode='numeric'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
+              textContentType='none'
+              placeholder='175'
             />
-            <Typography styles={styles.cms}>cms</Typography>
+            <Typography styles={OnboardingStyles.unit}>cms</Typography>
           </View>
-          <View style={styles.continueContainer}>
+          <View style={OnboardingStyles.continueContainer}>
             <Pressable
               style={{
-                ...styles.continueButton,
-                backgroundColor:
-                  height === 0 ? Colors.light.button.disabled : Colors.light['main-primary'],
+                ...OnboardingStyles.continueButton,
+                backgroundColor: isInvalidHeight
+                  ? Colors.light.button.disabled
+                  : Colors.light['main-primary'],
               }}
               onPress={handleContinue}
-              disabled={height === 0}
+              disabled={isInvalidHeight}
             >
               <Typography
                 weight='bold'
                 styles={{
-                  color: height === 0 ? Colors.light.text.disabled : Colors.light.text.emphasis,
-                  fontSize: 16,
+                  color: isInvalidHeight ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  ...OnboardingStyles.continueButtonText,
                 }}
               >
                 Continuar
@@ -82,43 +94,5 @@ const Height = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  cms: {
-    fontSize: 16,
-  },
-  container: {
-    flex: 1,
-    paddingBottom: 48,
-    paddingTop: 32,
-  },
-  continueButton: {
-    alignItems: 'center',
-    borderRadius: 16,
-    justifyContent: 'center',
-    padding: 16,
-    width: '100%',
-  },
-  continueContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  main: {
-    backgroundColor: Colors.light['screen-bg'],
-    flex: 1,
-  },
-  value: {
-    color: Colors.light.text.emphasis,
-    fontFamily: Fonts.RobotoRegular,
-    fontSize: 72,
-  },
-  valueContainer: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 12,
-    justifyContent: 'center',
-  },
-});
 
 export default Height;
