@@ -7,7 +7,6 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  useWindowDimensions,
   View,
 } from 'react-native';
 
@@ -22,8 +21,6 @@ import useStorage from '@/hooks/useStorage';
 const Age = () => {
   const [user, userDispatch] = useUserContext();
   const [age, updateAge] = useState(user.data.age);
-  const [keyboardActive, setKeyboardActive] = useState(false);
-  const { height: heightScreen } = useWindowDimensions();
   const { updateStorage } = useStorage();
 
   const handleOnboarding = async () => {
@@ -41,6 +38,7 @@ const Age = () => {
 
   return (
     <KeyboardAvoidingView
+      keyboardVerticalOffset={64}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main}
     >
@@ -57,22 +55,11 @@ const Age = () => {
               Edad
             </Typography>
           </View>
-          <View
-            style={[
-              styles.valueContainer,
-              {
-                height: keyboardActive
-                  ? Math.floor(heightScreen * 0.425)
-                  : Math.floor(heightScreen * 0.725),
-              },
-            ]}
-          >
+          <View style={styles.valueContainer}>
             <TextInput
               style={styles.value}
               value={age.toString()}
               onChangeText={text => updateAge(Number(text))}
-              onFocus={() => setKeyboardActive(true)}
-              onBlur={() => setKeyboardActive(false)}
               inputMode='decimal'
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
             />
@@ -134,6 +121,7 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     alignItems: 'center',
+    flex: 1,
     gap: 12,
     justifyContent: 'center',
   },
