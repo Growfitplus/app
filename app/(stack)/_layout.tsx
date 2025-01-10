@@ -17,7 +17,7 @@ const StackLayout = () => {
       <Stack
         screenOptions={{
           contentStyle: {
-            backgroundColor: Colors.light['screen-bg'],
+            backgroundColor: Colors.light['background+'],
           },
         }}
       >
@@ -45,7 +45,7 @@ const StackLayout = () => {
             ),
             headerShadowVisible: false,
             headerStyle: {
-              backgroundColor: Colors.light['screen-bg'],
+              backgroundColor: Colors.light['background+'],
             },
             headerTintColor: 'transparent',
           }}

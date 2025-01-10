@@ -29,7 +29,7 @@ const AppLayout = () => {
           ),
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: Colors.light['screen-bg'],
+            backgroundColor: Colors.light['background+'],
           },
           headerTitleStyle: {
             color: 'transparent',

@@ -66,9 +66,7 @@ const Weight = () => {
             <Pressable
               style={{
                 ...OnboardingStyles.continueButton,
-                backgroundColor: isInvalidWeight
-                  ? Colors.light.button.disabled
-                  : Colors.light['main-primary'],
+                backgroundColor: isInvalidWeight ? Colors.light.line : Colors.light['growfit+'],
               }}
               onPress={handleContinue}
               disabled={isInvalidWeight}
@@ -76,7 +74,7 @@ const Weight = () => {
               <Typography
                 weight='bold'
                 styles={{
-                  color: isInvalidWeight ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  color: isInvalidWeight ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}
               >

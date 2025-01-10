@@ -75,9 +75,7 @@ const Age = () => {
             <Pressable
               style={{
                 ...OnboardingStyles.continueButton,
-                backgroundColor: isInvalidAge
-                  ? Colors.light.button.disabled
-                  : Colors.light['main-primary'],
+                backgroundColor: isInvalidAge ? Colors.light.line : Colors.light['growfit+'],
               }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onPress={handleOnboarding}
@@ -86,7 +84,7 @@ const Age = () => {
               <Typography
                 weight='bold'
                 styles={{
-                  color: isInvalidAge ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  color: isInvalidAge ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}
               >

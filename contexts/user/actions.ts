@@ -52,3 +52,13 @@ export const addImage = (newImage: PhotosState): USER_TYPE_ACTIONS => ({
 export const resetState = (): USER_TYPE_ACTIONS => ({
   type: USER_ACTION_TYPES.RESET_STATE,
 });
+
+export const setCalories = (calories: number): USER_TYPE_ACTIONS => ({
+  payload: { calories },
+  type: USER_ACTION_TYPES.SET_CALORIES,
+});
+
+export const setLiters = (liters: number): USER_TYPE_ACTIONS => ({
+  payload: { liters },
+  type: USER_ACTION_TYPES.SET_LITERS,
+});

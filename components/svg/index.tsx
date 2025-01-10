@@ -1,6 +1,9 @@
 export { default as ClockSVG } from './Clock';
+export { default as DropSVG } from './Drop';
+export { default as FireSVG } from './Fire';
 export { default as HomeSVG } from './Home';
-export { default as UserSVG } from './User';
 export { default as InfoSVG } from './Info';
+export { default as UserSVG } from './User';
+export { default as WalkSVG } from './Walk';
 export { Logo as LogoSVG } from './Logo';
 export { LogoLogIn as LogoLogInSVG } from './Logo';

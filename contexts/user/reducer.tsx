@@ -86,14 +86,34 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         data: {
           age: 0,
+          calories: 0,
           genre: null,
           height: 0,
           images: [],
+          liters: 0,
           weight: 0,
         },
         hasSession: false,
         onboardingFinished: false,
         username: '',
+      };
+
+    case USER_ACTION_TYPES.SET_CALORIES:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          calories: action.payload.calories,
+        },
+      };
+
+    case USER_ACTION_TYPES.SET_LITERS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          liters: action.payload.liters,
+        },
       };
 
     default:

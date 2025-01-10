@@ -116,11 +116,11 @@ const Progress = () => {
 
 const styles = StyleSheet.create({
   addIcon: {
-    color: Colors.light['main-primary'],
+    color: Colors.light.success,
     fontSize: 18,
   },
   addPhotoCard: {
-    backgroundColor: Colors.light.white,
+    backgroundColor: Colors.light['white+'],
     borderRadius: 20,
     height: 104,
     justifyContent: 'space-between',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   weightButton: {
     alignItems: 'center',
-    borderColor: Colors.light.text.input,
+    borderColor: Colors.light['dark+'],
     borderRadius: 24,
     borderWidth: 2,
     height: 24,

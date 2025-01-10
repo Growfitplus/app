@@ -14,13 +14,13 @@ import { finishStorage, settingStorage } from '@/contexts/storage/actions';
 const TabOptions = {
   headerShadowVisible: false,
   headerStyle: {
-    backgroundColor: Colors.light['screen-bg'],
+    backgroundColor: Colors.light['background+'],
   },
   headerTitleStyle: {
     color: 'transparent',
   },
   sceneStyle: {
-    backgroundColor: Colors.light['screen-bg'],
+    backgroundColor: Colors.light['background+'],
   },
   tabBarButton: HapticTab,
   tabBarItemStyle: { marginTop: 20 },

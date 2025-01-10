@@ -40,8 +40,8 @@ const Onboarding = () => {
               ...styles.option,
               backgroundColor:
                 user.data.genre === GENRE_TYPES.Masculine
-                  ? Colors.light['main-primary']
-                  : Colors.light.white,
+                  ? Colors.light['growfit+']
+                  : Colors.light['white+'],
             }}
             onPressAction={() => handleGenre(GENRE_TYPES.Masculine)}
           >
@@ -62,8 +62,8 @@ const Onboarding = () => {
               ...styles.option,
               backgroundColor:
                 user.data.genre === GENRE_TYPES.Feminine
-                  ? Colors.light['main-primary']
-                  : Colors.light.white,
+                  ? Colors.light['growfit+']
+                  : Colors.light['white+'],
             }}
             onPressAction={() => handleGenre(GENRE_TYPES.Feminine)}
           >
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: 32,
   },
   genre: {
-    color: Colors.light.text.input,
+    color: Colors.light['dark+'],
     fontSize: 12,
     textAlign: 'right',
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   main: {
-    backgroundColor: Colors.light['screen-bg'],
+    backgroundColor: Colors.light['background+'],
     flex: 1,
   },
   option: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sign: {
-    color: Colors.light.text.emphasis,
+    color: Colors.light['dark+'],
     fontSize: 16,
   },
 });

@@ -7,9 +7,11 @@ import { USER_STATE_TYPE } from './types';
 const INITIAL_USER_STATE: USER_STATE_TYPE = {
   data: {
     age: 0,
+    calories: 0,
     genre: null,
     height: 0,
     images: [],
+    liters: 0,
     weight: 0,
   },
   hasSession: false,
