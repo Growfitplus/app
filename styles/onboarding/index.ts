@@ -23,7 +23,7 @@ export const OnboardingStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   main: {
-    backgroundColor: Colors.light['screen-bg'],
+    backgroundColor: Colors.light['background+'],
     flex: 1,
   },
   title: {
@@ -33,7 +33,7 @@ export const OnboardingStyles = StyleSheet.create({
     fontSize: 16,
   },
   value: {
-    color: Colors.light.text.emphasis,
+    color: Colors.light['dark+'],
     fontFamily: Fonts.RobotoRegular,
     fontSize: 72,
   },

@@ -11,7 +11,7 @@ import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Height = () => {
   const [user, dispatch] = useUserContext();
-  const [height, updateHeight] = useState(user.data.height.toString());
+  const [height, updateHeight] = useState(user.personal.height.toString());
   const isInvalidHeight = Number(height) < 1.2 || Number(height) > 2.5;
 
   const handleContinue = () => {
@@ -71,9 +71,7 @@ const Height = () => {
             <Pressable
               style={{
                 ...OnboardingStyles.continueButton,
-                backgroundColor: isInvalidHeight
-                  ? Colors.light.button.disabled
-                  : Colors.light['main-primary'],
+                backgroundColor: isInvalidHeight ? Colors.light.line : Colors.light['growfit+'],
               }}
               onPress={handleContinue}
               disabled={isInvalidHeight}
@@ -81,7 +79,7 @@ const Height = () => {
               <Typography
                 weight='bold'
                 styles={{
-                  color: isInvalidHeight ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  color: isInvalidHeight ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}
               >

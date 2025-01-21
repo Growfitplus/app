@@ -11,7 +11,7 @@ import { OnboardingStyles } from '@/styles/onboarding';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
-  const [weight, updateWeight] = useState(user.data.weight.toString());
+  const [weight, updateWeight] = useState(user.personal.weight.toString());
   const isInvalidWeight = Number(weight) < 30 || Number(weight) > 200;
 
   const handleContinue = () => {
@@ -66,9 +66,7 @@ const Weight = () => {
             <Pressable
               style={{
                 ...OnboardingStyles.continueButton,
-                backgroundColor: isInvalidWeight
-                  ? Colors.light.button.disabled
-                  : Colors.light['main-primary'],
+                backgroundColor: isInvalidWeight ? Colors.light.line : Colors.light['growfit+'],
               }}
               onPress={handleContinue}
               disabled={isInvalidWeight}
@@ -76,7 +74,7 @@ const Weight = () => {
               <Typography
                 weight='bold'
                 styles={{
-                  color: isInvalidWeight ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  color: isInvalidWeight ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}
               >

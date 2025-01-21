@@ -63,7 +63,7 @@ const Profile: React.FC<{
 const styles = StyleSheet.create({
   logOutText: { color: '#FF002E', fontSize: 16 },
   main: {
-    backgroundColor: Colors.light.white,
+    backgroundColor: Colors.light['white+'],
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     bottom: 0,

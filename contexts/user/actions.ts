@@ -1,5 +1,11 @@
 import { PhotosState } from '@/types/photos';
-import { GENRE_TYPES, USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
+import {
+  GENRE_TYPES,
+  USER_ACTION_TYPES,
+  USER_STATE_TYPE,
+  USER_TYPE_ACTIONS,
+  WEEK_CALORIES_TYPE,
+} from './types';
 
 export const setUsername = (username: string): USER_TYPE_ACTIONS => ({
   payload: { username },
@@ -51,4 +57,14 @@ export const addImage = (newImage: PhotosState): USER_TYPE_ACTIONS => ({
 
 export const resetState = (): USER_TYPE_ACTIONS => ({
   type: USER_ACTION_TYPES.RESET_STATE,
+});
+
+export const setCalories = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
+  payload: { week },
+  type: USER_ACTION_TYPES.SET_CALORIES,
+});
+
+export const setLiters = (liters: number): USER_TYPE_ACTIONS => ({
+  payload: { liters },
+  type: USER_ACTION_TYPES.SET_LITERS,
 });

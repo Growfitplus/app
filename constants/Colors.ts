@@ -1,16 +1,17 @@
 export const Colors = {
   dark: {},
   light: {
-    button: {
-      disabled: '#D5DADF',
+    'background+': '#FAFBFF',
+    'dark+': '#232A38',
+    error: '#FF004D',
+    gray: {
+      1: '#434D5C',
+      2: '#5E6574',
+      3: '#8A919D',
     },
-    'main-primary': '#00FFC2',
-    'screen-bg': '#f8faff',
-    text: {
-      disabled: '#8A919D',
-      emphasis: '#232A38',
-      input: '#080110',
-    },
-    white: '#FFF',
+    'growfit+': '#00FFC2',
+    line: '#D5DADF',
+    success: '#00E5AE',
+    'white+': '#FFF',
   },
 };

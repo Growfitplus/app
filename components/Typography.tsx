@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TextStyle } from 'react-native';
 
 interface TypographyProps {
-  children: string | number;
+  children: string | string[] | number;
   weight?: 'bold' | 'medium' | 'regular';
   styles?: TextStyle;
 }

@@ -1,10 +1,28 @@
-import { deletingStorage, finishStorage, settingStorage } from '@/contexts/storage/actions';
+import {
+  deletingStorage,
+  finishStorage,
+  gettingStorage,
+  settingStorage,
+} from '@/contexts/storage/actions';
 import { useStorageContext } from '@/contexts/storage/context';
 import * as SecureStore from 'expo-secure-store';
 import { USER_STATE_TYPE } from '@/contexts/user/types';
 
 const useStorage = () => {
   const [, storageDispatch] = useStorageContext();
+
+  const getStorage = async () => {
+    try {
+      storageDispatch(gettingStorage());
+      const storage = await SecureStore.getItemAsync('session');
+
+      return storage;
+    } catch (e) {
+      console.error('Secure Store is unavailable:', e);
+    } finally {
+      storageDispatch(finishStorage());
+    }
+  };
 
   const updateStorage = async (data: USER_STATE_TYPE) => {
     try {
@@ -32,6 +50,7 @@ const useStorage = () => {
 
   return {
     deleteStorage,
+    getStorage,
     updateStorage,
   };
 };

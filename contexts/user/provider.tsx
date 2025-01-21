@@ -3,17 +3,28 @@ import React, { JSXElementConstructor, ReactNode, useReducer } from 'react';
 import UserContext from '@/contexts/user/context';
 import UserReducer from '@/contexts/user/reducer';
 import { USER_STATE_TYPE } from './types';
+import { Days } from '@/constants/Goals';
 
 const INITIAL_USER_STATE: USER_STATE_TYPE = {
-  data: {
+  hasSession: false,
+  media: {
+    images: [],
+  },
+  nutrition: {
+    liters: 0,
+    week: Days.map(() => ({
+      calories: 0,
+      exceeded: false,
+      succeeded: false,
+    })),
+  },
+  onboardingFinished: false,
+  personal: {
     age: 0,
     genre: null,
     height: 0,
-    images: [],
     weight: 0,
   },
-  hasSession: false,
-  onboardingFinished: false,
   username: '',
 };
 

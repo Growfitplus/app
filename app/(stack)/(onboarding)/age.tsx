@@ -12,7 +12,7 @@ import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Age = () => {
   const [user, userDispatch] = useUserContext();
-  const [age, updateAge] = useState(user.data.age.toString());
+  const [age, updateAge] = useState(user.personal.age.toString());
   const { updateStorage } = useStorage();
   const isInvalidAge = Number(age) < 9 || Number(age) > 99;
 
@@ -22,8 +22,8 @@ const Age = () => {
 
     await updateStorage({
       ...user,
-      data: { ...user.data, age: Number(age) },
       onboardingFinished: true,
+      personal: { ...user.personal, age: Number(age) },
     });
 
     router.push('/(stack)/(tabs)/home');
@@ -75,9 +75,7 @@ const Age = () => {
             <Pressable
               style={{
                 ...OnboardingStyles.continueButton,
-                backgroundColor: isInvalidAge
-                  ? Colors.light.button.disabled
-                  : Colors.light['main-primary'],
+                backgroundColor: isInvalidAge ? Colors.light.line : Colors.light['growfit+'],
               }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onPress={handleOnboarding}
@@ -86,7 +84,7 @@ const Age = () => {
               <Typography
                 weight='bold'
                 styles={{
-                  color: isInvalidAge ? Colors.light.text.disabled : Colors.light.text.emphasis,
+                  color: isInvalidAge ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}
               >
