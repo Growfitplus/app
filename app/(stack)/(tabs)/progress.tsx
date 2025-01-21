@@ -18,9 +18,7 @@ const Progress = () => {
   const [user, userDispatch] = useUserContext();
   const [{ isLoading }] = useStorageContext();
   const { updateStorage } = useStorage();
-  const {
-    data: { images, weight },
-  } = user;
+  const { media: { images } = { images: [] }, personal: { weight } = { weight: 0 } } = user;
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
 
   useEffect(() => {

@@ -1,28 +1,43 @@
-import { Colors } from '@/constants/Colors';
 import React, { useEffect } from 'react';
 import { Platform, TextInput, View } from 'react-native';
+
+import { useUserContext } from '@/contexts/user/context';
+import { setCalories } from '@/contexts/user/actions';
+
+import useStorage from '@/hooks/useStorage';
+import useToday from '@/hooks/useToday';
+
+import { Colors } from '@/constants/Colors';
+import { CaloriesGoal } from '@/constants/Goals';
+import { Fonts } from '@/constants/Fonts';
+
+import CaloriesProgress from './CaloriesProgress';
 import WeekDays from './WeekDays';
 import { FireSVG } from '../SVG';
 import Typography from '../Typography';
-import CaloriesProgress from './CaloriesProgress';
-import { Fonts } from '../../constants/Fonts';
-import { useUserContext } from '@/contexts/user/context';
-import { setCalories } from '@/contexts/user/actions';
-import useStorage from '@/hooks/useStorage';
 
 const Calories = () => {
   const [user, userDispatch] = useUserContext();
   const { updateStorage } = useStorage();
   const {
-    data: { calories = 0 },
+    nutrition: { week },
   } = user;
+  const { today } = useToday();
+  const { calories } = week?.[today] || { calories: 0 };
+  const hasExceeded = calories > CaloriesGoal;
 
   useEffect(() => {
     void updateStorage({ ...user });
-  }, [calories]);
+  }, [week]);
 
   const handleCalories = (value: string) => {
-    userDispatch(setCalories(Number(value)));
+    const updatedWeek = [...week];
+
+    updatedWeek[today].calories = Number(value);
+    updatedWeek[today].exceeded = Number(value) > CaloriesGoal;
+    updatedWeek[today].succeeded = Number(value) === CaloriesGoal;
+
+    userDispatch(setCalories(updatedWeek));
   };
 
   return (
@@ -69,14 +84,26 @@ const Calories = () => {
         }}
       />
       <CaloriesProgress />
-      <Typography
-        styles={{
-          color: Colors.light.gray[2],
-          fontSize: 14,
-        }}
-      >
-        Consume máximo 1800 Kcal
-      </Typography>
+      {calories < CaloriesGoal && (
+        <Typography
+          styles={{
+            color: Colors.light.gray[2],
+            fontSize: 14,
+          }}
+        >
+          Consume máximo 1800 Kcal
+        </Typography>
+      )}
+      {hasExceeded && (
+        <Typography
+          styles={{
+            color: Colors.light.gray[2],
+            fontSize: 14,
+          }}
+        >
+          {`Te excediste en ${calories - CaloriesGoal} Kcal`}
+        </Typography>
+      )}
     </View>
   );
 };

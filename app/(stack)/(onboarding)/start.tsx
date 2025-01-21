@@ -39,7 +39,7 @@ const Onboarding = () => {
             customStyles={{
               ...styles.option,
               backgroundColor:
-                user.data.genre === GENRE_TYPES.Masculine
+                user.personal.genre === GENRE_TYPES.Masculine
                   ? Colors.light['growfit+']
                   : Colors.light['white+'],
             }}
@@ -61,7 +61,7 @@ const Onboarding = () => {
             customStyles={{
               ...styles.option,
               backgroundColor:
-                user.data.genre === GENRE_TYPES.Feminine
+                user.personal.genre === GENRE_TYPES.Feminine
                   ? Colors.light['growfit+']
                   : Colors.light['white+'],
             }}

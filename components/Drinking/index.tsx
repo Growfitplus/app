@@ -20,9 +20,7 @@ const Drinking = () => {
   const [{ isLoading }] = useStorageContext();
   const [percentage, setPercentage] = useState(0);
 
-  const {
-    data: { liters = 0 },
-  } = user;
+  const { nutrition: { liters = 0 } = { liters: 0 } } = user;
 
   useEffect(() => {
     void updateStorage({ ...user });

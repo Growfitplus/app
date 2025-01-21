@@ -1,24 +1,21 @@
 import { Colors } from '@/constants/Colors';
 import { CaloriesGoal, CaloriesWidth } from '@/constants/Goals';
 import { useUserContext } from '@/contexts/user/context';
+import useToday from '@/hooks/useToday';
 import React from 'react';
 import { View } from 'react-native';
 
 const CaloriesProgress = () => {
   const [
     {
-      data: { calories },
+      nutrition: { week },
     },
   ] = useUserContext();
+  const { today } = useToday();
+  const { calories } = week?.[today] || { calories: 0 };
   const caloriesPercentage = Math.floor((calories / CaloriesGoal) * 100);
 
   const getCaloriesPercentage = () => CaloriesWidth * (caloriesPercentage / 100);
-
-  console.log({
-    calories,
-    caloriesPercentage,
-    width: CaloriesWidth * (caloriesPercentage / 100),
-  });
 
   return (
     <View
@@ -31,7 +28,7 @@ const CaloriesProgress = () => {
     >
       <View
         style={{
-          backgroundColor: Colors.light['growfit+'],
+          backgroundColor: calories <= CaloriesGoal ? Colors.light['growfit+'] : Colors.light.error,
           borderRadius: 8,
           height: 6,
           width: caloriesPercentage > 100 ? CaloriesWidth : getCaloriesPercentage(),

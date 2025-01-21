@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { View } from 'react-native';
 import Typography from '../Typography';
 import { Colors } from '@/constants/Colors';
+import { Days } from '@/constants/Goals';
+import useToday from '@/hooks/useToday';
+import { useUserContext } from '@/contexts/user/context';
 
 const WeekDays = () => {
-  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-  const today = new Date().getDay() - 1;
+  const [
+    {
+      nutrition: { week },
+    },
+  ] = useUserContext();
+  const { today } = useToday();
 
-  console.log({ today });
+  const getDynamicColor = (index: number) => {
+    if (week[index].succeeded) {
+      return Colors.light['growfit+'];
+    }
+
+    if (week[index].exceeded) {
+      return Colors.light.error;
+    }
+
+    if (today === index) {
+      return Colors.light['dark+'];
+    } else {
+      return Colors.light.gray[3];
+    }
+  };
 
   return (
     <View
@@ -18,8 +39,11 @@ const WeekDays = () => {
         width: '100%',
       }}
     >
-      {days.map((day, index) => (
-        <View style={{ alignItems: 'center', gap: 16 }}>
+      {Days.map((day, index) => (
+        <View
+          style={{ alignItems: 'center', gap: 16 }}
+          key={`${useId()}-${day}`}
+        >
           <Typography
             weight='bold'
             styles={{
@@ -31,7 +55,7 @@ const WeekDays = () => {
           </Typography>
           <View
             style={{
-              backgroundColor: today === index ? Colors.light['dark+'] : Colors.light.gray[3],
+              backgroundColor: getDynamicColor(index),
               borderRadius: 8,
               height: 8,
               width: 8,

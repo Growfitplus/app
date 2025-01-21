@@ -5,9 +5,6 @@ import { router, useNavigation } from 'expo-router';
 import { LogoSVG } from '@/components/SVG';
 import Profile from '../(profile)/profile';
 import ProfileHeader from '@/components/Headers/Profile.header';
-// import { useUserContext } from '@/contexts/user/context';
-// import useStorage from '@/hooks/useStorage';
-// import { resetState } from '@/contexts/user/actions';
 import Container from '@/components/Container';
 import Calories from '@/components/Calories';
 import Walking from '@/components/Walking';
@@ -15,9 +12,7 @@ import Drinking from '@/components/Drinking';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
-  // const [user] = useUserContext();
   const navigation = useNavigation();
-  // const { deleteStorage } = useStorage();
 
   useEffect(() => {
     navigation.setOptions({
@@ -35,12 +30,6 @@ const Home = () => {
     setShowProfile(false);
   };
 
-  // const handleRemove = async () => {
-  //   await deleteStorage();
-
-  //   userDispatch(resetState());
-  // };
-
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={64}
@@ -49,11 +38,12 @@ const Home = () => {
         flex: 1,
       }}
     >
-      <Container customStyles={{ gap: 12 }}>
+      <Container>
         <Pressable
           onPress={Keyboard.dismiss}
           style={{
             flex: 1,
+            gap: 12,
           }}
         >
           <Calories />
@@ -61,17 +51,6 @@ const Home = () => {
             <Walking />
             <Drinking />
           </View>
-          {/* <View style={styles.main}>
-        <Text>Home</Text>
-        <Text>{JSON.stringify(user)}</Text>
-      </View>
-      <Pressable
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onPress={handleRemove}
-      >
-        <Text>Remove Storage</Text>
-      </Pressable>
-      */}
           <Profile
             isVisible={showProfile}
             handleAbout={handleAbout}

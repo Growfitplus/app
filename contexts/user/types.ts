@@ -24,7 +24,7 @@ export type USER_TYPE_ACTIONS =
   | { type: USER_ACTION_TYPES.LOGOUT }
   | { type: USER_ACTION_TYPES.RESET_STATE }
   | { type: USER_ACTION_TYPES.SET_AGE; payload: { age: number } }
-  | { type: USER_ACTION_TYPES.SET_CALORIES; payload: { calories: number } }
+  | { type: USER_ACTION_TYPES.SET_CALORIES; payload: { week: WEEK_CALORIES_TYPE[] } }
   | { type: USER_ACTION_TYPES.SET_GENRE; payload: { genre: GENRE_TYPES } }
   | { type: USER_ACTION_TYPES.SET_HEIGHT; payload: { height: number } }
   | { type: USER_ACTION_TYPES.SET_IMAGES; payload: PhotosState }
@@ -37,19 +37,31 @@ export enum GENRE_TYPES {
   'Feminine' = 'Feminine',
 }
 
+export type WEEK_DAYS = 'L' | 'M' | 'J' | 'V' | 'S' | 'D';
+
 export interface USER_STATE_TYPE {
-  username: string;
-  onboardingFinished: boolean;
   hasSession: boolean;
-  data: {
+  media: {
+    images: PhotosState[];
+  };
+  nutrition: {
+    liters: number;
+    week: WEEK_CALORIES_TYPE[];
+  };
+  onboardingFinished: boolean;
+  personal: {
     age: number;
-    calories: number;
     genre: GENRE_TYPES | null;
     height: number;
-    images: PhotosState[];
-    liters: number;
     weight: number;
   };
+  username: string;
+}
+
+export interface WEEK_CALORIES_TYPE {
+  calories: number;
+  succeeded: boolean;
+  exceeded: boolean;
 }
 
 export type USER_CONTEXT_INTERFACE = [USER_STATE_TYPE, dispatch: Dispatch<USER_TYPE_ACTIONS>];

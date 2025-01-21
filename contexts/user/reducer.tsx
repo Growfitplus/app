@@ -1,3 +1,4 @@
+import { Days } from '@/constants/Goals';
 import { USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
 
 const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_STATE_TYPE => {
@@ -23,8 +24,8 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_GENRE:
       return {
         ...state,
-        data: {
-          ...state.data,
+        personal: {
+          ...state.personal,
           genre: action.payload.genre,
         },
       };
@@ -32,8 +33,8 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_HEIGHT:
       return {
         ...state,
-        data: {
-          ...state.data,
+        personal: {
+          ...state.personal,
           height: action.payload.height,
         },
       };
@@ -41,8 +42,8 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_WEIGHT:
       return {
         ...state,
-        data: {
-          ...state.data,
+        personal: {
+          ...state.personal,
           weight: action.payload.weight,
         },
       };
@@ -50,8 +51,8 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_AGE:
       return {
         ...state,
-        data: {
-          ...state.data,
+        personal: {
+          ...state.personal,
           age: action.payload.age,
         },
       };
@@ -71,10 +72,9 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
     case USER_ACTION_TYPES.SET_IMAGES:
       return {
         ...state,
-        data: {
-          ...state.data,
+        media: {
           images: [
-            ...state.data.images,
+            ...state.media.images,
             {
               ...action.payload,
             },
@@ -84,34 +84,42 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
 
     case USER_ACTION_TYPES.RESET_STATE:
       return {
-        data: {
+        hasSession: false,
+        media: {
+          images: [],
+        },
+        nutrition: {
+          liters: 0,
+          week: Days.map(() => ({
+            calories: 0,
+            exceeded: false,
+            succeeded: false,
+          })),
+        },
+        onboardingFinished: false,
+        personal: {
           age: 0,
-          calories: 0,
           genre: null,
           height: 0,
-          images: [],
-          liters: 0,
           weight: 0,
         },
-        hasSession: false,
-        onboardingFinished: false,
         username: '',
       };
 
     case USER_ACTION_TYPES.SET_CALORIES:
       return {
         ...state,
-        data: {
-          ...state.data,
-          calories: action.payload.calories,
+        nutrition: {
+          ...state.nutrition,
+          week: [...action.payload.week],
         },
       };
 
     case USER_ACTION_TYPES.SET_LITERS:
       return {
         ...state,
-        data: {
-          ...state.data,
+        nutrition: {
+          ...state.nutrition,
           liters: action.payload.liters,
         },
       };

@@ -11,7 +11,7 @@ import { OnboardingStyles } from '@/styles/onboarding';
 
 const Weight = () => {
   const [user, dispatch] = useUserContext();
-  const [weight, updateWeight] = useState(user.data.weight.toString());
+  const [weight, updateWeight] = useState(user.personal.weight.toString());
   const isInvalidWeight = Number(weight) < 30 || Number(weight) > 200;
 
   const handleContinue = () => {

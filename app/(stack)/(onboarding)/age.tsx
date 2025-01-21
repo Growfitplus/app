@@ -12,7 +12,7 @@ import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Age = () => {
   const [user, userDispatch] = useUserContext();
-  const [age, updateAge] = useState(user.data.age.toString());
+  const [age, updateAge] = useState(user.personal.age.toString());
   const { updateStorage } = useStorage();
   const isInvalidAge = Number(age) < 9 || Number(age) > 99;
 
@@ -22,8 +22,8 @@ const Age = () => {
 
     await updateStorage({
       ...user,
-      data: { ...user.data, age: Number(age) },
       onboardingFinished: true,
+      personal: { ...user.personal, age: Number(age) },
     });
 
     router.push('/(stack)/(tabs)/home');
