@@ -8,13 +8,14 @@ import useStorage from '@/hooks/useStorage';
 import useToday from '@/hooks/useToday';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal } from '@/constants/Goals';
+import { CaloriesGoal, Days } from '@/constants/Goals';
 import { Fonts } from '@/constants/Fonts';
 
 import CaloriesProgress from './CaloriesProgress';
 import WeekDays from './WeekDays';
 import { FireSVG } from '../SVG';
 import Typography from '../Typography';
+import NightTime from './NightTime';
 
 const Calories = () => {
   const [user, userDispatch] = useUserContext();
@@ -31,7 +32,14 @@ const Calories = () => {
   }, [week]);
 
   const handleCalories = (value: string) => {
-    const updatedWeek = [...week];
+    const updatedWeek =
+      week.length === 0
+        ? Days.map(() => ({
+            calories: 0,
+            exceeded: false,
+            succeeded: false,
+          }))
+        : [...week];
 
     updatedWeek[today].calories = Number(value);
     updatedWeek[today].exceeded = Number(value) > CaloriesGoal;
@@ -48,9 +56,11 @@ const Calories = () => {
         borderRadius: 24,
         paddingHorizontal: 42,
         paddingVertical: 36,
+        position: 'relative',
         width: '100%',
       }}
     >
+      <NightTime />
       <WeekDays />
       <View
         style={{
@@ -65,7 +75,7 @@ const Calories = () => {
         <FireSVG />
         <Typography
           weight='bold'
-          styles={{ fontSize: 24 }}
+          customStyles={{ fontSize: 24 }}
         >
           Calorías
         </Typography>
@@ -86,7 +96,7 @@ const Calories = () => {
       <CaloriesProgress />
       {calories < CaloriesGoal && (
         <Typography
-          styles={{
+          customStyles={{
             color: Colors.light.gray[2],
             fontSize: 14,
           }}
@@ -96,7 +106,7 @@ const Calories = () => {
       )}
       {hasExceeded && (
         <Typography
-          styles={{
+          customStyles={{
             color: Colors.light.gray[2],
             fontSize: 14,
           }}

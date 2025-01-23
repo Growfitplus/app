@@ -15,72 +15,72 @@ const Terms = () => {
         />
         <Typography
           weight='bold'
-          styles={styles.title}
+          customStyles={styles.title}
         >
           Sobre Growfit+
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.subtitle}
+          customStyles={styles.subtitle}
         >
           TÉRMINOS Y CONDICIONES
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.vignette}
+          customStyles={styles.vignette}
         >
           1. EN GENERAL
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           1.1 Al utilizar el Servicio, usted está aceptando estar sujeto a estos Términos de
           Servicio, lo que significa que ha leído y comprendido los términos en su totalidad.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           1.2 Los términos pueden cambiar en cualquier momento, por lo que es su responsabilidad
           revisarlos regularmente para mantenerse informado de las actualizaciones.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           1.3 Si no está de acuerdo con los Términos, no puede utilizar el Servicio.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           1.4 El usuario debe consultar con un médico antes de usar el servicio y seguir el consejo
           médico, ya que el servicio no sustituye la atención médica profesional.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           1.5 El uso del servicio no crea una relación médico-paciente, terapeuta-paciente u otro
           profesional sanitario entre el usuario y la empresa.
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.vignette}
+          customStyles={styles.vignette}
         >
           2. RESPONSABILIDADES DEL USUARIO
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           2.1 Eres mayor de edad según lo establecido por tu país de residencia. El servicio no está
           destinado a ser utilizado por personas menores de 18 años.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           2.2 Renunciamos a los daños indirectos. En ningún caso seremos responsables ante usted o
           algún otro tercero por daños indirectos, especiales, incidentales, punitivos o
@@ -90,27 +90,27 @@ const Terms = () => {
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           2.3 Si proporcionas información falsa, inexacta, no actual o incompleta, nos reservamos el
           derecho de rechazar cualquier uso actual o futuro del Servicio.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           2.4 No puedes utilizar el Servicio para ningún otro propósito que no sea el que se pone a
           disposición.
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.vignette}
+          customStyles={styles.vignette}
         >
           3. RECOPILACIÓN Y USO DE INFORMACIÓN
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           3.1 Al utilizar nuestro servicio, se recopilará y utilizará información personal de
           acuerdo con nuestras políticas de privacidad. Esto puede incluir, pero no se limita a, su
@@ -118,14 +118,14 @@ const Terms = () => {
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           3.2 Utilizamos esta información para proporcionarle el servicio, responder a sus
           solicitudes, enviarle información sobre el servicio y procesar pagos, si corresponde.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           3.3 Podemos compartir información personal con terceros de confianza que nos ayudan a
           proporcionar y mejorar nuestro servicio, como proveedores de servicios de pago,
@@ -134,14 +134,14 @@ const Terms = () => {
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           3.4 Si no desea recibir comunicaciones de marketing de nuestra parte, puede optar por no
           recibirlas en cualquier momento.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           3.5 Nos reservamos el derecho de modificar esta política en cualquier momento. Cualquier
           cambio se publicará en nuestra app y se aplicará a la información recopilada después de la
@@ -149,39 +149,39 @@ const Terms = () => {
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.vignette}
+          customStyles={styles.vignette}
         >
           4. MODIFICACIONES E INTERRUPCIONES
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           4.1 Nos reservamos el derecho de modificar, suspender o descontinuar el Servicio en
           cualquier momento sin previo aviso.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           4.2 No seremos responsables por cualquier modificación o interrupción del servicio.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           4.3 No garantizamos la disponibilidad del Servicio en todo momento.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           4.4 No somos responsables de cualquier pérdida o daño causado por la incapacidad de
           acceder o utilizar el Servicio durante cualquier interrupción del Servicio.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           4.5 Podría haber información con errores tipográficos, inexactitudes u omisiones en el
           Servicio. Nos reservamos el derecho de modificar o corregir cualquier error, inexactitud u
@@ -189,26 +189,26 @@ const Terms = () => {
         </Typography>
         <Typography
           weight='bold'
-          styles={styles.vignette}
+          customStyles={styles.vignette}
         >
           5. DETALLES DE CONTACTO
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           Si desea enviar algún aviso en virtud de estos Términos o tiene alguna pregunta sobre el
           Servicio, puede comunicarse con nosotros a través de: contacto@growfitplus.com.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           HE LEÍDO ESTOS TÉRMINOS Y ACEPTO TODAS LAS DISPOSICIONES CONTENIDAS ANTERIORMENTE.
         </Typography>
         <Typography
           weight='regular'
-          styles={styles.content}
+          customStyles={styles.content}
         >
           Última actualización: 26 de noviembre del 2024
         </Typography>

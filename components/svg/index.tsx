@@ -5,5 +5,6 @@ export { default as HomeSVG } from './Home';
 export { default as InfoSVG } from './Info';
 export { default as UserSVG } from './User';
 export { default as WalkSVG } from './Walk';
+export { default as MoonSVG } from './Moon';
 export { Logo as LogoSVG } from './Logo';
 export { LogoLogIn as LogoLogInSVG } from './Logo';

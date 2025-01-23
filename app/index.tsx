@@ -98,7 +98,7 @@ const Login = () => {
         }}
       >
         <Typography
-          styles={LogInStyles.preButtonText}
+          customStyles={LogInStyles.preButtonText}
           weight='medium'
         >
           Ingresa con
@@ -115,7 +115,7 @@ const Login = () => {
           />
           <Typography
             weight='bold'
-            styles={LogInStyles.buttonText}
+            customStyles={LogInStyles.buttonText}
           >
             Google
           </Typography>

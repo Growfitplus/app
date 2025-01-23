@@ -55,12 +55,14 @@ const Drinking = () => {
         <Drop />
         <Typography
           weight='bold'
-          styles={{ fontSize: 12 }}
+          customStyles={{ fontSize: 12 }}
         >
           Agua
         </Typography>
       </View>
-      <Typography styles={{ textAlign: 'center' }}>{percentage.toString()}% de tu meta</Typography>
+      <Typography customStyles={{ textAlign: 'center' }}>
+        {percentage.toString()}% de tu meta
+      </Typography>
       <View
         style={{
           alignItems: 'center',
@@ -79,7 +81,7 @@ const Drinking = () => {
         </PressableWithEffect>
         <Typography
           weight='bold'
-          styles={{
+          customStyles={{
             color: liters > 0 ? Colors.light['dark+'] : Colors.light.gray[2],
             fontSize: 32,
             textAlign: 'center',
@@ -95,7 +97,7 @@ const Drinking = () => {
         </PressableWithEffect>
       </View>
       <Typography
-        styles={{
+        customStyles={{
           color: Colors.light.gray[3],
           fontSize: 12,
           marginBottom: 16,

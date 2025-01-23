@@ -5,7 +5,7 @@ import { Text, TextStyle } from 'react-native';
 interface TypographyProps {
   children: string | string[] | number;
   weight?: 'bold' | 'medium' | 'regular';
-  styles?: TextStyle;
+  customStyles?: TextStyle;
 }
 
 const WeightTypes = {
@@ -14,8 +14,8 @@ const WeightTypes = {
   regular: Fonts.RobotoRegular,
 };
 
-const Typography: React.FC<TypographyProps> = ({ children, weight = 'regular', styles }) => {
-  return <Text style={{ fontFamily: WeightTypes[weight], ...styles }}>{children}</Text>;
+const Typography: React.FC<TypographyProps> = ({ children, weight = 'regular', customStyles }) => {
+  return <Text style={{ fontFamily: WeightTypes[weight], ...customStyles }}>{children}</Text>;
 };
 
 export default Typography;

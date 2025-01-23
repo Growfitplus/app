@@ -56,7 +56,7 @@ const Progress = () => {
       <Container>
         <Typography
           weight='bold'
-          styles={styles.title}
+          customStyles={styles.title}
         >
           Mi Progreso
         </Typography>
@@ -67,14 +67,14 @@ const Progress = () => {
             onPressAction={pickImageAsync}
             isEnabled={!isLoading}
           >
-            <Typography styles={styles.addIcon}>+</Typography>
+            <Typography customStyles={styles.addIcon}>+</Typography>
             <View>
-              <Typography styles={styles.addPhotoText}>Nueva</Typography>
-              <Typography styles={styles.addPhotoText}>Foto</Typography>
+              <Typography customStyles={styles.addPhotoText}>Nueva</Typography>
+              <Typography customStyles={styles.addPhotoText}>Foto</Typography>
             </View>
           </PressableWithEffect>
           <View style={styles.weightData}>
-            <Typography styles={{ fontSize: 16 }}>Peso Actual</Typography>
+            <Typography customStyles={{ fontSize: 16 }}>Peso Actual</Typography>
             <View style={styles.weightContainer}>
               <PressableWithEffect
                 onPressAction={() => setNewWeight(weight - 1)}
@@ -82,7 +82,7 @@ const Progress = () => {
               >
                 <Subtract />
               </PressableWithEffect>
-              <Typography styles={{ fontSize: 32 }}>{weight}</Typography>
+              <Typography customStyles={{ fontSize: 32 }}>{weight}</Typography>
               <PressableWithEffect
                 onPressAction={() => setNewWeight(weight + 1)}
                 isEnabled={!isLoading}
