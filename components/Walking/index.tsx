@@ -1,20 +1,44 @@
-import { Colors } from '@/constants/Colors';
 import React from 'react';
 import { View } from 'react-native';
+
+import { Colors } from '@/constants/Colors';
+
 import Walk from '../SVG/Walk';
 import Typography from '../Typography';
 import { CheckIcon } from '../Icons';
+import PressableWithEffect from '../PressableWithEffect';
+import { useUserContext } from '@/contexts/user/context';
+import { resetWeek } from '@/utils/resetWeek';
+import useToday from '@/hooks/useToday';
+import { setWalking } from '@/contexts/user/actions';
 
 const Walking = () => {
+  const [
+    {
+      nutrition: { week },
+    },
+    userDisptach,
+  ] = useUserContext();
+  const { today } = useToday();
+
+  const handleWalking = () => {
+    const updatedWeek = week.length === 0 ? resetWeek() : [...week];
+
+    updatedWeek[today].walking = true;
+
+    userDisptach(setWalking(updatedWeek));
+  };
+
   return (
-    <View
-      style={{
+    <PressableWithEffect
+      customStyles={{
         backgroundColor: Colors.light['white+'],
         borderRadius: 24,
         flex: 1,
         paddingHorizontal: 24,
         paddingVertical: 36,
       }}
+      onPressAction={handleWalking}
     >
       <View
         style={{
@@ -31,7 +55,9 @@ const Walking = () => {
           Caminar
         </Typography>
       </View>
-      <Typography customStyles={{ textAlign: 'center' }}>0% de tu meta</Typography>
+      <Typography customStyles={{ textAlign: 'center' }}>
+        {week[today].walking ? '100' : '0'}% de tu meta
+      </Typography>
       <Typography
         weight='bold'
         customStyles={{
@@ -54,12 +80,23 @@ const Walking = () => {
         Minutos
       </Typography>
       <View style={{ alignItems: 'center' }}>
-        <CheckIcon
-          size={16}
-          color={Colors.light.gray[1]}
-        />
+        <View
+          style={{
+            alignItems: 'center',
+            backgroundColor: week[today].walking ? Colors.light['growfit+'] : 'transparent',
+            borderRadius: 20,
+            height: 20,
+            justifyContent: 'center',
+            width: 20,
+          }}
+        >
+          <CheckIcon
+            size={16}
+            color={Colors.light.gray[1]}
+          />
+        </View>
       </View>
-    </View>
+    </PressableWithEffect>
   );
 };
 

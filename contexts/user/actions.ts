@@ -64,7 +64,12 @@ export const setCalories = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
   type: USER_ACTION_TYPES.SET_CALORIES,
 });
 
-export const setLiters = (liters: number): USER_TYPE_ACTIONS => ({
-  payload: { liters },
+export const setLiters = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
+  payload: { week },
   type: USER_ACTION_TYPES.SET_LITERS,
+});
+
+export const setWalking = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
+  payload: { week },
+  type: USER_ACTION_TYPES.SET_WALKING,
 });

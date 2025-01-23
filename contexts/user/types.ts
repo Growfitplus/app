@@ -14,6 +14,7 @@ export enum USER_ACTION_TYPES {
   SET_IMAGES = 'SET_IMAGES',
   SET_LITERS = 'SET_LITERS',
   SET_USERNAME = 'SET_USERNAME',
+  SET_WALKING = 'SET_WALKING',
   SET_WEIGHT = 'SET_WEIGHT',
 }
 
@@ -28,8 +29,9 @@ export type USER_TYPE_ACTIONS =
   | { type: USER_ACTION_TYPES.SET_GENRE; payload: { genre: GENRE_TYPES } }
   | { type: USER_ACTION_TYPES.SET_HEIGHT; payload: { height: number } }
   | { type: USER_ACTION_TYPES.SET_IMAGES; payload: PhotosState }
-  | { type: USER_ACTION_TYPES.SET_LITERS; payload: { liters: number } }
+  | { type: USER_ACTION_TYPES.SET_LITERS; payload: { week: WEEK_CALORIES_TYPE[] } }
   | { type: USER_ACTION_TYPES.SET_USERNAME; payload: { username: string } }
+  | { type: USER_ACTION_TYPES.SET_WALKING; payload: { week: WEEK_CALORIES_TYPE[] } }
   | { type: USER_ACTION_TYPES.SET_WEIGHT; payload: { weight: number } };
 
 export enum GENRE_TYPES {
@@ -45,7 +47,6 @@ export interface USER_STATE_TYPE {
     images: PhotosState[];
   };
   nutrition: {
-    liters: number;
     week: WEEK_CALORIES_TYPE[];
   };
   onboardingFinished: boolean;
@@ -62,6 +63,8 @@ export interface WEEK_CALORIES_TYPE {
   calories: number;
   succeeded: boolean;
   exceeded: boolean;
+  liters: number;
+  walking: boolean;
 }
 
 export type USER_CONTEXT_INTERFACE = [USER_STATE_TYPE, dispatch: Dispatch<USER_TYPE_ACTIONS>];

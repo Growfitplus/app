@@ -1,4 +1,5 @@
-import { Days } from '@/constants/Goals';
+import { resetWeek } from '@/utils/resetWeek';
+
 import { USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
 
 const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_STATE_TYPE => {
@@ -89,12 +90,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
           images: [],
         },
         nutrition: {
-          liters: 0,
-          week: Days.map(() => ({
-            calories: 0,
-            exceeded: false,
-            succeeded: false,
-          })),
+          week: resetWeek(),
         },
         onboardingFinished: false,
         personal: {
@@ -110,7 +106,6 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         ...state,
         nutrition: {
-          ...state.nutrition,
           week: [...action.payload.week],
         },
       };
@@ -119,8 +114,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         ...state,
         nutrition: {
-          ...state.nutrition,
-          liters: action.payload.liters,
+          week: [...state.nutrition.week],
         },
       };
 

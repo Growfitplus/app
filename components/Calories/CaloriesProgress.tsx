@@ -1,9 +1,12 @@
-import { Colors } from '@/constants/Colors';
-import { CaloriesGoal, CaloriesWidth } from '@/constants/Goals';
-import { useUserContext } from '@/contexts/user/context';
-import useToday from '@/hooks/useToday';
 import React from 'react';
 import { View } from 'react-native';
+
+import { useUserContext } from '@/contexts/user/context';
+
+import { Colors } from '@/constants/Colors';
+import { CaloriesGoal, CaloriesWidth } from '@/constants/Goals';
+
+import useToday from '@/hooks/useToday';
 
 const CaloriesProgress = () => {
   const [

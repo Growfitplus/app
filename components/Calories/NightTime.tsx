@@ -8,6 +8,7 @@ const NightTime = () => {
   return (
     <View
       style={{
+        alignItems: 'center',
         backgroundColor: Colors.light['dark+'],
         borderRadius: 50,
         flexDirection: 'row',
