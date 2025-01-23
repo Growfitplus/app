@@ -13,14 +13,20 @@ import { setLiters } from '@/contexts/user/actions';
 import useStorage from '@/hooks/useStorage';
 import { useStorageContext } from '@/contexts/storage/context';
 import { DrinkingGoal } from '@/constants/Goals';
+import useToday from '@/hooks/useToday';
+import { resetWeek } from '@/utils/resetWeek';
 
 const Drinking = () => {
   const [user, userDispatch] = useUserContext();
   const { updateStorage } = useStorage();
   const [{ isLoading }] = useStorageContext();
+  const { today } = useToday();
   const [percentage, setPercentage] = useState(0);
 
-  const { nutrition: { liters = 0 } = { liters: 0 } } = user;
+  const {
+    nutrition: { week },
+  } = user;
+  const { liters = 0 } = week[today];
 
   useEffect(() => {
     void updateStorage({ ...user });
@@ -28,7 +34,12 @@ const Drinking = () => {
 
   const handleDrinking = (value: number) => {
     if (value >= 0) {
-      userDispatch(setLiters(value));
+      const updatedWeek = week.length === 0 ? resetWeek() : [...week];
+
+      updatedWeek[today].liters = value;
+
+      userDispatch(setLiters(updatedWeek));
+
       const calculatePercentage = value < 3 ? Math.floor((value / DrinkingGoal) * 100) : 100;
 
       setPercentage(value === 0 ? 0 : calculatePercentage);

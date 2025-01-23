@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
 import { Slot } from 'expo-router';
@@ -13,9 +13,30 @@ import RootProvider from '@/contexts/root';
 import UserProvider from '@/contexts/user/provider';
 import StorageProvider from '@/contexts/storage/provider';
 import { StatusBar } from 'expo-status-bar';
+import { useUserContext } from '@/contexts/user/context';
+import useStorage from '@/hooks/useStorage';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 SplashScreen.preventAutoHideAsync();
+
+const Layout = () => {
+  const [user] = useUserContext();
+  const { updateStorage } = useStorage();
+
+  useEffect(() => {
+    void updateStorage(user);
+  }, [user]);
+
+  return (
+    <>
+      <StatusBar
+        style='dark'
+        translucent={true}
+      />
+      <Slot />
+    </>
+  );
+};
 
 const RootLayout = () => {
   const [loaded, error] = useFonts({
@@ -37,11 +58,7 @@ const RootLayout = () => {
 
   return (
     <RootProvider providers={[UserProvider, StorageProvider]}>
-      <StatusBar
-        style='dark'
-        translucent={true}
-      />
-      <Slot />
+      <Layout />
     </RootProvider>
   );
 };

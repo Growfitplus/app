@@ -8,8 +8,10 @@ import useStorage from '@/hooks/useStorage';
 import useToday from '@/hooks/useToday';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal, Days } from '@/constants/Goals';
+import { CaloriesGoal } from '@/constants/Goals';
 import { Fonts } from '@/constants/Fonts';
+
+import { resetWeek } from '@/utils/resetWeek';
 
 import CaloriesProgress from './CaloriesProgress';
 import WeekDays from './WeekDays';
@@ -32,14 +34,7 @@ const Calories = () => {
   }, [week]);
 
   const handleCalories = (value: string) => {
-    const updatedWeek =
-      week.length === 0
-        ? Days.map(() => ({
-            calories: 0,
-            exceeded: false,
-            succeeded: false,
-          }))
-        : [...week];
+    const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
     updatedWeek[today].calories = Number(value);
     updatedWeek[today].exceeded = Number(value) > CaloriesGoal;

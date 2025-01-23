@@ -2,8 +2,10 @@ import React, { JSXElementConstructor, ReactNode, useReducer } from 'react';
 
 import UserContext from '@/contexts/user/context';
 import UserReducer from '@/contexts/user/reducer';
+
+import { resetWeek } from '@/utils/resetWeek';
+
 import { USER_STATE_TYPE } from './types';
-import { Days } from '@/constants/Goals';
 
 const INITIAL_USER_STATE: USER_STATE_TYPE = {
   hasSession: false,
@@ -11,12 +13,7 @@ const INITIAL_USER_STATE: USER_STATE_TYPE = {
     images: [],
   },
   nutrition: {
-    liters: 0,
-    week: Days.map(() => ({
-      calories: 0,
-      exceeded: false,
-      succeeded: false,
-    })),
+    week: resetWeek(),
   },
   onboardingFinished: false,
   personal: {
