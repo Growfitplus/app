@@ -1,4 +1,11 @@
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  View,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { router, useNavigation } from 'expo-router';
 
@@ -31,33 +38,39 @@ const Home = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      keyboardVerticalOffset={64}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <ScrollView
       style={{
-        flex: 1,
+        paddingTop: 42,
       }}
     >
-      <Container>
-        <Pressable
-          onPress={Keyboard.dismiss}
-          style={{
-            flex: 1,
-            gap: 12,
-          }}
-        >
-          <Calories />
-          <View style={{ flexDirection: 'row', gap: 12 }}>
-            <Walking />
-            <Drinking />
-          </View>
-          <Profile
-            isVisible={showProfile}
-            handleAbout={handleAbout}
-          />
-        </Pressable>
-      </Container>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={64}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{
+          flex: 1,
+        }}
+      >
+        <Container>
+          <Pressable
+            onPress={Keyboard.dismiss}
+            style={{
+              flex: 1,
+              gap: 12,
+            }}
+          >
+            <Calories />
+            <View style={{ flexDirection: 'row', gap: 12 }}>
+              <Walking />
+              <Drinking />
+            </View>
+            <Profile
+              isVisible={showProfile}
+              handleAbout={handleAbout}
+            />
+          </Pressable>
+        </Container>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 

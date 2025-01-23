@@ -55,7 +55,7 @@ const Age = () => {
           <View>
             <Typography
               weight='bold'
-              styles={OnboardingStyles.title}
+              customStyles={OnboardingStyles.title}
             >
               Edad
             </Typography>
@@ -69,7 +69,7 @@ const Age = () => {
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
               placeholder='30'
             />
-            <Typography styles={OnboardingStyles.unit}>Años</Typography>
+            <Typography customStyles={OnboardingStyles.unit}>Años</Typography>
           </View>
           <View style={OnboardingStyles.continueContainer}>
             <Pressable
@@ -83,7 +83,7 @@ const Age = () => {
             >
               <Typography
                 weight='bold'
-                styles={{
+                customStyles={{
                   color: isInvalidAge ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}

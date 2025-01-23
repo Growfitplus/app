@@ -50,7 +50,7 @@ const Height = () => {
           <View>
             <Typography
               weight='bold'
-              styles={OnboardingStyles.title}
+              customStyles={OnboardingStyles.title}
             >
               Estatura
             </Typography>
@@ -65,7 +65,7 @@ const Height = () => {
               textContentType='none'
               placeholder='175'
             />
-            <Typography styles={OnboardingStyles.unit}>cms</Typography>
+            <Typography customStyles={OnboardingStyles.unit}>cms</Typography>
           </View>
           <View style={OnboardingStyles.continueContainer}>
             <Pressable
@@ -78,7 +78,7 @@ const Height = () => {
             >
               <Typography
                 weight='bold'
-                styles={{
+                customStyles={{
                   color: isInvalidHeight ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}

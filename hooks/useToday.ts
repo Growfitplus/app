@@ -1,7 +1,9 @@
 const useToday = () => {
-  const today = new Date().getDay() - 1;
+  const date = new Date();
+  const today = date.getDay() - 1;
+  const time = date.getHours();
 
-  return { today };
+  return { time, today };
 };
 
 export default useToday;

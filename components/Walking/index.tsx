@@ -26,15 +26,15 @@ const Walking = () => {
         <Walk />
         <Typography
           weight='bold'
-          styles={{ fontSize: 12 }}
+          customStyles={{ fontSize: 12 }}
         >
           Caminar
         </Typography>
       </View>
-      <Typography styles={{ textAlign: 'center' }}>0% de tu meta</Typography>
+      <Typography customStyles={{ textAlign: 'center' }}>0% de tu meta</Typography>
       <Typography
         weight='bold'
-        styles={{
+        customStyles={{
           color: Colors.light.gray[2],
           fontSize: 32,
           marginTop: 16,
@@ -44,7 +44,7 @@ const Walking = () => {
         30
       </Typography>
       <Typography
-        styles={{
+        customStyles={{
           color: Colors.light.gray[3],
           fontSize: 12,
           marginBottom: 16,

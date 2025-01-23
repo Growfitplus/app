@@ -15,11 +15,11 @@ const WeekDays = () => {
   const { today } = useToday();
 
   const getDynamicColor = (index: number) => {
-    if (week[index].succeeded) {
+    if (week[index]?.succeeded) {
       return Colors.light['growfit+'];
     }
 
-    if (week[index].exceeded) {
+    if (week[index]?.exceeded) {
       return Colors.light.error;
     }
 
@@ -46,7 +46,7 @@ const WeekDays = () => {
         >
           <Typography
             weight='bold'
-            styles={{
+            customStyles={{
               color: today === index ? Colors.light['dark+'] : Colors.light.gray[3],
               fontSize: 12,
             }}

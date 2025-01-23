@@ -46,7 +46,7 @@ const Weight = () => {
           <View>
             <Typography
               weight='bold'
-              styles={OnboardingStyles.title}
+              customStyles={OnboardingStyles.title}
             >
               Peso actual
             </Typography>
@@ -60,7 +60,7 @@ const Weight = () => {
               keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'decimal-pad'}
               placeholder='70'
             />
-            <Typography styles={OnboardingStyles.unit}>Kilos</Typography>
+            <Typography customStyles={OnboardingStyles.unit}>Kilos</Typography>
           </View>
           <View style={OnboardingStyles.continueContainer}>
             <Pressable
@@ -73,7 +73,7 @@ const Weight = () => {
             >
               <Typography
                 weight='bold'
-                styles={{
+                customStyles={{
                   color: isInvalidWeight ? Colors.light.gray[3] : Colors.light['dark+'],
                   ...OnboardingStyles.continueButtonText,
                 }}

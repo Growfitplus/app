@@ -37,7 +37,7 @@ const Profile: React.FC<{
               width={24}
               height={24}
             />
-            <Typography styles={styles.termsText}>Sobre Growfit+</Typography>
+            <Typography customStyles={styles.termsText}>Sobre Growfit+</Typography>
           </View>
           <ChevronNextIcon
             size={24}
@@ -53,7 +53,7 @@ const Profile: React.FC<{
             size={24}
             color='#FF002E'
           />
-          <Typography styles={styles.logOutText}>Cerrar Sesión</Typography>
+          <Typography customStyles={styles.logOutText}>Cerrar Sesión</Typography>
         </Pressable>
       </View>
     </Modal>

@@ -29,7 +29,7 @@ const Onboarding = () => {
         <View>
           <Typography
             weight='bold'
-            styles={{ fontSize: 24 }}
+            customStyles={{ fontSize: 24 }}
           >
             ¿Cuál es tu sexo?
           </Typography>
@@ -48,13 +48,13 @@ const Onboarding = () => {
             <View>
               <Typography
                 weight='bold'
-                styles={styles.sign}
+                customStyles={styles.sign}
               >
                 ♂
               </Typography>
             </View>
             <View style={styles.genreContainer}>
-              <Typography styles={styles.genre}>Masculino</Typography>
+              <Typography customStyles={styles.genre}>Masculino</Typography>
             </View>
           </PressableWithEffect>
           <PressableWithEffect
@@ -70,13 +70,13 @@ const Onboarding = () => {
             <View>
               <Typography
                 weight='bold'
-                styles={styles.sign}
+                customStyles={styles.sign}
               >
                 ♀
               </Typography>
             </View>
             <View style={styles.genreContainer}>
-              <Typography styles={styles.genre}>Femenino</Typography>
+              <Typography customStyles={styles.genre}>Femenino</Typography>
             </View>
           </PressableWithEffect>
         </View>
