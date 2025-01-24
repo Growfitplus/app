@@ -8,7 +8,7 @@ import useStorage from '@/hooks/useStorage';
 import useToday from '@/hooks/useToday';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal } from '@/constants/Goals';
+import { CaloriesGoal, MaxCalories } from '@/constants/Goals';
 import { Fonts } from '@/constants/Fonts';
 
 import { resetWeek } from '@/utils/resetWeek';
@@ -35,13 +35,15 @@ const Calories = () => {
   }, [week]);
 
   const handleCalories = (value: string) => {
-    const updatedWeek = week.length === 0 ? resetWeek() : [...week];
+    if (Number(value) < MaxCalories) {
+      const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
-    updatedWeek[today].calories = Number(value);
-    updatedWeek[today].exceeded = Number(value) > CaloriesGoal;
-    updatedWeek[today].succeeded = Number(value) === CaloriesGoal;
+      updatedWeek[today].calories = Number(value);
+      updatedWeek[today].exceeded = Number(value) > CaloriesGoal;
+      updatedWeek[today].succeeded = Number(value) === CaloriesGoal;
 
-    userDispatch(setCalories(updatedWeek));
+      userDispatch(setCalories(updatedWeek));
+    }
   };
 
   return (

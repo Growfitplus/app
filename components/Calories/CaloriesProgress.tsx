@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { useUserContext } from '@/contexts/user/context';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal, CaloriesWidth } from '@/constants/Goals';
+import { CaloriesGoal, CaloriesWidth, DoubleCalories } from '@/constants/Goals';
 
 import useToday from '@/hooks/useToday';
 
@@ -16,9 +16,24 @@ const CaloriesProgress = () => {
   ] = useUserContext();
   const { today } = useToday();
   const { calories } = week?.[today] || { calories: 0 };
-  const caloriesPercentage = Math.floor((calories / CaloriesGoal) * 100);
+  const caloriesGoalPercentage = calories / CaloriesGoal;
+  const caloriesPercentage = Math.floor(caloriesGoalPercentage * 100);
+  const exceededCaloriesPercentage = Math.floor((caloriesGoalPercentage - 1) * 100);
 
-  const getCaloriesPercentage = () => CaloriesWidth * (caloriesPercentage / 100);
+  const getCaloriesWidth = () =>
+    CaloriesWidth * ((caloriesPercentage < 1 ? 1 : caloriesPercentage) / 100);
+
+  const getExceededCaloriesWidth = () =>
+    calories < DoubleCalories
+      ? CaloriesWidth * ((exceededCaloriesPercentage < 1 ? 1 : exceededCaloriesPercentage) / 100)
+      : CaloriesWidth;
+
+  const getCaloriesProgress = () => {
+    if (calories === 0) {
+      return 0;
+    }
+    return calories > CaloriesGoal ? getExceededCaloriesWidth() : getCaloriesWidth();
+  };
 
   return (
     <View
@@ -34,7 +49,7 @@ const CaloriesProgress = () => {
           backgroundColor: calories <= CaloriesGoal ? Colors.light['growfit+'] : Colors.light.error,
           borderRadius: 8,
           height: 6,
-          width: caloriesPercentage > 100 ? CaloriesWidth : getCaloriesPercentage(),
+          width: getCaloriesProgress(),
         }}
       />
       <View
@@ -42,7 +57,9 @@ const CaloriesProgress = () => {
           backgroundColor: Colors.light.line,
           borderRadius: 8,
           height: 6,
-          width: CaloriesWidth - getCaloriesPercentage(),
+          width:
+            CaloriesWidth -
+            (calories <= CaloriesGoal ? getCaloriesWidth() : getExceededCaloriesWidth()),
         }}
       />
     </View>
