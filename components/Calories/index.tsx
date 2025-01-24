@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Platform, TextInput, View } from 'react-native';
 
 import { useUserContext } from '@/contexts/user/context';
 import { setCalories } from '@/contexts/user/actions';
 
-import useStorage from '@/hooks/useStorage';
 import useToday from '@/hooks/useToday';
 
 import { Colors } from '@/constants/Colors';
@@ -21,7 +20,6 @@ import NightTime from './NightTime';
 
 const Calories = () => {
   const [user, userDispatch] = useUserContext();
-  const { updateStorage } = useStorage();
   const {
     nutrition: { week },
   } = user;
@@ -29,10 +27,6 @@ const Calories = () => {
   const { calories } = week?.[today] || { calories: 0 };
   const hasExceeded = calories > CaloriesGoal;
   const showNight = hours >= 23 && hours < 7;
-
-  useEffect(() => {
-    void updateStorage({ ...user });
-  }, [week]);
 
   const handleCalories = (value: string) => {
     if (Number(value) < MaxCalories) {

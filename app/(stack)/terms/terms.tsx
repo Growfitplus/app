@@ -65,6 +65,7 @@ const Terms = () => {
           1.5 El uso del servicio no crea una relación médico-paciente, terapeuta-paciente u otro
           profesional sanitario entre el usuario y la empresa.
         </Typography>
+
         <Typography
           weight='bold'
           customStyles={styles.vignette}
@@ -102,6 +103,7 @@ const Terms = () => {
           2.4 No puedes utilizar el Servicio para ningún otro propósito que no sea el que se pone a
           disposición.
         </Typography>
+
         <Typography
           weight='bold'
           customStyles={styles.vignette}
@@ -147,6 +149,7 @@ const Terms = () => {
           cambio se publicará en nuestra app y se aplicará a la información recopilada después de la
           fecha en que se publique el cambio.
         </Typography>
+
         <Typography
           weight='bold'
           customStyles={styles.vignette}
@@ -187,11 +190,57 @@ const Terms = () => {
           Servicio. Nos reservamos el derecho de modificar o corregir cualquier error, inexactitud u
           omisión en cualquier momento sin previo aviso.
         </Typography>
+
         <Typography
           weight='bold'
           customStyles={styles.vignette}
         >
-          5. DETALLES DE CONTACTO
+          5. USO DE MATERIAL AUDIOVISUAL
+        </Typography>
+        <Typography
+          weight='regular'
+          customStyles={styles.content}
+        >
+          5.1 El usuario concede a la aplicación el derecho no exclusivo, mundial y libre de
+          regalías para utilizar, reproducir, modificar y mostrar cualquier fotografía y video que
+          se cargue a la plataforma con el fin de mejorar la experiencia del servicio y fomentar la
+          comunidad.
+        </Typography>
+        <Typography
+          weight='regular'
+          customStyles={styles.content}
+        >
+          5.2 El usuario garantiza que posee los derechos necesarios sobre dicho material
+          audiovisual y que no infringe los derechos de propiedad intelectual de terceros.
+        </Typography>
+        <Typography
+          weight='regular'
+          customStyles={styles.content}
+        >
+          5.3 La aplicación se reserva el derecho de eliminar cualquier contenido que considere
+          inapropiado, ofensivo o que infrinja estas condiciones.
+        </Typography>
+        <Typography
+          weight='regular'
+          customStyles={styles.content}
+        >
+          5.4 El usuario es responsable de obtener cualquier consentimiento necesario de las
+          personas que aparezcan en las fotografías o videos antes de su carga, liberando a la
+          aplicación de cualquier reclamación al respecto.
+        </Typography>
+        <Typography
+          weight='regular'
+          customStyles={styles.content}
+        >
+          5.5 Cualquier uso comercial del material audiovisual cargado por el usuario sin su
+          autorización previa está estrictamente prohibido.
+        </Typography>
+
+        <Typography
+          weight='bold'
+          customStyles={styles.vignette}
+        >
+          6. DETALLES DE CONTACTO
         </Typography>
         <Typography
           weight='regular'

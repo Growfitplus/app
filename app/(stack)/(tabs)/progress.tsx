@@ -1,29 +1,25 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, SafeAreaView, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+
+import { useUserContext } from '@/contexts/user/context';
+import { addImage, setWeight } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
 
 import Container from '@/components/Container';
 import PressableWithEffect from '@/components/PressableWithEffect';
 import Add from '@/components/SVG/Add';
 import Subtract from '@/components/SVG/Subtract';
 import Typography from '@/components/Typography';
-import { Colors } from '@/constants/Colors';
-import { useUserContext } from '@/contexts/user/context';
 import PhotosProgress from '@/components/PhotosProgress';
-import { addImage, setWeight } from '@/contexts/user/actions';
-import { useStorageContext } from '@/contexts/storage/context';
-import useStorage from '@/hooks/useStorage';
+
+import { Colors } from '@/constants/Colors';
 
 const Progress = () => {
   const [user, userDispatch] = useUserContext();
   const [{ isLoading }] = useStorageContext();
-  const { updateStorage } = useStorage();
   const { media: { images } = { images: [] }, personal: { weight } = { weight: 0 } } = user;
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
-
-  useEffect(() => {
-    void updateStorage({ ...user });
-  }, [images, weight]);
 
   const setNewWeight = (value: number) => {
     if (weight > 0) {

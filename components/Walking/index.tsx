@@ -1,32 +1,33 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import { useUserContext } from '@/contexts/user/context';
+import { setWalking } from '@/contexts/user/actions';
+
+import useToday from '@/hooks/useToday';
+
+import { resetWeek } from '@/utils/resetWeek';
+
 import { Colors } from '@/constants/Colors';
 
 import Walk from '../SVG/Walk';
 import Typography from '../Typography';
 import { CheckIcon } from '../Icons';
 import PressableWithEffect from '../PressableWithEffect';
-import { useUserContext } from '@/contexts/user/context';
-import { resetWeek } from '@/utils/resetWeek';
-import useToday from '@/hooks/useToday';
-import { setWalking } from '@/contexts/user/actions';
 
 const Walking = () => {
-  const [
-    {
-      nutrition: { week },
-    },
-    userDisptach,
-  ] = useUserContext();
+  const [user, userDispatch] = useUserContext();
+  const {
+    nutrition: { week },
+  } = user;
   const { today } = useToday();
 
   const handleWalking = () => {
     const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
-    updatedWeek[today].walking = true;
+    updatedWeek[today].walking = !updatedWeek[today].walking;
 
-    userDisptach(setWalking(updatedWeek));
+    userDispatch(setWalking(updatedWeek));
   };
 
   return (

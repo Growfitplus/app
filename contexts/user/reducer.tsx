@@ -118,6 +118,14 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         },
       };
 
+    case USER_ACTION_TYPES.SET_WALKING:
+      return {
+        ...state,
+        nutrition: {
+          week: [...state.nutrition.week],
+        },
+      };
+
     default:
       return state;
   }

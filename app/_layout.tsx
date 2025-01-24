@@ -24,7 +24,7 @@ const Layout = () => {
   const { updateStorage } = useStorage();
 
   useEffect(() => {
-    void updateStorage(user);
+    void updateStorage({ ...user });
   }, [user]);
 
   return (
