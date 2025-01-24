@@ -40,6 +40,7 @@ const AppLayout = () => {
         <Stack.Screen name='height' />
         <Stack.Screen name='weight' />
         <Stack.Screen name='age' />
+        <Stack.Screen name='imc' />
       </Stack>
     </>
   );

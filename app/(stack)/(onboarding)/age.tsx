@@ -5,7 +5,7 @@ import { Keyboard, KeyboardAvoidingView, Platform, Pressable, TextInput, View } 
 import { Colors } from '@/constants/Colors';
 import Typography from '@/components/Typography';
 import { useUserContext } from '@/contexts/user/context';
-import { finishOnboarding, setAge } from '@/contexts/user/actions';
+import { setAge } from '@/contexts/user/actions';
 import Container from '@/components/Container';
 import useStorage from '@/hooks/useStorage';
 import { OnboardingStyles } from '@/styles/onboarding/index';
@@ -18,15 +18,13 @@ const Age = () => {
 
   const handleOnboarding = async () => {
     userDispatch(setAge(Number(age)));
-    userDispatch(finishOnboarding());
 
     await updateStorage({
       ...user,
-      onboardingFinished: true,
       personal: { ...user.personal, age: Number(age) },
     });
 
-    router.push('/(stack)/(tabs)/home');
+    router.push('/(stack)/(onboarding)/imc');
   };
 
   const formatAge = (value: string) => {
