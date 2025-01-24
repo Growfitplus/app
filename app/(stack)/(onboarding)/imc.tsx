@@ -7,21 +7,28 @@ import Container from '@/components/Container';
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
+import { router } from 'expo-router';
 
 const IMC = () => {
   const [animateToNumber, setAnimateToNumber] = useState(0);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
+    let timeOut: NodeJS.Timeout;
 
     if (animateToNumber < 100) {
       interval = setInterval(() => {
         increase();
       }, 50);
+    } else {
+      timeOut = setTimeout(() => {
+        router.push('/(stack)/(onboarding)/results');
+      }, 500);
     }
 
     return () => {
       clearInterval(interval);
+      clearTimeout(timeOut);
     };
   }, [animateToNumber]);
 
