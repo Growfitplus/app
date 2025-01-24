@@ -25,9 +25,10 @@ const Calories = () => {
   const {
     nutrition: { week },
   } = user;
-  const { today } = useToday();
+  const { today, hours } = useToday();
   const { calories } = week?.[today] || { calories: 0 };
   const hasExceeded = calories > CaloriesGoal;
+  const showNight = hours >= 23 && hours < 7;
 
   useEffect(() => {
     void updateStorage({ ...user });
@@ -55,7 +56,7 @@ const Calories = () => {
         width: '100%',
       }}
     >
-      <NightTime />
+      {showNight && <NightTime />}
       <WeekDays />
       <View
         style={{

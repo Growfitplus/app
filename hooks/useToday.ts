@@ -1,9 +1,10 @@
 const useToday = () => {
   const date = new Date();
   const today = date.getDay() - 1;
-  const time = date.getHours();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
 
-  return { time, today };
+  return { hours, minutes, today };
 };
 
 export default useToday;

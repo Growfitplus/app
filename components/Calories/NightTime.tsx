@@ -26,7 +26,7 @@ const NightTime = () => {
         }}
         weight='bold'
       >
-        Hora de dormir 08:00
+        Hora de dormir 23:00
       </Typography>
     </View>
   );
