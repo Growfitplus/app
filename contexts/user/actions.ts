@@ -53,7 +53,12 @@ export const logOut = (): USER_TYPE_ACTIONS => ({
 
 export const addImage = (newImage: PhotosState): USER_TYPE_ACTIONS => ({
   payload: newImage,
-  type: USER_ACTION_TYPES.SET_IMAGES,
+  type: USER_ACTION_TYPES.ADD_IMAGE,
+});
+
+export const removeImage = (images: PhotosState[]): USER_TYPE_ACTIONS => ({
+  payload: { images },
+  type: USER_ACTION_TYPES.REMOVE_IMAGE,
 });
 
 export const resetState = (): USER_TYPE_ACTIONS => ({

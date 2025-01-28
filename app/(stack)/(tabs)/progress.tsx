@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, SafeAreaView, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 import { useUserContext } from '@/contexts/user/context';
-import { addImage, setWeight } from '@/contexts/user/actions';
+import { addImage, removeImage, setWeight } from '@/contexts/user/actions';
 import { useStorageContext } from '@/contexts/storage/context';
+
+import { Colors } from '@/constants/Colors';
 
 import Container from '@/components/Container';
 import PressableWithEffect from '@/components/PressableWithEffect';
 import Add from '@/components/SVG/Add';
 import Subtract from '@/components/SVG/Subtract';
 import Typography from '@/components/Typography';
-import PhotosProgress from '@/components/PhotosProgress';
-
-import { Colors } from '@/constants/Colors';
+import PhotosProgress from '@/components/Progress/PhotosProgress';
+import Preview from '@/components/Progress/Preview';
 
 const Progress = () => {
   const [user, userDispatch] = useUserContext();
   const [{ isLoading }] = useStorageContext();
-  const { media: { images } = { images: [] }, personal: { weight } = { weight: 0 } } = user;
+  const [isVisible, setIsVisible] = useState(false);
+  const [preview, setPreview] = useState<{ date: string; id: string; preview: string } | null>();
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const { media: { images } = { images: [] }, personal: { weight } = { weight: 0 } } = user;
 
   const setNewWeight = (value: number) => {
     if (weight > 0) {
@@ -37,6 +40,11 @@ const Progress = () => {
       if (!result.canceled) {
         userDispatch(
           addImage({
+            date: new Intl.DateTimeFormat('es', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            }).format(new Date()),
             id: result.assets[0].fileName!,
             uri: result.assets[0].uri,
           }),
@@ -44,6 +52,22 @@ const Progress = () => {
       }
     } else {
       await requestPermission();
+    }
+  };
+
+  const handlePreview = ({ date, id, preview }: { date: string; id: string; preview: string }) => {
+    setIsVisible(true);
+    setPreview({ date, id, preview });
+  };
+
+  const handleRemoveImg = () => {
+    if (preview) {
+      setIsVisible(false);
+      setPreview(null);
+
+      const newImages = [...images].filter(img => img.id !== preview.id);
+
+      userDispatch(removeImage(newImages));
     }
   };
 
@@ -90,7 +114,14 @@ const Progress = () => {
         </View>
         <FlatList
           data={images}
-          renderItem={({ item }) => <PhotosProgress imageSource={item.uri} />}
+          renderItem={({ item }) => (
+            <PhotosProgress
+              imageSource={item.uri}
+              handlePreview={() =>
+                handlePreview({ date: item.date, id: item.id, preview: item.uri })
+              }
+            />
+          )}
           numColumns={3}
           style={{
             paddingTop: 8,
@@ -104,6 +135,14 @@ const Progress = () => {
           }}
         />
       </Container>
+      {preview && (
+        <Preview
+          isVisible={isVisible}
+          data={preview}
+          closeModal={() => setIsVisible(!isVisible)}
+          removeImg={handleRemoveImg}
+        />
+      )}
     </SafeAreaView>
   );
 };

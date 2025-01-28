@@ -70,7 +70,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         hasSession: false,
       };
 
-    case USER_ACTION_TYPES.SET_IMAGES:
+    case USER_ACTION_TYPES.ADD_IMAGE:
       return {
         ...state,
         media: {
@@ -80,6 +80,14 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
               ...action.payload,
             },
           ],
+        },
+      };
+
+    case USER_ACTION_TYPES.REMOVE_IMAGE:
+      return {
+        ...state,
+        media: {
+          images: [...action.payload.images],
         },
       };
 

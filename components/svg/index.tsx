@@ -1,4 +1,5 @@
 export { default as ClockSVG } from './Clock';
+export { default as CloseSVG } from './Close';
 export { default as DropSVG } from './Drop';
 export { default as FireSVG } from './Fire';
 export { default as HomeSVG } from './Home';
