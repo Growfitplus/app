@@ -1,6 +1,7 @@
 import { PhotosState } from '@/types/photos';
 import {
   GENRE_TYPES,
+  NUTRITION_INTERFACE,
   USER_ACTION_TYPES,
   USER_STATE_TYPE,
   USER_TYPE_ACTIONS,
@@ -72,4 +73,9 @@ export const setLiters = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
 export const setWalking = (week: WEEK_CALORIES_TYPE[]): USER_TYPE_ACTIONS => ({
   payload: { week },
   type: USER_ACTION_TYPES.SET_WALKING,
+});
+
+export const setIMCData = (nutrition: Omit<NUTRITION_INTERFACE, 'week'>): USER_TYPE_ACTIONS => ({
+  payload: { nutrition },
+  type: USER_ACTION_TYPES.SET_IMC_DATA,
 });

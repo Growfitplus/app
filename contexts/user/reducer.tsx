@@ -1,6 +1,6 @@
 import { resetWeek } from '@/utils/resetWeek';
 
-import { USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
+import { IMC_LEVELS, USER_ACTION_TYPES, USER_STATE_TYPE, USER_TYPE_ACTIONS } from './types';
 
 const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_STATE_TYPE => {
   switch (action.type) {
@@ -90,6 +90,12 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
           images: [],
         },
         nutrition: {
+          imc: 0,
+          imcLevel: IMC_LEVELS.NORMAL_WEIGHT,
+          litersGoal: 0,
+          loseWeight: 0,
+          maintainWeight: 0,
+          walkingGoal: 0,
           week: resetWeek(),
         },
         onboardingFinished: false,
@@ -106,6 +112,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         ...state,
         nutrition: {
+          ...state.nutrition,
           week: [...action.payload.week],
         },
       };
@@ -114,6 +121,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         ...state,
         nutrition: {
+          ...state.nutrition,
           week: [...state.nutrition.week],
         },
       };
@@ -122,6 +130,16 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       return {
         ...state,
         nutrition: {
+          ...state.nutrition,
+          week: [...state.nutrition.week],
+        },
+      };
+
+    case USER_ACTION_TYPES.SET_IMC_DATA:
+      return {
+        ...state,
+        nutrition: {
+          ...action.payload.nutrition,
           week: [...state.nutrition.week],
         },
       };

@@ -7,7 +7,7 @@ import { setCalories } from '@/contexts/user/actions';
 import useToday from '@/hooks/useToday';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal, MaxCalories } from '@/constants/Goals';
+import { DefaultCaloriesGoal, MaxCalories } from '@/constants/Goals';
 import { Fonts } from '@/constants/Fonts';
 
 import { resetWeek } from '@/utils/resetWeek';
@@ -19,13 +19,16 @@ import Typography from '../Typography';
 import NightTime from './NightTime';
 
 const Calories = () => {
-  const [user, userDispatch] = useUserContext();
-  const {
-    nutrition: { week },
-  } = user;
+  const [
+    {
+      nutrition: { week, maintainWeight },
+    },
+    userDispatch,
+  ] = useUserContext();
   const { today, hours } = useToday();
   const { calories } = week?.[today] || { calories: 0 };
-  const hasExceeded = calories > CaloriesGoal;
+  const caloriesGoal = maintainWeight ? maintainWeight : DefaultCaloriesGoal;
+  const hasExceeded = calories > caloriesGoal;
   const showNight = hours >= 23 && hours < 7;
 
   const handleCalories = (value: string) => {
@@ -33,8 +36,8 @@ const Calories = () => {
       const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
       updatedWeek[today].calories = Number(value);
-      updatedWeek[today].exceeded = Number(value) > CaloriesGoal;
-      updatedWeek[today].succeeded = Number(value) === CaloriesGoal;
+      updatedWeek[today].exceeded = Number(value) > caloriesGoal;
+      updatedWeek[today].succeeded = Number(value) === caloriesGoal;
 
       userDispatch(setCalories(updatedWeek));
     }
@@ -86,14 +89,14 @@ const Calories = () => {
         }}
       />
       <CaloriesProgress />
-      {calories < CaloriesGoal && (
+      {calories < caloriesGoal && (
         <Typography
           customStyles={{
             color: Colors.light.gray[2],
             fontSize: 14,
           }}
         >
-          Consume máximo 1800 Kcal
+          Consume máximo {maintainWeight.toString()} Kcal
         </Typography>
       )}
       {hasExceeded && (
@@ -103,7 +106,7 @@ const Calories = () => {
             fontSize: 14,
           }}
         >
-          {`Te excediste en ${calories - CaloriesGoal} Kcal`}
+          {`Te excediste en ${calories - caloriesGoal} Kcal`}
         </Typography>
       )}
     </View>

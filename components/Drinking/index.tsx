@@ -1,30 +1,36 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import { useUserContext } from '@/contexts/user/context';
+import { setLiters } from '@/contexts/user/actions';
+import { useStorageContext } from '@/contexts/storage/context';
+
 import { Colors } from '@/constants/Colors';
+import { DrinkingGoal } from '@/constants/Goals';
+
+import useToday from '@/hooks/useToday';
+import { resetWeek } from '@/utils/resetWeek';
+
 import Typography from '../Typography';
 import { CheckIcon } from '../Icons';
 import Drop from '../SVG/Drop';
 import PressableWithEffect from '../PressableWithEffect';
 import Add from '../SVG/Add';
 import Subtract from '../SVG/Subtract';
-import { useUserContext } from '@/contexts/user/context';
-import { setLiters } from '@/contexts/user/actions';
-import { useStorageContext } from '@/contexts/storage/context';
-import { DrinkingGoal } from '@/constants/Goals';
-import useToday from '@/hooks/useToday';
-import { resetWeek } from '@/utils/resetWeek';
 
 const Drinking = () => {
-  const [user, userDispatch] = useUserContext();
+  const [
+    {
+      nutrition: { week, litersGoal },
+    },
+    userDispatch,
+  ] = useUserContext();
   const [{ isLoading }] = useStorageContext();
   const { today } = useToday();
 
-  const {
-    nutrition: { week },
-  } = user;
   const { liters = 0 } = week[today];
-  const percentage = liters < 3 ? Math.floor((liters / DrinkingGoal) * 100) : 100;
+  const goal = litersGoal ? litersGoal : DrinkingGoal;
+  const percentage = liters < 3 ? Math.floor((liters / goal) * 100) : 100;
 
   const handleDrinking = (value: number) => {
     if (value >= 0) {

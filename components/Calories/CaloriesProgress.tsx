@@ -4,27 +4,29 @@ import { View } from 'react-native';
 import { useUserContext } from '@/contexts/user/context';
 
 import { Colors } from '@/constants/Colors';
-import { CaloriesGoal, CaloriesWidth, DoubleCalories } from '@/constants/Goals';
+import { DefaultCaloriesGoal, CaloriesWidth, DefaultDoubleCalories } from '@/constants/Goals';
 
 import useToday from '@/hooks/useToday';
 
 const CaloriesProgress = () => {
   const [
     {
-      nutrition: { week },
+      nutrition: { maintainWeight, week },
     },
   ] = useUserContext();
   const { today } = useToday();
   const { calories } = week?.[today] || { calories: 0 };
-  const caloriesGoalPercentage = calories / CaloriesGoal;
+  const caloriesGoal = maintainWeight ? maintainWeight : DefaultCaloriesGoal;
+  const caloriesGoalPercentage = calories / caloriesGoal;
   const caloriesPercentage = Math.floor(caloriesGoalPercentage * 100);
   const exceededCaloriesPercentage = Math.floor((caloriesGoalPercentage - 1) * 100);
+  const doubleCalories = maintainWeight ? maintainWeight * 2 : DefaultDoubleCalories;
 
   const getCaloriesWidth = () =>
     CaloriesWidth * ((caloriesPercentage < 1 ? 1 : caloriesPercentage) / 100);
 
   const getExceededCaloriesWidth = () =>
-    calories < DoubleCalories
+    calories < doubleCalories
       ? CaloriesWidth * ((exceededCaloriesPercentage < 1 ? 1 : exceededCaloriesPercentage) / 100)
       : CaloriesWidth;
 
@@ -32,7 +34,7 @@ const CaloriesProgress = () => {
     if (calories === 0) {
       return 0;
     }
-    return calories > CaloriesGoal ? getExceededCaloriesWidth() : getCaloriesWidth();
+    return calories > caloriesGoal ? getExceededCaloriesWidth() : getCaloriesWidth();
   };
 
   return (
@@ -46,7 +48,7 @@ const CaloriesProgress = () => {
     >
       <View
         style={{
-          backgroundColor: calories <= CaloriesGoal ? Colors.light['growfit+'] : Colors.light.error,
+          backgroundColor: calories <= caloriesGoal ? Colors.light['growfit+'] : Colors.light.error,
           borderRadius: 8,
           height: 6,
           width: getCaloriesProgress(),
@@ -59,7 +61,7 @@ const CaloriesProgress = () => {
           height: 6,
           width:
             CaloriesWidth -
-            (calories <= CaloriesGoal ? getCaloriesWidth() : getExceededCaloriesWidth()),
+            (calories <= caloriesGoal ? getCaloriesWidth() : getExceededCaloriesWidth()),
         }}
       />
     </View>

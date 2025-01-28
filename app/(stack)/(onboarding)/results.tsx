@@ -1,9 +1,9 @@
 import React from 'react';
 import { Pressable, SafeAreaView, View } from 'react-native';
-// import { router } from 'expo-router';
+import { router } from 'expo-router';
 
-// import { finishOnboarding } from '@/contexts/user/actions';
-// import { useUserContext } from '@/contexts/user/context';
+import { finishOnboarding } from '@/contexts/user/actions';
+import { useUserContext } from '@/contexts/user/context';
 
 import Container from '@/components/Container';
 import Bar from '@/components/IMC/Bar';
@@ -12,19 +12,19 @@ import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 
 import { OnboardingStyles } from '@/styles/onboarding';
+import { translateIMC } from '@/utils/nutritionFormulas';
 
 const Results = () => {
-  // const [, userDispatch] = useUserContext();
+  const [
+    {
+      nutrition: { imc, imcLevel },
+    },
+    userDispatch,
+  ] = useUserContext();
 
-  const handleOnboarding = async () => {
-    // userDispatch();
-    // userDispatch(finishOnboarding());
-    // await updateStorage({
-    //   ...user,
-    //   onboardingFinished: true,
-    //   personal: { ...user.personal, age: Number(age) },
-    // });
-    // router.push('/(stack)/(tabs)/home');
+  const handleOnboarding = () => {
+    userDispatch(finishOnboarding());
+    router.push('/(stack)/(tabs)/home');
   };
 
   return (
@@ -41,14 +41,14 @@ const Results = () => {
             weight='bold'
             customStyles={{ fontSize: 22 }}
           >
-            Obesidad Media
+            {translateIMC(imcLevel)}
           </Typography>
           <Bar />
           <Typography
             weight='bold'
             customStyles={{ fontSize: 16, marginBottom: 58 }}
           >
-            IMC 39 / 24.9
+            IMC {imc.toString()} / 24.9
           </Typography>
           <Typography
             weight='bold'
@@ -75,7 +75,6 @@ const Results = () => {
             ...OnboardingStyles.continueButton,
             backgroundColor: Colors.light['growfit+'],
           }}
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onPress={handleOnboarding}
         >
           <Typography

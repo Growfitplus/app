@@ -5,7 +5,7 @@ import UserReducer from '@/contexts/user/reducer';
 
 import { resetWeek } from '@/utils/resetWeek';
 
-import { USER_STATE_TYPE } from './types';
+import { IMC_LEVELS, USER_STATE_TYPE } from './types';
 
 const INITIAL_USER_STATE: USER_STATE_TYPE = {
   hasSession: false,
@@ -13,6 +13,12 @@ const INITIAL_USER_STATE: USER_STATE_TYPE = {
     images: [],
   },
   nutrition: {
+    imc: 0,
+    imcLevel: IMC_LEVELS.NORMAL_WEIGHT,
+    litersGoal: 0,
+    loseWeight: 0,
+    maintainWeight: 0,
+    walkingGoal: 0,
     week: resetWeek(),
   },
   onboardingFinished: false,

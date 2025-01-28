@@ -12,6 +12,7 @@ export enum USER_ACTION_TYPES {
   SET_GENRE = 'SET_GENRE',
   SET_HEIGHT = 'SET_HEIGHT',
   SET_IMAGES = 'SET_IMAGES',
+  SET_IMC_DATA = 'SET_IMC_DATA',
   SET_LITERS = 'SET_LITERS',
   SET_USERNAME = 'SET_USERNAME',
   SET_WALKING = 'SET_WALKING',
@@ -29,6 +30,10 @@ export type USER_TYPE_ACTIONS =
   | { type: USER_ACTION_TYPES.SET_GENRE; payload: { genre: GENRE_TYPES } }
   | { type: USER_ACTION_TYPES.SET_HEIGHT; payload: { height: number } }
   | { type: USER_ACTION_TYPES.SET_IMAGES; payload: PhotosState }
+  | {
+      type: USER_ACTION_TYPES.SET_IMC_DATA;
+      payload: { nutrition: Omit<NUTRITION_INTERFACE, 'week'> };
+    }
   | { type: USER_ACTION_TYPES.SET_LITERS; payload: { week: WEEK_CALORIES_TYPE[] } }
   | { type: USER_ACTION_TYPES.SET_USERNAME; payload: { username: string } }
   | { type: USER_ACTION_TYPES.SET_WALKING; payload: { week: WEEK_CALORIES_TYPE[] } }
@@ -39,6 +44,15 @@ export enum GENRE_TYPES {
   'Feminine' = 'Feminine',
 }
 
+export enum IMC_LEVELS {
+  'LOW_WEIGHT' = 'LOW WEIGHT',
+  'NORMAL_WEIGHT' = 'NORMAL WEIGHT',
+  'OVERWEIGHT' = 'OVERWEIGHT',
+  'LOW_OBESITY' = 'LOW OBESITY',
+  'MEDIUM_OBESITY' = 'MEDIUM OBESITY',
+  'MORBID_OBESITY' = 'MORBID OBESITY',
+}
+
 export type WEEK_DAYS = 'L' | 'M' | 'J' | 'V' | 'S' | 'D';
 
 export interface USER_STATE_TYPE {
@@ -46,9 +60,7 @@ export interface USER_STATE_TYPE {
   media: {
     images: PhotosState[];
   };
-  nutrition: {
-    week: WEEK_CALORIES_TYPE[];
-  };
+  nutrition: NUTRITION_INTERFACE;
   onboardingFinished: boolean;
   personal: {
     age: number;
@@ -65,6 +77,16 @@ export interface WEEK_CALORIES_TYPE {
   exceeded: boolean;
   liters: number;
   walking: boolean;
+}
+
+export interface NUTRITION_INTERFACE {
+  imc: number;
+  imcLevel: IMC_LEVELS;
+  litersGoal: number;
+  loseWeight: number;
+  maintainWeight: number;
+  walkingGoal: number;
+  week: WEEK_CALORIES_TYPE[];
 }
 
 export type USER_CONTEXT_INTERFACE = [USER_STATE_TYPE, dispatch: Dispatch<USER_TYPE_ACTIONS>];

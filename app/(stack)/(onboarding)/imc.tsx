@@ -8,9 +8,25 @@ import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
 import { router } from 'expo-router';
+import { useUserContext } from '@/contexts/user/context';
+import {
+  getIMCLevel,
+  getLitersGoal,
+  getMaintainWeight,
+  getManLoseWeight,
+  getWalkingGoal,
+  getWomanLoseWeight,
+} from '@/utils/nutritionFormulas';
+import { GENRE_TYPES } from '@/contexts/user/types';
+import { setIMCData } from '@/contexts/user/actions';
 
 const IMC = () => {
+  const [{ personal }, userDispatch] = useUserContext();
   const [animateToNumber, setAnimateToNumber] = useState(0);
+
+  useEffect(() => {
+    calculateIMC();
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -19,11 +35,11 @@ const IMC = () => {
     if (animateToNumber < 100) {
       interval = setInterval(() => {
         increase();
-      }, 50);
+      }, 30);
     } else {
       timeOut = setTimeout(() => {
         router.push('/(stack)/(onboarding)/results');
-      }, 500);
+      }, 1250);
     }
 
     return () => {
@@ -34,6 +50,35 @@ const IMC = () => {
 
   const increase = () => {
     setAnimateToNumber(animateToNumber + 1);
+  };
+
+  const calculateIMC = () => {
+    const { age, genre, height, weight } = personal;
+    const squaredHeigth = height ** 2;
+    const imc = Number((weight / squaredHeigth).toFixed(2));
+    const fullHeight = Number(height.toString().replace('.', ''));
+    const maintainWeight = Math.round(getMaintainWeight({ age, height: fullHeight, weight }));
+    const walkingGoal = Math.round(getWalkingGoal({ weight }));
+    const litersGoal = Math.round(getLitersGoal({ weight }));
+    const imcLevel = getIMCLevel({ imc });
+    let loseWeight;
+
+    if (genre === GENRE_TYPES.Masculine) {
+      loseWeight = Math.round(getManLoseWeight({ age, height: fullHeight, weight }));
+    } else {
+      loseWeight = Math.round(getWomanLoseWeight({ age, height: fullHeight, weight }));
+    }
+
+    userDispatch(
+      setIMCData({
+        imc,
+        imcLevel,
+        litersGoal,
+        loseWeight,
+        maintainWeight,
+        walkingGoal,
+      }),
+    );
   };
 
   return (
