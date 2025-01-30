@@ -16,6 +16,7 @@ import Container from '@/components/Container';
 import Calories from '@/components/Calories';
 import Walking from '@/components/Walking';
 import Drinking from '@/components/Drinking';
+import { runOnJS } from 'react-native-reanimated';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -34,7 +35,11 @@ const Home = () => {
 
   const handleAbout = () => {
     router.push('/(stack)/terms/terms');
-    setShowProfile(false);
+  };
+
+  const closeSheet = () => {
+    'worklet';
+    runOnJS(setShowProfile)(false);
   };
 
   return (
@@ -66,6 +71,7 @@ const Home = () => {
             <Profile
               isVisible={showProfile}
               handleAbout={handleAbout}
+              closeSheet={closeSheet}
             />
           </Pressable>
         </Container>

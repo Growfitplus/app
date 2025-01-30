@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Slot } from 'expo-router';
 import {
   RobotoMono_700Bold as RobotoBold,
@@ -57,9 +58,11 @@ const RootLayout = () => {
   }
 
   return (
-    <RootProvider providers={[UserProvider, StorageProvider]}>
-      <Layout />
-    </RootProvider>
+    <GestureHandlerRootView>
+      <RootProvider providers={[UserProvider, StorageProvider]}>
+        <Layout />
+      </RootProvider>
+    </GestureHandlerRootView>
   );
 };
 

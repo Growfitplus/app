@@ -3,6 +3,6 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     sourceMaps: true,
-    plugins: ['@babel/transform-react-jsx-source'],
+    plugins: ['@babel/transform-react-jsx-source', 'react-native-reanimated/plugin'],
   };
 };
