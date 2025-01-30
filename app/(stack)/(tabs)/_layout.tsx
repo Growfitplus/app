@@ -65,6 +65,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name='progress'
         options={{
+          headerShown: false,
           tabBarIcon: ProgressTab,
           tabBarShowLabel: false,
         }}

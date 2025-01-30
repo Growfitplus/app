@@ -268,7 +268,7 @@ const Terms = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 32,
+    paddingBottom: 32,
   },
   content: {
     fontSize: 10,

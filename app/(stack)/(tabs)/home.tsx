@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <ScrollView
       style={{
-        paddingTop: 42,
+        paddingTop: 24,
       }}
     >
       <KeyboardAvoidingView

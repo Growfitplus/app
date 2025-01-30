@@ -16,6 +16,13 @@
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		DD9A8765F41F55D8599992B6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C44A6AEEEE8941F5F9F665B0 /* PrivacyInfo.xcprivacy */; };
+		5BE4CBABAEC4466CB14F6190 /* RobotoMono_100Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A34CB30AF4D486E857A278C /* RobotoMono_100Thin.ttf */; };
+		615B37C2A290450186FE881D /* RobotoMono_200ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE3DCA8E3A5546BC96D1A818 /* RobotoMono_200ExtraLight.ttf */; };
+		F209AA58C032432888897A29 /* RobotoMono_300Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F989E18CAAA74522A2E0D78B /* RobotoMono_300Light.ttf */; };
+		EB2D45DF6160410E9301460A /* RobotoMono_400Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7E1750531DE45AC87F4E4F9 /* RobotoMono_400Regular.ttf */; };
+		A1D0A7E493A54F8594E6361E /* RobotoMono_500Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AED280540BC84BBC96DB2473 /* RobotoMono_500Medium.ttf */; };
+		90F30CE53A774C22A29ADCC0 /* RobotoMono_600SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29A2B0C7AAA4413EB02379DF /* RobotoMono_600SemiBold.ttf */; };
+		348BDA652C8D42B0824F603E /* RobotoMono_700Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAD8178048334EBEB270EF4A /* RobotoMono_700Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +42,13 @@
 		C44A6AEEEE8941F5F9F665B0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = growfit/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-growfit/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		8A34CB30AF4D486E857A278C /* RobotoMono_100Thin.ttf */ = {isa = PBXFileReference; name = "RobotoMono_100Thin.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_100Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CE3DCA8E3A5546BC96D1A818 /* RobotoMono_200ExtraLight.ttf */ = {isa = PBXFileReference; name = "RobotoMono_200ExtraLight.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_200ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F989E18CAAA74522A2E0D78B /* RobotoMono_300Light.ttf */ = {isa = PBXFileReference; name = "RobotoMono_300Light.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_300Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B7E1750531DE45AC87F4E4F9 /* RobotoMono_400Regular.ttf */ = {isa = PBXFileReference; name = "RobotoMono_400Regular.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_400Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AED280540BC84BBC96DB2473 /* RobotoMono_500Medium.ttf */ = {isa = PBXFileReference; name = "RobotoMono_500Medium.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_500Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		29A2B0C7AAA4413EB02379DF /* RobotoMono_600SemiBold.ttf */ = {isa = PBXFileReference; name = "RobotoMono_600SemiBold.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_600SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FAD8178048334EBEB270EF4A /* RobotoMono_700Bold.ttf */ = {isa = PBXFileReference; name = "RobotoMono_700Bold.ttf"; path = "../node_modules/@expo-google-fonts/roboto-mono/RobotoMono_700Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +105,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				17838ADA6822433A9FC907C8 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -138,6 +153,21 @@
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
+		};
+		17838ADA6822433A9FC907C8 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8A34CB30AF4D486E857A278C /* RobotoMono_100Thin.ttf */,
+				CE3DCA8E3A5546BC96D1A818 /* RobotoMono_200ExtraLight.ttf */,
+				F989E18CAAA74522A2E0D78B /* RobotoMono_300Light.ttf */,
+				B7E1750531DE45AC87F4E4F9 /* RobotoMono_400Regular.ttf */,
+				AED280540BC84BBC96DB2473 /* RobotoMono_500Medium.ttf */,
+				29A2B0C7AAA4413EB02379DF /* RobotoMono_600SemiBold.ttf */,
+				FAD8178048334EBEB270EF4A /* RobotoMono_700Bold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -205,6 +235,13 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				DD9A8765F41F55D8599992B6 /* PrivacyInfo.xcprivacy in Resources */,
+				5BE4CBABAEC4466CB14F6190 /* RobotoMono_100Thin.ttf in Resources */,
+				615B37C2A290450186FE881D /* RobotoMono_200ExtraLight.ttf in Resources */,
+				F209AA58C032432888897A29 /* RobotoMono_300Light.ttf in Resources */,
+				EB2D45DF6160410E9301460A /* RobotoMono_400Regular.ttf in Resources */,
+				A1D0A7E493A54F8594E6361E /* RobotoMono_500Medium.ttf in Resources */,
+				90F30CE53A774C22A29ADCC0 /* RobotoMono_600SemiBold.ttf in Resources */,
+				348BDA652C8D42B0824F603E /* RobotoMono_700Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +412,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamzea.growfit;
-				PRODUCT_NAME = growfit;
+				PRODUCT_NAME = "growfit";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -383,7 +420,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "growfit/growfit-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -412,14 +449,14 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamzea.growfit;
-				PRODUCT_NAME = growfit;
+				PRODUCT_NAME = "growfit";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "growfit/growfit-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

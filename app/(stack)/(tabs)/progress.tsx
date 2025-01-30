@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
+    paddingTop: 24,
   },
   title: {
     fontSize: 24,

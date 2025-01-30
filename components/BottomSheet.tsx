@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/Colors';
 import React, { FC, useEffect } from 'react';
 import { Modal, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 interface BottomSheetProps {
@@ -62,29 +62,31 @@ const BottomSheet: FC<BottomSheetProps> = ({ children, isVisible, closeSheet }) 
       transparent={true}
       visible={isVisible}
     >
-      <View
-        style={{
-          alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          flex: 1,
-          justifyContent: 'center',
-        }}
-      >
-        <GestureDetector gesture={gesture}>
-          <Animated.View style={[styles.main, reanimatedBottomStyle]}>
-            <View
-              style={{
-                alignSelf: 'center',
-                backgroundColor: '#000',
-                borderRadius: 16,
-                height: 4,
-                width: screenWidth * 0.25,
-              }}
-            />
-            {children}
-          </Animated.View>
-        </GestureDetector>
-      </View>
+      <GestureHandlerRootView>
+        <View
+          style={{
+            alignItems: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            flex: 1,
+            justifyContent: 'center',
+          }}
+        >
+          <GestureDetector gesture={gesture}>
+            <Animated.View style={[styles.main, reanimatedBottomStyle]}>
+              <View
+                style={{
+                  alignSelf: 'center',
+                  backgroundColor: '#000',
+                  borderRadius: 16,
+                  height: 4,
+                  width: screenWidth * 0.25,
+                }}
+              />
+              {children}
+            </Animated.View>
+          </GestureDetector>
+        </View>
+      </GestureHandlerRootView>
     </Modal>
   );
 };
