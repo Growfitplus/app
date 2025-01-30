@@ -33,7 +33,7 @@ const Drinking = () => {
   const percentage = liters < 3 ? Math.floor((liters / goal) * 100) : 100;
 
   const handleDrinking = (value: number) => {
-    if (value >= 0) {
+    if (value >= 0 && value <= 6) {
       const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
       updatedWeek[today].liters = value;
@@ -82,7 +82,8 @@ const Drinking = () => {
       >
         <PressableWithEffect
           onPressAction={() => handleDrinking(liters - 1)}
-          isEnabled={!isLoading}
+          isEnabled={isLoading ? false : liters !== 0}
+          handleDisableStyles={liters === 0}
         >
           <Subtract />
         </PressableWithEffect>
@@ -98,7 +99,8 @@ const Drinking = () => {
         </Typography>
         <PressableWithEffect
           onPressAction={() => handleDrinking(liters + 1)}
-          isEnabled={!isLoading}
+          isEnabled={isLoading ? false : liters < 6}
+          handleDisableStyles={liters === 6}
         >
           <Add />
         </PressableWithEffect>

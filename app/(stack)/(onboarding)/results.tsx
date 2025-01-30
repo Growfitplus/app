@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, SafeAreaView, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 
 import { finishOnboarding } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
@@ -21,6 +21,11 @@ const Results = () => {
     },
     userDispatch,
   ] = useUserContext();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   const handleOnboarding = () => {
     userDispatch(finishOnboarding());
@@ -29,7 +34,7 @@ const Results = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: Colors.light['background+'], flex: 1 }}>
-      <Container>
+      <Container customStyles={{ paddingBottom: 24 }}>
         <Typography
           weight='bold'
           customStyles={{ fontSize: 24 }}

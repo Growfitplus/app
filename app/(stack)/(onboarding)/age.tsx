@@ -12,7 +12,7 @@ import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Age = () => {
   const [user, userDispatch] = useUserContext();
-  const [age, updateAge] = useState(user.personal.age.toString());
+  const [age, updateAge] = useState(user?.personal?.age?.toString() || '0');
   const { updateStorage } = useStorage();
   const isInvalidAge = Number(age) < 9 || Number(age) > 99;
 

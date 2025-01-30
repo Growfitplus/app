@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { CameraIcon } from '../Icons';
+import { Colors } from '@/constants/Colors';
 
 const ProgressTab: React.FC<{ focused: boolean }> = ({ focused }) => (
   <View
@@ -13,7 +14,10 @@ const ProgressTab: React.FC<{ focused: boolean }> = ({ focused }) => (
       width: 40,
     }}
   >
-    <CameraIcon />
+    <CameraIcon
+      size={24}
+      color={Colors.light['dark+']}
+    />
   </View>
 );
 

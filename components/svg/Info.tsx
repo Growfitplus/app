@@ -6,7 +6,7 @@ interface InfoIconProps extends SvgProps {
   height?: number;
 }
 
-const Info: React.FC<InfoIconProps> = ({ width = 18, height = 18 }) => (
+export const Info: React.FC<InfoIconProps> = ({ width = 18, height = 18 }) => (
   <Svg
     viewBox='0 0 24 24'
     width={width}
@@ -21,5 +21,17 @@ const Info: React.FC<InfoIconProps> = ({ width = 18, height = 18 }) => (
     />
   </Svg>
 );
-
-export default Info;
+export const InfoFill = () => (
+  <Svg
+    width={18}
+    height={18}
+    fill='none'
+  >
+    <Path
+      fill='#000'
+      fillRule='evenodd'
+      d='M0 6a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6H6a6 6 0 0 1-6-6V6Zm8.125 8V8h1.75v6h-1.75Zm0-10v2h1.75V4h-1.75Z'
+      clipRule='evenodd'
+    />
+  </Svg>
+);

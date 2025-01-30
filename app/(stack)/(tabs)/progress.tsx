@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, SafeAreaView, FlatList } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { useMediaLibraryPermissions, launchImageLibraryAsync } from 'expo-image-picker';
 
 import { useUserContext } from '@/contexts/user/context';
 import { addImage, removeImage, setWeight } from '@/contexts/user/actions';
@@ -15,13 +15,17 @@ import Subtract from '@/components/SVG/Subtract';
 import Typography from '@/components/Typography';
 import PhotosProgress from '@/components/Progress/PhotosProgress';
 import Preview from '@/components/Progress/Preview';
+import { InfoFillSVG } from '@/components/SVG';
+import PhotoHelp from '@/components/Progress/PhotoHelp';
+import { runOnJS } from 'react-native-reanimated';
 
 const Progress = () => {
   const [user, userDispatch] = useUserContext();
   const [{ isLoading }] = useStorageContext();
-  const [isVisible, setIsVisible] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [showPhotoHelp, setShowPhotoHelp] = useState(false);
   const [preview, setPreview] = useState<{ date: string; id: string; preview: string } | null>();
-  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [status, requestPermission] = useMediaLibraryPermissions();
   const { media: { images } = { images: [] }, personal: { weight } = { weight: 0 } } = user;
 
   const setNewWeight = (value: number) => {
@@ -32,7 +36,7 @@ const Progress = () => {
 
   const pickImageAsync = async () => {
     if (status?.granted) {
-      const result = await ImagePicker.launchImageLibraryAsync({
+      const result = await launchImageLibraryAsync({
         mediaTypes: ['images'],
         quality: 1,
       });
@@ -56,13 +60,13 @@ const Progress = () => {
   };
 
   const handlePreview = ({ date, id, preview }: { date: string; id: string; preview: string }) => {
-    setIsVisible(true);
+    setShowPreview(true);
     setPreview({ date, id, preview });
   };
 
   const handleRemoveImg = () => {
     if (preview) {
-      setIsVisible(false);
+      setShowPreview(false);
       setPreview(null);
 
       const newImages = [...images].filter(img => img.id !== preview.id);
@@ -71,15 +75,32 @@ const Progress = () => {
     }
   };
 
+  const closeSheet = () => {
+    'worklet';
+    runOnJS(setShowPhotoHelp)(false);
+  };
+
   return (
     <SafeAreaView style={styles.main}>
       <Container>
-        <Typography
-          weight='bold'
-          customStyles={styles.title}
+        <View
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 52,
+          }}
         >
-          Mi Progreso
-        </Typography>
+          <Typography
+            weight='bold'
+            customStyles={styles.title}
+          >
+            Mi Progreso
+          </Typography>
+          <PressableWithEffect onPressAction={() => setShowPhotoHelp(!showPhotoHelp)}>
+            <InfoFillSVG />
+          </PressableWithEffect>
+        </View>
         <View style={styles.dataContainer}>
           <PressableWithEffect
             customStyles={styles.addPhotoCard}
@@ -137,12 +158,16 @@ const Progress = () => {
       </Container>
       {preview && (
         <Preview
-          isVisible={isVisible}
+          isVisible={showPreview}
           data={preview}
-          closeModal={() => setIsVisible(!isVisible)}
+          closeModal={() => setShowPreview(!showPreview)}
           removeImg={handleRemoveImg}
         />
       )}
+      <PhotoHelp
+        isVisible={showPhotoHelp}
+        closeSheet={closeSheet}
+      />
     </SafeAreaView>
   );
 };
@@ -173,7 +198,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginBottom: 52,
   },
   weightButton: {
     alignItems: 'center',

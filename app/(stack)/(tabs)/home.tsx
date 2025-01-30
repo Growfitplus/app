@@ -34,6 +34,8 @@ const Home = () => {
   }, [navigation]);
 
   const handleAbout = () => {
+    'worklet';
+    runOnJS(setShowProfile)(false);
     router.push('/(stack)/terms/terms');
   };
 

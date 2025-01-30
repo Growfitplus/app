@@ -117,6 +117,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
       };
 
     case USER_ACTION_TYPES.SET_CALORIES:
+      console.log({ action });
       return {
         ...state,
         nutrition: {
@@ -130,7 +131,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         ...state,
         nutrition: {
           ...state.nutrition,
-          week: [...state.nutrition.week],
+          week: state?.nutrition?.week ? [...state.nutrition.week] : resetWeek(),
         },
       };
 
@@ -139,7 +140,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         ...state,
         nutrition: {
           ...state.nutrition,
-          week: [...state.nutrition.week],
+          week: state?.nutrition?.week ? [...state.nutrition.week] : resetWeek(),
         },
       };
 
@@ -148,7 +149,7 @@ const UserReducer = (state: USER_STATE_TYPE, action: USER_TYPE_ACTIONS): USER_ST
         ...state,
         nutrition: {
           ...action.payload.nutrition,
-          week: [...state.nutrition.week],
+          week: state?.nutrition?.week ? [...state.nutrition.week] : resetWeek(),
         },
       };
 

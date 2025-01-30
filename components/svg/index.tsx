@@ -3,7 +3,7 @@ export { default as CloseSVG } from './Close';
 export { default as DropSVG } from './Drop';
 export { default as FireSVG } from './Fire';
 export { default as HomeSVG } from './Home';
-export { default as InfoSVG } from './Info';
+export { Info as InfoSVG, InfoFill as InfoFillSVG } from './Info';
 export { default as UserSVG } from './User';
 export { default as WalkSVG } from './Walk';
 export { default as MoonSVG } from './Moon';

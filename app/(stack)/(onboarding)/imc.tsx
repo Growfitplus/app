@@ -7,7 +7,7 @@ import Container from '@/components/Container';
 import Typography from '@/components/Typography';
 import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Fonts';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import { useUserContext } from '@/contexts/user/context';
 import {
   getIMCLevel,
@@ -23,6 +23,11 @@ import { setIMCData } from '@/contexts/user/actions';
 const IMC = () => {
   const [{ personal }, userDispatch] = useUserContext();
   const [animateToNumber, setAnimateToNumber] = useState(0);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   useEffect(() => {
     calculateIMC();

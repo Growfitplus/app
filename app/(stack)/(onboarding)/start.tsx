@@ -8,6 +8,7 @@ import { useUserContext } from '@/contexts/user/context';
 import { setGenre } from '@/contexts/user/actions';
 import { GENRE_TYPES } from '@/contexts/user/types';
 import PressableWithEffect from '@/components/PressableWithEffect';
+import Container from '@/components/Container';
 
 const Onboarding = () => {
   const navigation = useNavigation();
@@ -25,7 +26,7 @@ const Onboarding = () => {
 
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
+      <Container customStyles={styles.container}>
         <View>
           <Typography
             weight='bold'
@@ -39,7 +40,7 @@ const Onboarding = () => {
             customStyles={{
               ...styles.option,
               backgroundColor:
-                user.personal.genre === GENRE_TYPES.Masculine
+                user?.personal?.genre === GENRE_TYPES.Masculine
                   ? Colors.light['growfit+']
                   : Colors.light['white+'],
             }}
@@ -61,7 +62,7 @@ const Onboarding = () => {
             customStyles={{
               ...styles.option,
               backgroundColor:
-                user.personal.genre === GENRE_TYPES.Feminine
+                user?.personal?.genre === GENRE_TYPES.Feminine
                   ? Colors.light['growfit+']
                   : Colors.light['white+'],
             }}
@@ -80,7 +81,7 @@ const Onboarding = () => {
             </View>
           </PressableWithEffect>
         </View>
-      </View>
+      </Container>
     </SafeAreaView>
   );
 };
@@ -88,7 +89,6 @@ const Onboarding = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 22,
     paddingVertical: 32,
   },
   genre: {

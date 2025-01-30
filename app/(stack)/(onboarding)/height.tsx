@@ -11,7 +11,7 @@ import { OnboardingStyles } from '@/styles/onboarding/index';
 
 const Height = () => {
   const [user, dispatch] = useUserContext();
-  const [height, updateHeight] = useState(user.personal.height.toString());
+  const [height, updateHeight] = useState(user?.personal?.height?.toString() || '0');
   const isInvalidHeight = Number(height) < 1.2 || Number(height) > 2.5;
 
   const handleContinue = () => {

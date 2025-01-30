@@ -32,7 +32,7 @@ const Calories = () => {
   const showNight = hours >= 23 && hours < 7;
 
   const handleCalories = (value: string) => {
-    if (Number(value) < MaxCalories) {
+    if (Number(value) <= MaxCalories) {
       const updatedWeek = week.length === 0 ? resetWeek() : [...week];
 
       updatedWeek[today].calories = Number(value);
