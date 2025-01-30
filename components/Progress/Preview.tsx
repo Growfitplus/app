@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Pressable, SafeAreaView, useWindowDimensions, View } from 'react-native';
+import { Modal, Pressable, useWindowDimensions, View } from 'react-native';
 import { Image } from 'expo-image';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/Colors';
 

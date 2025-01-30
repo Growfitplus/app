@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { useMediaLibraryPermissions, launchImageLibraryAsync } from 'expo-image-picker';
+import { runOnJS } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useUserContext } from '@/contexts/user/context';
 import { addImage, removeImage, setWeight } from '@/contexts/user/actions';
@@ -17,7 +19,6 @@ import PhotosProgress from '@/components/Progress/PhotosProgress';
 import Preview from '@/components/Progress/Preview';
 import { InfoFillSVG } from '@/components/SVG';
 import PhotoHelp from '@/components/Progress/PhotoHelp';
-import { runOnJS } from 'react-native-reanimated';
 
 const Progress = () => {
   const [user, userDispatch] = useUserContext();

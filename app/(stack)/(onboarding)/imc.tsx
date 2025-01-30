@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
-
+import { View } from 'react-native';
+import { router, useNavigation } from 'expo-router';
 import AnimatedNumbers from 'react-native-animated-numbers';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useUserContext } from '@/contexts/user/context';
+import { GENRE_TYPES } from '@/contexts/user/types';
+import { setIMCData } from '@/contexts/user/actions';
 
 import Container from '@/components/Container';
 import Typography from '@/components/Typography';
-import { Colors } from '@/constants/Colors';
-import { Fonts } from '@/constants/Fonts';
-import { router, useNavigation } from 'expo-router';
-import { useUserContext } from '@/contexts/user/context';
+
 import {
   getIMCLevel,
   getLitersGoal,
@@ -17,8 +19,8 @@ import {
   getWalkingGoal,
   getWomanLoseWeight,
 } from '@/utils/nutritionFormulas';
-import { GENRE_TYPES } from '@/contexts/user/types';
-import { setIMCData } from '@/contexts/user/actions';
+import { Colors } from '@/constants/Colors';
+import { Fonts } from '@/constants/Fonts';
 
 const IMC = () => {
   const [{ personal }, userDispatch] = useUserContext();

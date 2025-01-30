@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { router, useNavigation } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Typography from '@/components/Typography';
-import { Colors } from '@/constants/Colors';
 import { useUserContext } from '@/contexts/user/context';
 import { setGenre } from '@/contexts/user/actions';
 import { GENRE_TYPES } from '@/contexts/user/types';
+
+import Typography from '@/components/Typography';
 import PressableWithEffect from '@/components/PressableWithEffect';
 import Container from '@/components/Container';
+
+import { Colors } from '@/constants/Colors';
 
 const Onboarding = () => {
   const navigation = useNavigation();

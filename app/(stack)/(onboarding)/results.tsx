@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Pressable, SafeAreaView, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { router, useNavigation } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { finishOnboarding } from '@/contexts/user/actions';
 import { useUserContext } from '@/contexts/user/context';
